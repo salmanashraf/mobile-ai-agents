@@ -52,9 +52,11 @@ git push origin main
 git push origin v1.0.19
 ```
 
-6. Let GitHub Actions publish npm.
+6. Let GitHub Actions publish npm and create the GitHub Release.
 
-The workflow is `.github/workflows/publish.yml`. It runs on tags matching `v*`, verifies the tag version matches `package.json`, checks whether the version already exists on npm, and publishes only when the version is new.
+The workflow is `.github/workflows/publish.yml`. It runs on tags matching `v*`, verifies the tag version matches `package.json`, checks whether the version already exists on npm, and publishes only when the version is new. It also creates or updates the GitHub Release with generated notes.
+
+Release notes must compare against the latest existing GitHub Release tag. The workflow passes that tag explicitly to GitHub's release-notes API so the `Full Changelog` range does not fall back to an older tag.
 
 ---
 
@@ -66,6 +68,7 @@ After the workflow finishes:
 npm view mobile-ai-agents version dist-tags.latest
 npm view mobile-ai-agents@1.0.19 version dist.tarball dist.shasum
 git ls-remote origin refs/heads/main refs/tags/v1.0.19
+gh release view v1.0.19 --json body,url
 ```
 
 Expected:
@@ -74,6 +77,7 @@ Expected:
 - GitHub `main` points to the release commit.
 - GitHub tag `v1.0.19` points to the same release commit.
 - GitHub Actions publish workflow is green.
+- GitHub Release notes compare from the previous release tag to the new tag.
 
 ---
 
@@ -83,3 +87,4 @@ Expected:
 - Never push a tag before `package.json` is updated and committed.
 - The tag must match the package version exactly: `package.json` `1.0.19` uses tag `v1.0.19`.
 - If a workflow is rerun for an already-published version, it should skip publishing instead of failing.
+- Do not rely on GitHub's web UI default "Generate release notes" range. Use the workflow or pass the previous tag explicitly.

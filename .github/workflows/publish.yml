@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'   # triggers on v1.0.1, v1.1.0, v2.0.0, etc.
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -54,3 +57,34 @@ jobs:
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          PREVIOUS_TAG="$(gh release list --repo "$REPO" --exclude-drafts --limit 20 --json tagName --jq ".[] | select(.tagName != \"$TAG\") | .tagName" | head -n 1)"
+
+          if [ -n "$PREVIOUS_TAG" ]; then
+            gh api "repos/$REPO/releases/generate-notes" \
+              -f tag_name="$TAG" \
+              -f previous_tag_name="$PREVIOUS_TAG" \
+              --jq '.body' > release-notes.md
+          else
+            gh api "repos/$REPO/releases/generate-notes" \
+              -f tag_name="$TAG" \
+              --jq '.body' > release-notes.md
+          fi
+
+          if [[ "$TAG" == *-* ]]; then
+            release_flags=(--prerelease)
+          else
+            release_flags=(--latest)
+          fi
+
+          if gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1; then
+            gh release edit "$TAG" --repo "$REPO" --title "$TAG" --notes-file release-notes.md "${release_flags[@]}"
+          else
+            gh release create "$TAG" --repo "$REPO" --title "$TAG" --notes-file release-notes.md --verify-tag "${release_flags[@]}"
+          fi
