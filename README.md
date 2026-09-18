@@ -316,7 +316,7 @@ Not sure where to begin? Pick your situation:
 | `/store-listing` | Conversation → ASO-optimized listing copy |
 | `/feature-slice` | Epic → independently shippable tickets |
 | `/release-prep` | Full release checklist from freeze to store |
-| `/accessibility-audit` | WCAG 2.1 AA + platform accessibility review |
+| `/accessibility-audit` | WCAG 2.1 AA, reskin contrast, and semantic color-token migration review |
 | `/api-versioning` | API deprecation strategy for mobile clients |
 | `/deeplink-debug` | Diagnoses broken deep links across Android and iOS |
 | `/mobile-mcp-qa` | Run AI-assisted QA on iOS/Android devices, simulators, and emulators |

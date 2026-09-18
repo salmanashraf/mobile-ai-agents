@@ -384,6 +384,16 @@ Full guide: [`docs/vscode-copilot-integration.md`](vscode-copilot-integration.md
 
 **Specify the exact platform:** `Android-Compose`, `Android-XML`, `iOS-SwiftUI`, `iOS-UIKit`, `Flutter`, or `React-Native`. The fixes differ significantly between frameworks.
 
+For a reskin or theme migration, run `/accessibility-audit` with the supported themes, theme/token source, affected screens, and resolved foreground/background pairs. It maps by semantic role rather than old hex value, computes WCAG AA contrast for light and dark modes, and reports role collisions where one palette value was incorrectly reused for text, borders, fills, disabled content, or status states. Pair it with `/mobile-app-design` before implementation and `/mobile-mcp-qa` for device screenshots afterward.
+
+```text
+/accessibility-audit
+PLATFORM: React Native
+SUPPORTED_THEMES: light, dark
+Audit the Settings reskin and token migration. Report failed pairs with their ratio,
+required ratio, semantic role, theme/state, and recommended token.
+```
+
 ---
 
 ## 7. How Skills Work

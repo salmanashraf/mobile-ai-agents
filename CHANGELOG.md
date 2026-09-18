@@ -19,6 +19,12 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 - Prerelease package versions now publish to the npm `prerelease` dist-tag instead of `latest`.
 
+## [1.0.34] — 2026-09-18
+
+### Changed
+
+- Expanded `/accessibility-audit` with semantic role-based color-token migration, computed WCAG AA checks across every supported theme and state, invisible-text detection, role-collision reporting, and a dark-mode reskin regression example.
+
 ---
 
 ## [1.0.0] — 2026-05-29
