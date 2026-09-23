@@ -101,7 +101,7 @@ Use the agent at agents/android/code-reviewer/agent.md to review this file:
 | Release Notes Generator | `agents/cross-platform/release-notes-generator/` | All | Git commits → user-facing release notes |
 | CI/CD Pipeline Generator | `agents/cross-platform/ci-cd-generator/` | All | Generates GitHub Actions / Bitrise / Fastlane configs |
 | Store Listing Writer | `agents/cross-platform/store-listing-writer/` | All | Play Store / App Store descriptions optimised for ASO |
-| Mobile Harness | `agents/cross-platform/mobile-harness/` | All | Build, test, verify UI, and run Mobile MCP QA for approved tasks |
+| Mobile Harness | `agents/cross-platform/mobile-harness/` | All | Guide beginners from idea and stack choice through one-task implementation, verification, device proof, and memory |
 
 ---
 

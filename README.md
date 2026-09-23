@@ -83,7 +83,7 @@ Mobile AI Agents turns AI coding from one-off prompts into a repeatable mobile e
 | 1. Start | Turn a raw idea into starter PRD, design, task, roadmap, and memory docs. | `npx mobile-ai-agents start` |
 | 2. Install | Add the agents, skills, and workflows to your AI coding tool. | `npx mobile-ai-agents install` |
 | 3. Open your app | Use it inside an Android, iOS, Flutter, React Native, KMP, Unity, or Unreal project. | Claude Code · Cursor · Windsurf · Copilot · Codex |
-| 4. Run the loop | Tell Mobile Harness to continue from the generated docs. It asks clarification questions before building. | `/mobile-harness` |
+| 4. Run the loop | Tell Mobile Harness to continue from the generated docs. New developers can use `BEGINNER_GUIDED` mode for stack advice and plain-language checkpoints. | `/mobile-harness` |
 | 5. Build with gates | The loop plans, implements, reviews architecture, checks security, audits performance, verifies UI, and runs QA. | `@MOBILE-HARNESS` |
 | 6. Continue later | Project context, decisions, reports, and next tasks are saved so work can continue across sessions. | Mobile Memory |
 
@@ -174,7 +174,9 @@ Not sure where to begin? Pick your situation:
 | Build, test, and verify a feature | `@MOBILE-HARNESS` + approved PRD/design/tasks |
 | Prepare a release | `/release-prep` |
 | Generate release notes | `@SCRIBE` + paste your git log |
-| Build an app from idea to store | `@APPFORGE` + answer the discovery questions |
+| Plan an app without implementing it | `@APPFORGE` + answer the discovery questions |
+| Build a first app with guided stack selection | `@MOBILE-HARNESS` in `BEGINNER_GUIDED` mode |
+| Build an approved app plan through device proof | `@MOBILE-HARNESS` |
 
 ---
 
@@ -431,20 +433,26 @@ Mobile Harness is the Loop Engineering orchestrator for Mobile AI Agents. It can
 
 Use it when you want to define the goal once and have the system keep moving through the app-building loop without repeating the same manual prompts at every stage.
 
+Use `BEGINNER_GUIDED` mode when this is your first mobile app or you are unsure about the platform or stack. Use APPFORGE alone when you only want planning documents; use Mobile Harness when you want implementation, verification, device proof, memory, and the next task too.
+
 ### What It Runs
 
 ```text
 Goal
--> clarify delivery profile and design direction
--> create or read PRD.md, DESIGN.md, TASKS.md, DEPENDENCIES.md, ROADMAP.md
--> implement one scoped task
--> run platform review
--> run tests
--> verify PRD and UI match
--> run device QA when available
--> run performance/security/accessibility checks when relevant
--> update MOBILE_MEMORY.md
--> produce MOBILE_HARNESS_REPORT.md
+-> PLAN: choose profile/stack and create or read PRD.md + ROADMAP.md
+-> DESIGN: approve DESIGN.md
+-> TASK: select one small item from TASKS.md
+-> IMPLEMENT: change only that task
+-> VERIFY: review, build, test, and check the PRD
+-> DEVICE PROOF: run Mobile MCP QA when available
+-> MEMORY: update MOBILE_MEMORY.md and the report
+-> NEXT ACTION: continue, fix, or stop at a human gate
+```
+
+Beginner prompt:
+
+```text
+Use MOBILE-HARNESS in BEGINNER_GUIDED mode. I have an app idea but I am not sure which platform or stack to use. Recommend one with reasons, create PRD.md, DESIGN.md, TASKS.md, DEPENDENCIES.md, ROADMAP.md, and MOBILE_MEMORY.md, then stop for approval before coding.
 ```
 
 ### First Questions It Should Ask

@@ -19,6 +19,12 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 - Prerelease package versions now publish to the npm `prerelease` dist-tag instead of `latest`.
 
+## [1.0.35] — 2026-09-23
+
+### Changed
+
+- Mobile Harness now includes a `BEGINNER_GUIDED` mode with stack recommendations, beginner-readable planning artifacts, a deterministic eight-stage development loop, plain-language checkpoints, and explicit human stop gates.
+
 ## [1.0.34] — 2026-09-18
 
 ### Changed

@@ -4,6 +4,10 @@ Mobile Harness is the top-level orchestrator for Mobile AI Agents. It can start 
 
 Use it when you want one AI system to manage the full mobile delivery loop with as little human effort as safely possible, while still using specialized agents and skills underneath.
 
+Choose `BEGINNER_GUIDED` mode if you have only an app idea, do not know the right mobile stack, or want each checkpoint explained in plain language. It uses the same rigorous build and QA gates as the standard harness.
+
+Use APPFORGE alone when you only want planning documents. Use Mobile Harness when you want the plan implemented, verified, tested on a device, saved to memory, and continued task by task.
+
 ---
 
 ## Mental Model
@@ -13,6 +17,7 @@ MOBILE-HARNESS
 ├── APPFORGE      → idea, PRD, design, tasks, roadmap
 ├── Mobile Memory → long-term memory across days/weeks
 ├── AXIOM/SWIFT/DART/BRIDGE → platform code review
+├── /mobile-app-design → screens, navigation, redesigns, and reskins
 ├── /mobile-mcp-qa → emulator/device UI verification
 ├── /accessibility-audit → accessibility verification
 ├── /perf-audit or PERF → performance verification
@@ -23,6 +28,42 @@ MOBILE-HARNESS
 ```
 
 APPFORGE plans. Mobile Memory remembers. Mobile Harness orchestrates execution and evidence.
+Mobile Flight Recorder records the end-of-session handoff so another session can resume from the exact next action.
+
+The fixed loop is:
+
+```text
+PLAN -> DESIGN -> TASK -> IMPLEMENT -> VERIFY -> DEVICE PROOF -> MEMORY -> NEXT ACTION
+```
+
+---
+
+## Beginner-Guided Start
+
+Mobile Harness asks four simple questions: what the app does and who it serves, whether it targets Android/iPhone/both, which languages you know, and whether you want a learning prototype, polished demo, or production app. It inspects an existing project before recommending a stack.
+
+For a new project, its defaults are native Compose for Android, native SwiftUI for Apple platforms, React Native with Expo for cross-platform TypeScript developers, and Flutter for teams that accept Dart and prioritize consistent custom UI. The recommendation includes reasons and tradeoffs; it is not treated as universally correct.
+
+Before coding it creates:
+
+- `PRD.md` for the user problem and requirements.
+- `DESIGN.md` for screens, states, navigation, accessibility, and screenshot proof.
+- `TASKS.md` for small independently verifiable work items.
+- `DEPENDENCIES.md` for tools, services, keys, and setup.
+- `ROADMAP.md` for milestones and deferred scope.
+- `MOBILE_MEMORY.md` for decisions, progress, blockers, and the next action.
+
+It stops for approval before the first code change and before credentials, destructive actions, paid services, irreversible migrations, public deployment, or store release.
+
+```text
+Use MOBILE-HARNESS in BEGINNER_GUIDED mode.
+App idea: A simple meal planner for busy parents.
+Target platform: Not sure.
+Experience: I know basic TypeScript and this is my first mobile app.
+Goal: A polished demo.
+
+Recommend the stack, explain why, create the planning documents, and stop for approval before coding.
+```
 
 ---
 
@@ -59,6 +100,7 @@ Mobile Harness verifies against docs, not memory:
 | `DESIGN.md` or design plan | Required before UI work | Layout, states, visual target |
 | `TASKS.md` | Required before implementation | Task scope and acceptance criteria |
 | `DEPENDENCIES.md` | Required before implementation | Libraries, APIs, env vars |
+| `ROADMAP.md` | Required for idea-to-app work | Milestones, sequence, deferred scope, release checkpoints |
 | `MOBILE_HARNESS_REPORT.md` | Required after each cycle | Evidence and pass/fail state |
 
 If these docs are missing, Mobile Harness routes to APPFORGE first.
@@ -112,6 +154,8 @@ Platform:
 Task:
 Status: PASS | FAIL | BLOCKED
 Mode:
+Current Loop Stage:
+Beginner Checkpoint:
 Artifacts Read:
 Orchestration State:
 Implementation Summary:

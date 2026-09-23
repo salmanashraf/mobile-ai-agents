@@ -16,6 +16,14 @@ npx mobile-ai-agents start
 
 This creates `PRD.md`, `DESIGN.md`, `TASKS.md`, `ROADMAP.md`, and `MOBILE_MEMORY.md`. After reviewing those files, install the agents and run `/mobile-harness` to continue from the approved plan.
 
+If this is your first mobile app or you do not know which stack to choose, start Mobile Harness like this:
+
+```text
+Use MOBILE-HARNESS in BEGINNER_GUIDED mode. I have a rough app idea and need a stack recommendation. Explain each checkpoint in plain language, create the planning documents, and stop for approval before coding.
+```
+
+APPFORGE is the planning specialist. Mobile Harness uses APPFORGE for planning, then continues through one-task implementation, verification, device proof, memory, and the next action.
+
 | I need to... | Start with this loop | Good first tool |
 |---|---|---|
 | Plan an app or feature | Planning | `@APPFORGE` |

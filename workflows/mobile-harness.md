@@ -2,13 +2,17 @@
 
 **Type:** Top-level mobile delivery orchestration  
 **Agents Used:** MOBILE-HARNESS, APPFORGE, Mobile Memory, AXIOM / SWIFT / DART / BRIDGE, CRASHER, PERF, LAUNCHPAD, SCRIBE, PIPELINE
-**Skills Used:** /mobile-mcp-qa, /accessibility-audit, /perf-audit, /mobile-memory-save, /release-prep, /store-listing
+**Skills Used:** /mobile-app-design, /prd-verification, /mobile-mcp-qa, /accessibility-audit, /perf-audit, /mobile-memory-save, /release-prep, /store-listing
 
 ---
 
 ## When to Use
 
 Use this workflow when a user wants one orchestrator that can manage the complete mobile app lifecycle: idea, planning, implementation, verification, multi-session memory, device QA, and launch preparation.
+
+Use `BEGINNER_GUIDED` mode when the user is new to mobile development, has only a rough idea, or does not know which platform or stack to choose. Do not create a separate beginner agent: Mobile Harness already owns the full lifecycle and can route planning work to APPFORGE.
+
+Use APPFORGE alone when the requested deliverable stops at discovery, PRD, design, tasks, or roadmap. Use Mobile Harness when the user wants the plan executed and proved on an emulator, simulator, or device.
 
 This workflow is intentionally strict. It prevents the common AI failure mode of building code without proving it matches the product plan, design, and real-device behavior.
 
@@ -44,37 +48,46 @@ Ask the user only for:
 ## Lifecycle Map
 
 ```text
-0. START
-   ↓ New idea or existing codebase?
-
-1. DELIVERY PROFILE
-   ↓ Smallest MVP, Demo-grade MVP, or Production-ready MVP
-
-2. DESIGN DIRECTION
-   ↓ Clean utility, polished consumer, playful gamified, premium wellness, dense dashboard, enterprise/admin, or custom reference
-
-3. MEMORY
-   ↓ Load or create MOBILE_MEMORY.md
-
-4. PRODUCT PLAN
-   ↓ APPFORGE discovery, PRD.md, design plan, TASKS.md, DEPENDENCIES.md
-
-5. TASK LOOP
-   ↓ Select exactly one task
-   ↓ Implement only that task
-   ↓ Platform review
-   ↓ Tests
-   ↓ PRD verification
-   ↓ UI match review
-   ↓ Mobile MCP QA
-   ↓ Update MOBILE_MEMORY.md
-
-6. FULL QA
-   ↓ Accessibility, performance, crash risk, edge cases
-
-7. LAUNCH
-   ↓ Store listing, release notes, checklist, pipeline
+PLAN -> DESIGN -> TASK -> IMPLEMENT -> VERIFY -> DEVICE PROOF -> MEMORY -> NEXT ACTION
 ```
+
+The eight stages are deterministic. Full QA and launch preparation happen as tasks inside the same loop rather than bypassing it.
+
+---
+
+## Beginner-Guided Defaults
+
+Ask only what cannot be discovered from the repository: app idea and audience, target platform, existing language experience, and delivery goal. `Not sure` is a valid answer.
+
+Recommend one stack with a plain-language explanation and record the tradeoff:
+
+| Need | Recommended Stack |
+|---|---|
+| Android only | Kotlin + Jetpack Compose |
+| iPhone/iPad only | Swift + SwiftUI |
+| Android + iOS with TypeScript/JavaScript experience | React Native + Expo + TypeScript |
+| Android + iOS with highly consistent custom UI | Flutter + Dart |
+| Existing app | Keep the existing stack |
+
+Before implementation, create beginner-readable `PRD.md`, `DESIGN.md`, `TASKS.md`, `DEPENDENCIES.md`, `ROADMAP.md`, and `MOBILE_MEMORY.md`. Explain each document's purpose, keep tasks independently shippable, and give every task acceptance criteria plus a verification command.
+
+At the end of every stage, state:
+
+```text
+What happened:
+Why it matters:
+Decision needed: None | <one explicit request>
+What happens next:
+```
+
+Stop at these human gates:
+
+- Approval of PRD, design, and task order before the first implementation.
+- Product choices that materially change the MVP.
+- Credentials, keys, certificates, account access, or private data.
+- Destructive operations, irreversible migrations, or deletion of user data/work.
+- Paid services, purchases, billing changes, or cost-incurring usage.
+- Public deployment, store submission, production rollout, or release approval.
 
 ---
 
@@ -203,15 +216,17 @@ For each task:
 4. Read `TASKS.md`.
 5. Read `DEPENDENCIES.md`.
 6. Select exactly one task.
-7. Implement only that task.
-8. Run platform reviewer.
-9. Run tests.
-10. Verify behavior against `PRD.md`.
-11. Verify UI against design.
-12. Run `/mobile-mcp-qa` if device automation is available.
-13. Produce `DEVICE_QA_REPORT.md` with the `device-proof-report` workflow when screenshots or device proof are required.
-14. Write `MOBILE_HARNESS_REPORT.md`.
-15. Update `MOBILE_MEMORY.md`.
+7. Select the narrowest specialist agent or skill and record why it fits the task.
+8. Use `/mobile-app-design` first when the task creates or changes screens, navigation, visual identity, or a reskin; then implement only that task.
+9. Run platform reviewer.
+10. Run the configured build, lint/static-analysis, and test commands. Discover safe platform defaults when commands are missing and record any unavailable check.
+11. Verify behavior against `PRD.md`.
+12. Verify UI against design.
+13. Run `/mobile-mcp-qa` if device automation is available.
+14. Produce `DEVICE_QA_REPORT.md` with the `device-proof-report` workflow when screenshots or device proof are required.
+15. Write `MOBILE_HARNESS_REPORT.md`.
+16. Update `MOBILE_MEMORY.md`.
+17. At session end, run `mobile-flight-recorder` to preserve changed files, commands, evidence, blockers, and the next action.
 
 After a task passes, continue to the next safe task automatically when the user has approved autonomous execution for the project. Stop only at human gates defined in the Autonomy Contract.
 
@@ -305,6 +320,12 @@ Start from scratch:
 
 ```text
 Use MOBILE-HARNESS. Start from a new app idea and orchestrate APPFORGE, Mobile Memory, implementation, QA, and launch prep.
+```
+
+Beginner-guided start:
+
+```text
+Use MOBILE-HARNESS in BEGINNER_GUIDED mode. I have an app idea but need help choosing the platform and stack. Explain each checkpoint in plain language, create the planning documents, and stop for approval before the first code change.
 ```
 
 Resume multi-day feature:
