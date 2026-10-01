@@ -51,6 +51,7 @@ test -f "$tmp_home/.claude/commands/<name>.md"
 
 ```bash
 git diff --check
+npm test
 node --check cli/index.js
 bash -n install.sh
 node cli/index.js list

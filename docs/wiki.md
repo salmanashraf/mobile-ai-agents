@@ -41,10 +41,20 @@
 
 For first-time setup, use the dedicated [Installation Guide](installation.md). It explains which command to run for Claude Code, Cursor, Windsurf, GitHub Copilot, and Codex.
 
+For Android device or emulator QA, use the [Android Device QA Setup](android-device-setup.md). It covers the environment doctor, Mobile MCP client setup, and `.mobile-ai-agents/android-device.json` project configuration used by `/mobile-mcp-qa`.
+
 Fast path:
 
 ```bash
 npx mobile-ai-agents install
+```
+
+Android QA setup:
+
+```bash
+npx mobile-ai-agents doctor --platform android
+npx mobile-ai-agents mcp setup --client claude
+npx mobile-ai-agents mcp config init --app-id com.example.app
 ```
 
 Common installs:

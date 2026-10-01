@@ -679,7 +679,12 @@
       <span class="comment"># Or just one Android agent</span><br>
       <span class="cmd2">npx mobile-ai-agents add agent axiom</span><br>
       <span class="cmd2">npx mobile-ai-agents add agent anr-investigation</span><br>
-      <span class="cmd2">npx mobile-ai-agents add agent memory-leak-analyzer</span>
+      <span class="cmd2">npx mobile-ai-agents add agent memory-leak-analyzer</span><br><br>
+      <span class="comment"># Prepare Android device QA with Mobile MCP</span><br>
+      <span class="cmd2">npx mobile-ai-agents doctor</span> <span class="flag">--platform</span> <span class="val">android</span><br>
+      <span class="cmd2">npx mobile-ai-agents mcp setup</span> <span class="flag">--client</span> <span class="val">claude</span><br>
+      <span class="cmd2">npx mobile-ai-agents mcp config init</span> <span class="flag">--app-id</span> <span class="val">com.example.app</span><br><br>
+      <a href="android-device-setup.md">Read the Android Device QA Setup guide →</a>
     </div>
     <div class="code-block" id="tab-cursor" style="display:none">
       <span class="comment"># Install for Cursor (.cursorrules in current project)</span><br>

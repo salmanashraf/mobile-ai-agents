@@ -11,7 +11,7 @@ Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Un
 [![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-agency?style=social)](https://github.com/salmanashraf/mobile-agency/stargazers)
 [![Platform](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Flutter%20%7C%20RN%20%7C%20KMP%20%7C%20Unity%20%7C%20Unreal-brightgreen)](#core-loops-and-platform-plugins)
 
-[Installation Guide](docs/installation.md) · [Core Loops](docs/core-loops.md) · [mobile-karpathy](mobile-karpathy.md) · [Wiki](https://github.com/salmanashraf/mobile-agency/wiki) · [Getting Started](docs/getting-started.md) · [Contributing](CONTRIBUTING.md)
+[Installation Guide](docs/installation.md) · [Android Device Setup](docs/android-device-setup.md) · [Core Loops](docs/core-loops.md) · [mobile-karpathy](mobile-karpathy.md) · [Wiki](https://github.com/salmanashraf/mobile-ai-agents/wiki) · [Getting Started](docs/getting-started.md) · [Contributing](CONTRIBUTING.md)
 
 > AI agents, skills, and Loop Engineering workflows for building, testing, reviewing, and shipping Android, iOS, Flutter, React Native, Unity, and Unreal apps.
 
@@ -398,6 +398,14 @@ Mobile MCP fits the QA stage next: use it for emulator, simulator, or real-devic
 
 Mobile MCP gives Mobile AI Agents a device automation layer for iOS and Android simulators, emulators, and real devices.
 
+Prepare an Android project with environment diagnostics and settings-preserving MCP setup:
+
+```bash
+npx mobile-ai-agents doctor --platform android
+npx mobile-ai-agents mcp setup --client claude
+npx mobile-ai-agents mcp config init --app-id com.example.app
+```
+
 ```
 /mobile-mcp-qa
 1. List devices
@@ -408,7 +416,7 @@ Mobile MCP gives Mobile AI Agents a device automation layer for iOS and Android 
 6. Produce MOBILE_MCP_QA_REPORT.md
 ```
 
-Use it inside APPFORGE Stage 7 Full QA, UI match review, launch readiness checks, and screenshot validation. Full guide: [docs/mobile-mcp.md](docs/mobile-mcp.md)
+Use it inside APPFORGE Stage 7 Full QA, UI match review, launch readiness checks, and screenshot validation. Guides: [Android Device QA Setup](docs/android-device-setup.md), [wiki guide](https://github.com/salmanashraf/mobile-ai-agents/wiki/Android-Device-QA-Setup), and [Mobile MCP Integration](docs/mobile-mcp.md).
 
 ### Device Proof Reports
 

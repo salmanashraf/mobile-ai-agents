@@ -1,10 +1,13 @@
 {
   "name": "mobile-ai-agents",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "AI agents, skills, and Loop Engineering workflows for building, testing, auditing, and releasing mobile apps.",
   "bin": {
     "mobile-ai-agents": "cli/index.js",
     "mobile-agency": "cli/index.js"
+  },
+  "scripts": {
+    "test": "node --test"
   },
   "files": [
     "AGENTS.md",

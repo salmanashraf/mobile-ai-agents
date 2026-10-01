@@ -19,6 +19,18 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 - Prerelease package versions now publish to the npm `prerelease` dist-tag instead of `latest`.
 
+## [1.0.36] — 2026-10-01
+
+### Added
+
+- `doctor --platform android` with readable and JSON checks for the Android SDK, `adb`, connected devices, emulator AVDs, Mobile MCP settings, and project configuration.
+- Idempotent `mcp setup --client <claude|cursor|windsurf|codex>` commands that preserve existing client settings.
+- Android device QA project configuration commands, schema, template, tests, and setup guide for the `/mobile-mcp-qa` skill.
+
+### Changed
+
+- CLI command routing now uses testable command modules while preserving existing commands.
+
 ## [1.0.35] — 2026-09-23
 
 ### Changed

@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const readline = require('readline');
+const { createCommandRouter } = require('./commands/router');
+const { parseOptions } = require('./lib/options');
 
 const REPO = 'salmanashraf/mobile-agency';
 const BRANCH = 'main';
@@ -281,26 +283,6 @@ function slugify(s) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .slice(0, 80) || 'memory';
-}
-
-function parseOptions(args) {
-  const out = { _: [] };
-  for (let i = 0; i < args.length; i++) {
-    const arg = args[i];
-    if (!arg.startsWith('--')) {
-      out._.push(arg);
-      continue;
-    }
-    const key = arg.slice(2);
-    const next = args[i + 1];
-    if (!next || next.startsWith('--')) {
-      out[key] = true;
-    } else {
-      out[key] = next;
-      i++;
-    }
-  }
-  return out;
 }
 
 function readStdinIfPiped() {
@@ -1401,6 +1383,8 @@ function cmdList() {
   console.log(dim('    npx mobile-ai-agents add skill grill-mobile          # one skill'));
   console.log(dim('    npx mobile-ai-agents add workflow feature-ship       # one workflow'));
   console.log(dim('    npx mobile-ai-agents memory init                     # local Mobile Memory'));
+  console.log(dim('    npx mobile-ai-agents doctor --platform android       # check Android setup'));
+  console.log(dim('    npx mobile-ai-agents mcp setup --client claude       # configure Mobile MCP'));
   console.log('');
 }
 
@@ -1413,6 +1397,8 @@ function cmdHelp() {
   console.log(`    ${bold('install')}                         Install agents, skills, and workflows`);
   console.log(`    ${bold('add')} agent|skill|workflow <name>  Install a single item`);
   console.log(`    ${bold('memory')} init|capture|search|...    Local Mobile Memory store`);
+  console.log(`    ${bold('doctor')} --platform android          Check SDK, adb, emulator, MCP, and project config`);
+  console.log(`    ${bold('mcp')} setup|config                  Configure Mobile MCP and Android device QA`);
   console.log(`    ${bold('list')}                            List all available agents, skills, and workflows`);
   console.log(`    ${bold('help')}                            Show this help`);
   console.log('');
@@ -1447,6 +1433,11 @@ function cmdHelp() {
   console.log(dim('    npx mobile-ai-agents add workflow feature-ship'));
   console.log(dim('    npx mobile-ai-agents memory init'));
   console.log(dim('    npx mobile-ai-agents memory capture --type decision --text "Use Room for offline persistence"'));
+  console.log(dim('    npx mobile-ai-agents doctor --platform android'));
+  console.log(dim('    npx mobile-ai-agents doctor --platform android --json'));
+  console.log(dim('    npx mobile-ai-agents mcp setup --client codex'));
+  console.log(dim('    npx mobile-ai-agents mcp config init --app-id com.example.app'));
+  console.log(dim('    npx mobile-ai-agents mcp config validate'));
   console.log('');
   console.log(dim(`  github.com/${REPO}`));
   console.log('');
@@ -1454,28 +1445,24 @@ function cmdHelp() {
 
 // ─── Main ────────────────────────────────────────────────────────────────────
 
+const routeCommand = createCommandRouter({
+  start: cmdStart,
+  install: cmdInstall,
+  add: cmdAdd,
+  memory: cmdMemory,
+  list: cmdList,
+  help: cmdHelp,
+});
+
 async function main() {
   const [,, cmd, ...args] = process.argv;
 
   try {
-    switch (cmd) {
-      case 'start':   await cmdStart(args);   break;
-      case 'install': await cmdInstall(args); break;
-      case 'add':     await cmdAdd(args);     break;
-      case 'memory':  cmdMemory(args);        break;
-      case 'list':    cmdList();              break;
-      case 'help':
-      case '--help':
-      case '-h':
-      case undefined: cmdHelp();              break;
-      default:
-        console.error(`\n  Unknown command: ${cmd}\n`);
-        cmdHelp();
-        process.exit(1);
-    }
+    await routeCommand(cmd, args);
   } catch (e) {
-    console.error(`\n  Error: ${e.message}\n`);
-    process.exit(1);
+    console.error(`\n  ${e.code === 'UNKNOWN_COMMAND' ? e.message : `Error: ${e.message}`}\n`);
+    if (e.code === 'UNKNOWN_COMMAND') cmdHelp();
+    process.exitCode = 1;
   }
 }
 

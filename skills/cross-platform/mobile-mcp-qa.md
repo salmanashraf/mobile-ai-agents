@@ -16,6 +16,20 @@ Mobile MCP is best used after implementation, during APPFORGE Stage 7 Full QA, a
 
 ## Prerequisites
 
+For Android, use the Mobile AI Agents setup commands from the app project:
+
+```bash
+npx mobile-ai-agents doctor --platform android
+npx mobile-ai-agents mcp setup --client <claude|cursor|windsurf|codex>
+npx mobile-ai-agents mcp config init \
+  --app-id com.example.app \
+  --apk app/build/outputs/apk/debug/app-debug.apk \
+  --flow "Launch app|Complete the primary flow|Verify success"
+npx mobile-ai-agents mcp config validate
+```
+
+The setup command preserves existing client settings and is safe to repeat. See `docs/android-device-setup.md` for configuration fields, JSON output, and troubleshooting.
+
 Install Mobile MCP in your AI tool:
 
 ```json

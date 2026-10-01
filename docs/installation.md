@@ -60,6 +60,14 @@ node --version
 
 If this prints a version like `v18.x`, `v20.x`, or newer, you are ready.
 
+If you plan to use `/mobile-mcp-qa` with Android, also install Android Studio, Platform-Tools, and an emulator image or connect an authorized device. Verify the setup with:
+
+```bash
+npx mobile-ai-agents doctor --platform android
+```
+
+Then follow the [Android Device QA Setup guide](android-device-setup.md) to configure Mobile MCP and the project test flow.
+
 ---
 
 ## Step 1: Pick Your AI Tool

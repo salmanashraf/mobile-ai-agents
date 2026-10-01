@@ -33,6 +33,20 @@ It exposes tools for:
 
 ## Install
 
+### Automated setup
+
+From an Android app project, run the environment doctor and configure your AI client:
+
+```bash
+npx mobile-ai-agents doctor --platform android
+npx mobile-ai-agents mcp setup --client <claude|cursor|windsurf|codex>
+npx mobile-ai-agents mcp config init --app-id com.example.app
+```
+
+The setup command preserves existing settings and is idempotent. The project config records the app ID, APK, target device, flow, timeouts, and evidence directory. See [Android Device QA Setup](android-device-setup.md) for the full command reference and troubleshooting.
+
+### Manual setup
+
 Standard MCP config:
 
 ```json
