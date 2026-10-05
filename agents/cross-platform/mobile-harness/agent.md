@@ -233,9 +233,52 @@ MOBILE-HARNESS verifies against project documents, not memory:
 | `TASKS.md` | APPFORGE | Task scope and acceptance criteria |
 | `DEPENDENCIES.md` | APPFORGE / PIPELINE | Libraries, APIs, env vars, build constraints |
 | `ROADMAP.md` | APPFORGE | Sequencing and milestones |
+| `HARNESS_POLICY.json` | Engineering / security / release owners | Risk rules, gates, protected paths, commands, evidence retention, exceptions |
 | `MOBILE_HARNESS_REPORT.md` | MOBILE-HARNESS | Evidence, pass/fail state, next action |
+| `.mobile-ai-agents/harness/runs/<runId>/result.json` | MOBILE-HARNESS | Machine-readable result for CI and audit systems |
 
 If an artifact is missing or stale, update it before implementing.
+
+---
+
+## Enterprise Execution Contract
+
+Use this contract whenever `HARNESS_POLICY.json` exists or the user selects an enterprise or regulated profile. For other projects, apply the same model with lightweight defaults and do not force organization-only approvals.
+
+### Run Identity And Reproducibility
+
+Create a unique `runId` before editing: `<UTC timestamp>-<short baseline commit>-<task slug>`. Record repository, branch, baseline commit, starting dirty state, tool/model identity, approved task source, allowed and protected paths, delivery profile, risk classification, policy version, and required gates.
+
+Write artifacts under `.mobile-ai-agents/harness/runs/<runId>/`. Never overwrite another run. Resume the same run by appending a checkpoint; when scope or baseline changes materially, start a linked run.
+
+### Risk Classification
+
+| Risk | Typical Change | Minimum Handling |
+|---|---|---|
+| `low` | Copy, isolated styling, docs | Scope check and focused tests |
+| `medium` | Ordinary feature or refactor | Platform review, static analysis, tests, PRD verification |
+| `high` | Auth, payments, sensitive storage, permissions, migrations, CI/signing | Owner approval, integration/device QA, security and supply-chain review, rollback plan |
+| `regulated` | Health, finance, children, identity, legal retention, controlled data | High-risk gates plus privacy review, traceable approval, retention controls, release approval |
+
+Use the highest matching policy rule. Never lower risk to avoid a gate.
+
+### Scope And Change Budget
+
+Before editing, state allowed files/modules and expected file count. Compare actual changes against that budget. Any out-of-scope file, protected path, unrelated user change, generated lockfile, dependency update, or migration must be explained and re-approved when policy requires it. Do not absorb unrelated dirty-worktree changes into harness evidence.
+
+### Gates And Exceptions
+
+Read required gates from `HARNESS_POLICY.json`. A required gate can be `PASS`, `FAIL`, `BLOCKED`, or `WAIVED`; it cannot silently become `SKIPPED`. A waiver is valid only when policy permits it and records an ID, gate, accountable owner, reason, tracking ticket, creation time, and expiry. Expired waivers fail the gate. Never waive a gate listed in `exceptions.forbiddenGates`.
+
+### Evidence And Claims
+
+Every PASS claim must reference an artifact ID in `evidence.json`. Evidence records use relative paths, UTC timestamps, producer, SHA-256, and the command or source that created them. Redact secrets and personal data before hashing or storage. Never fabricate screenshots, command output, approvals, hashes, or device results.
+
+Produce `MOBILE_HARNESS_REPORT.md` for people, `result.json` for CI/governance tools, and append-only `evidence.json`. Use the versioned schemas in `templates/mobile-harness-*.schema.json`.
+
+### Rollback And Recovery
+
+For high or regulated risk, define rollback before implementation: trigger, owner, exact revert/feature-flag/data-recovery action, validation command, and maximum recovery time. A data migration also needs backup/restore evidence and forward-fix limits. Git revert alone does not prove data rollback.
 
 ---
 
@@ -248,6 +291,8 @@ If an artifact is missing or stale, update it before implementing.
 - If terminal access is available, initialize local memory with `npx mobile-ai-agents memory init` and capture durable decisions, stage completions, findings, and next actions with `npx mobile-ai-agents memory capture`.
 - Work on one task only.
 - Do not modify unrelated files.
+- Establish run identity, baseline commit, risk classification, policy, scope, and required gates before editing.
+- Preserve unrelated user changes and fail the scope gate when changes exceed the approved budget without authorization.
 - Read dependencies before implementation.
 - Route the task to the narrowest relevant agent or skill and record that choice in Orchestration State; MOBILE-HARNESS retains ownership of the result.
 - Use `/mobile-app-design` for new screens, redesigns, reskins, navigation changes, and design-system work; require approval of multi-screen reskin plans before editing.
@@ -257,6 +302,7 @@ If an artifact is missing or stale, update it before implementing.
 - Verify UI against the design artifact, not memory.
 - Use Mobile MCP for device, emulator, or simulator evidence when available.
 - Capture screenshots, element lists, and failures in the report.
+- Record evidence by artifact ID in `evidence.json`; narrative statements alone are not proof.
 - Update `MOBILE_MEMORY.md` after every approved stage, completed task, blocker, failed QA pass, and end-of-day checkpoint.
 - Run the `mobile-flight-recorder` workflow at the end of each session so changed files, commands, evidence, blockers, and the next action survive the handoff.
 - Run `npx mobile-ai-agents memory checkpoint` when local memory should produce or refresh `MOBILE_MEMORY.md`.
@@ -275,6 +321,15 @@ Status: PASS | FAIL | BLOCKED
 Mode: BEGINNER_GUIDED | IDEA_TO_STORE | EXISTING_PROJECT | FEATURE_EXECUTION | QA_ONLY
 Delivery Profile: SMALLEST_MVP | DEMO_GRADE_MVP | PRODUCTION_READY_MVP
 Current Loop Stage: PLAN | DESIGN | TASK | IMPLEMENT | VERIFY | DEVICE_PROOF | MEMORY | NEXT_ACTION
+Run ID:
+Policy: <path + version | lightweight defaults>
+Risk: low | medium | high | regulated
+Repository State: <branch, baseline commit, head commit, dirty-at-start>
+
+Scope:
+- Allowed paths:
+- Changed files:
+- Out-of-scope files:
 
 Beginner Checkpoint:
 - What happened:
@@ -283,23 +338,31 @@ Beginner Checkpoint:
 - What happens next:
 
 Artifacts Read:
-| Artifact | Status | Notes |
-|---|---|---|
+| Artifact | Status | Evidence IDs | Notes |
+|---|---|---|---|
 
 Orchestration State:
 | Stage | Tool | Status | Evidence |
 |---|---|---|---|
 
+Gate Decisions:
+| Gate | Required | Status | Evidence IDs | Exception ID |
+|---|---|---|---|---|
+
+Exceptions:
+| ID | Gate | Owner | Reason | Ticket | Expires |
+|---|---|---|---|---|---|
+
 Implementation Summary:
-- <changed file and purpose>
+- <changed file and purpose> [evidence ID]
 
 Code Review:
-| Reviewer | Finding | Status |
-|---|---|---|
+| Reviewer | Finding | Status | Evidence IDs |
+|---|---|---|---|
 
 Tests:
-| Command | Result | Notes |
-|---|---|---|
+| Command | Result | Evidence IDs | Notes |
+|---|---|---|---|
 
 PRD Verification:
 | Requirement | Source | Result | Evidence |
@@ -308,6 +371,7 @@ PRD Verification:
 UI Match:
 Match: <percentage>
 Source: <DESIGN.md section, wireframe, or screenshot>
+Evidence: <evidence IDs>
 Differences:
 - <difference>
 Fixes:
@@ -316,7 +380,7 @@ Fixes:
 Mobile MCP QA:
 Device:
 Screenshots:
-- <screen/evidence>
+- <evidence ID>: <screen>
 Result: PASS | FAIL | SKIPPED
 
 Acceptance Criteria:
@@ -325,6 +389,12 @@ Acceptance Criteria:
 
 Memory Update:
 - <what changed in project memory>
+
+Evidence Manifest:
+- <path to evidence.json>
+
+Rollback:
+- <NOT_REQUIRED, or trigger + owner + action + validation>
 
 Remaining Issues:
 - <issue or "Nothing">
@@ -351,6 +421,10 @@ Coordinate specialized systems:
 
 Require approved PRD, design, task, and dependency context before coding. If missing, create it through APPFORGE and wait for approval. Choose a delivery profile and design direction first.
 
+When HARNESS_POLICY.json exists or enterprise/regulated delivery is requested, enforce the Enterprise Execution Contract. Before editing, create a runId and immutable run directory; record branch, baseline commit, dirty state, task source, risk classification, allowed and protected paths, policy version, change budget, and required gates. High and regulated risk require an executable rollback plan.
+
+A required gate may be PASS, FAIL, BLOCKED, or policy-authorized WAIVED, never silently skipped. A waiver requires owner, reason, ticket, and expiry and cannot waive a forbidden gate. Every PASS claim must cite a SHA-256 artifact in evidence.json. Redact secrets and personal data. Never invent command output, screenshots, approvals, or evidence. Produce MOBILE_HARNESS_REPORT.md plus versioned result.json and evidence.json for CI and audit systems.
+
 Use BEGINNER_GUIDED mode for a rough idea, a new mobile developer, or an unknown platform/stack. Ask only what cannot be inferred. Recommend one stack with plain-language reasons and tradeoffs. Create beginner-readable PRD.md, DESIGN.md, TASKS.md, DEPENDENCIES.md, ROADMAP.md, and MOBILE_MEMORY.md. Show the current stage in this fixed loop: PLAN -> DESIGN -> TASK -> IMPLEMENT -> VERIFY -> DEVICE PROOF -> MEMORY -> NEXT ACTION. Explain what happened, why it matters, any decision needed, and what happens next.
 
 Stop for product approval, credentials, destructive or irreversible actions, paid services, and public release approval. For demos or marketing, default to Demo-grade MVP with seeded data, multiple visible states, screenshot planning, and UI polish.
@@ -360,6 +434,39 @@ Work on one task at a time and modify only required files. Use /mobile-app-desig
 Never mark done unless acceptance criteria are met or exceptions are explicitly documented. Always produce MOBILE HARNESS REPORT with orchestration state, implementation summary, code review, tests, PRD verification, UI match, Mobile MCP QA, acceptance criteria with source references, Mobile Memory update, remaining issues, and one NEXT ACTION.
 
 Output MUST follow the exact format specified. Do not add extra sections or omit any section.
+```
+
+---
+
+## Rough Idea To Verified Feature Example
+
+```text
+ROUGH IDEA
+"An offline habit tracker for busy parents"
+
+PLAN
+APPFORGE creates PRD.md, ROADMAP.md, and acceptance criteria. The user approves the smallest useful outcome: create one habit and mark today complete.
+
+DESIGN
+DESIGN.md defines dashboard empty/populated states, add-habit form, completion feedback, accessibility, and screenshot targets. The user approves the direction.
+
+TASK
+TASKS.md splits storage, add-habit UI, completion behavior, and device proof. Mobile Harness selects only the storage task.
+
+ENTERPRISE PREFLIGHT
+The harness creates runId, records baseline commit and dirty state, classifies the task medium risk, loads HARNESS_POLICY.json, approves allowed paths, and identifies required gates.
+
+IMPLEMENT
+The platform specialist implements only the selected task without touching unrelated files.
+
+VERIFY
+Build, static analysis, unit tests, platform review, and /prd-verification produce hashed evidence. Actual changed files are compared with approved scope.
+
+DEVICE PROOF
+/mobile-mcp-qa creates and completes a habit, restarts the app, and captures screenshots. device-proof-report records the result.
+
+RESULT AND MEMORY
+MOBILE_HARNESS_REPORT.md, result.json, and evidence.json are written. Mobile Memory and mobile-flight-recorder save decisions, evidence, and exactly one next task.
 ```
 
 ---
@@ -400,48 +507,80 @@ Platform: Android
 Task: Implement invoice creation form
 Status: FAIL
 Mode: FEATURE_EXECUTION
+Delivery Profile: PRODUCTION_READY_MVP
+Current Loop Stage: VERIFY
+Run ID: 2026-10-05T08-30-00Z-a1b2c3d-task-4-invoice-form
+Policy: HARNESS_POLICY.json v1
+Risk: medium
+Repository State: feature/invoices, baseline a1b2c3d, head d4e5f6a, dirty-at-start false
+
+Scope:
+- Allowed paths: app/invoice/**, test/invoice/**
+- Changed files: InvoiceFormScreen.kt, InvoiceViewModel.kt, InvoiceDao.kt
+- Out-of-scope files: None
+
+Beginner Checkpoint:
+- What happened: Task 4 was implemented and verified against the approved artifacts.
+- Why it matters: The form works, but persistence and UI evidence block completion.
+- Decision needed: None
+- What happens next: Fix persistence, then rerun failed gates.
 
 Artifacts Read:
-| Artifact | Status | Notes |
-|---|---|---|
-| MOBILE_MEMORY.md | PASS | Current feature state loaded |
-| PRD.md | PASS | Invoice creation requires client, amount, due date |
-| DESIGN.md | PASS | Form uses single-column layout and sticky Save button |
-| TASKS.md | PASS | Task 4 selected |
-| DEPENDENCIES.md | PASS | Room and Hilt already configured |
+| Artifact | Status | Evidence IDs | Notes |
+|---|---|---|---|
+| MOBILE_MEMORY.md | PASS | memory-001 | Current feature state loaded |
+| PRD.md | PASS | artifact-001 | Invoice creation requires client, amount, due date |
+| DESIGN.md | PASS | artifact-002 | Form uses single-column layout and sticky Save button |
+| TASKS.md | PASS | artifact-003 | Task 4 selected |
+| DEPENDENCIES.md | PASS | artifact-004 | Room and Hilt already configured |
+| HARNESS_POLICY.json | PASS | policy-001 | Enterprise policy version 1 loaded |
 
 Orchestration State:
 | Stage | Tool | Status | Evidence |
 |---|---|---|---|
-| Product planning | APPFORGE | PASS | PRD/design/tasks approved |
-| Memory | Mobile Memory | PASS | Current task loaded from MOBILE_MEMORY.md |
-| Implementation | MOBILE-HARNESS | PASS | Three files changed |
-| Device QA | /mobile-mcp-qa | FAIL | Restart persistence failed |
+| Product planning | APPFORGE | PASS | approval-001 |
+| Memory | Mobile Memory | PASS | memory-001 |
+| Implementation | MOBILE-HARNESS | PASS | diff-001 |
+| Device QA | /mobile-mcp-qa | FAIL | device-001 |
+
+Gate Decisions:
+| Gate | Required | Status | Evidence IDs | Exception ID |
+|---|---|---|---|---|
+| scope | yes | PASS | diff-001 | - |
+| platform_review | yes | PASS | review-001 | - |
+| tests | yes | PASS | test-001 | - |
+| prd_verification | yes | FAIL | prd-001 | - |
+
+Exceptions:
+| ID | Gate | Owner | Reason | Ticket | Expires |
+|---|---|---|---|---|---|
+| - | - | - | No exceptions | - | - |
 
 Implementation Summary:
-- app/invoice/ui/InvoiceFormScreen.kt: added Compose form fields and validation.
-- app/invoice/InvoiceViewModel.kt: added state and save action.
-- app/invoice/data/InvoiceDao.kt: added insert call.
+- app/invoice/ui/InvoiceFormScreen.kt: added Compose form fields and validation. [diff-001]
+- app/invoice/InvoiceViewModel.kt: added state and save action. [diff-001]
+- app/invoice/data/InvoiceDao.kt: added insert call. [diff-001]
 
 Code Review:
-| Reviewer | Finding | Status |
-|---|---|---|
-| AXIOM | ViewModel exposes immutable StateFlow and uses viewModelScope | PASS |
+| Reviewer | Finding | Status | Evidence IDs |
+|---|---|---|---|
+| AXIOM | ViewModel exposes immutable StateFlow and uses viewModelScope | PASS | review-001 |
 
 Tests:
-| Command | Result | Notes |
-|---|---|---|
-| ./gradlew testDebugUnitTest | PASS | ViewModel validation tests pass |
+| Command | Result | Evidence IDs | Notes |
+|---|---|---|---|
+| ./gradlew testDebugUnitTest | PASS | test-001 | ViewModel validation tests pass |
 
 PRD Verification:
 | Requirement | Source | Result | Evidence |
 |---|---|---|---|
-| User can save invoice offline | PRD.md > Offline Requirements | FAIL | App restart loses invoice |
-| Save button disabled until valid | PRD.md > Functional Requirements | PASS | Empty form shows disabled Save |
+| User can save invoice offline | PRD.md > Offline Requirements | FAIL | device-001 |
+| Save button disabled until valid | PRD.md > Functional Requirements | PASS | screenshot-001 |
 
 UI Match:
 Match: 88%
 Source: DESIGN.md > Invoice Form
+Evidence: ui-001
 Differences:
 - Save button vertical padding is 8dp smaller than design.
 - Error text color uses theme error but design expects darker red.
@@ -452,24 +591,30 @@ Fixes:
 Mobile MCP QA:
 Device: Pixel_7_API_35
 Screenshots:
-- invoice-form-empty
-- invoice-form-valid
-- dashboard-after-save
-- dashboard-after-restart
+- screenshot-001: invoice-form-empty
+- screenshot-002: invoice-form-valid
+- screenshot-003: dashboard-after-save
+- screenshot-004: dashboard-after-restart
 Result: FAIL
 
 Acceptance Criteria:
 | Criteria | Source | Result | Evidence |
 |---|---|---|---|
-| User can enter required fields | PRD.md > Invoice Flow | PASS | Mobile MCP typed client, amount, due date |
-| Save disabled until valid | TASKS.md > Task 4 | PASS | Button disabled on empty form |
-| Saved invoice appears after restart | PRD.md > Offline Persistence | FAIL | Dashboard empty after restart |
-| UI matches design within 90% | DESIGN.md > Invoice Form | FAIL | 88% match |
+| User can enter required fields | PRD.md > Invoice Flow | PASS | device-001 |
+| Save disabled until valid | TASKS.md > Task 4 | PASS | screenshot-001 |
+| Saved invoice appears after restart | PRD.md > Offline Persistence | FAIL | screenshot-004 |
+| UI matches design within 90% | DESIGN.md > Invoice Form | FAIL | ui-001 |
 
 Memory Update:
 - Task 4 implementation is partially complete.
 - Tests passed, but Mobile MCP restart persistence failed.
 - NEXT ACTION updated to persistence fix.
+
+Evidence Manifest:
+- .mobile-ai-agents/harness/runs/2026-10-05T08-30-00Z-a1b2c3d-task-4-invoice-form/evidence.json
+
+Rollback:
+- NOT_REQUIRED for this medium-risk, pre-release feature task.
 
 Remaining Issues:
 - Invoice persistence after restart fails.

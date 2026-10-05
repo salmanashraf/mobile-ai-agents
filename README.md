@@ -439,6 +439,13 @@ device-proof-report
 
 Mobile Harness is the Loop Engineering orchestrator for Mobile AI Agents. It can start from a rough app idea or an existing codebase, then coordinate APPFORGE, Mobile Memory, platform reviewers, tests, UI verification, Mobile MCP QA, accessibility, performance, security, release prep, and store/growth work.
 
+For larger engineering organizations, Mobile Harness supports a governed execution contract with repository policy, run IDs, baseline commits, change budgets, risk-based gates, protected paths, accountable exceptions, rollback plans, SHA-256 evidence manifests, and machine-readable CI results. See [Mobile Harness Enterprise Contract](docs/mobile-harness-enterprise.md).
+
+```bash
+npx mobile-ai-agents harness policy init --profile enterprise
+npx mobile-ai-agents harness policy validate
+```
+
 Use it when you want to define the goal once and have the system keep moving through the app-building loop without repeating the same manual prompts at every stage.
 
 Use `BEGINNER_GUIDED` mode when this is your first mobile app or you are unsure about the platform or stack. Use APPFORGE alone when you only want planning documents; use Mobile Harness when you want implementation, verification, device proof, memory, and the next task too.
@@ -550,7 +557,7 @@ Design direction: Playful gamified, polished consumer app. Colorful but clean. S
 Ask clarification first if needed, then run the full loop without asking me to repeat the idea.
 ```
 
-Full guide: [docs/mobile-harness.md](docs/mobile-harness.md)
+Guides: [Mobile Harness](docs/mobile-harness.md) · [Enterprise Contract](docs/mobile-harness-enterprise.md)
 
 ---
 

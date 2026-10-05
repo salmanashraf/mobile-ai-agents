@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-10-05T08-30-00Z-a1b2c3d-task-4-invoice-form",
+  "status": "PASS",
+  "risk": "medium",
+  "task": "TASKS.md Task 4: invoice creation form",
+  "startedAt": "2026-10-05T08:30:00Z",
+  "completedAt": "2026-10-05T09:10:00Z",
+  "repository": {
+    "branch": "feature/invoices",
+    "baselineCommit": "a1b2c3d",
+    "headCommit": "d4e5f6a",
+    "dirtyAtStart": false
+  },
+  "scope": {
+    "allowedPaths": ["app/invoice/**", "test/invoice/**"],
+    "changedFiles": [
+      "app/invoice/ui/InvoiceFormScreen.kt",
+      "app/invoice/InvoiceViewModel.kt",
+      "test/invoice/InvoiceViewModelTest.kt"
+    ],
+    "outOfScopeFiles": []
+  },
+  "gates": [
+    {
+      "name": "scope",
+      "status": "PASS",
+      "evidence": ["diff-001"]
+    },
+    {
+      "name": "tests",
+      "status": "PASS",
+      "evidence": ["test-001"]
+    },
+    {
+      "name": "prd_verification",
+      "status": "PASS",
+      "evidence": ["prd-001"]
+    }
+  ],
+  "exceptions": [],
+  "evidenceManifest": ".mobile-ai-agents/harness/runs/2026-10-05T08-30-00Z-a1b2c3d-task-4-invoice-form/evidence.json",
+  "nextAction": "Select the next approved task from TASKS.md."
+}

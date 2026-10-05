@@ -8,6 +8,13 @@ Choose `BEGINNER_GUIDED` mode if you have only an app idea, do not know the righ
 
 Use APPFORGE alone when you only want planning documents. Use Mobile Harness when you want the plan implemented, verified, tested on a device, saved to memory, and continued task by task.
 
+For organization-wide use, add `HARNESS_POLICY.json` and follow the [Enterprise Contract](mobile-harness-enterprise.md). Governed runs add risk classification, scoped change budgets, owners, policy gates, rollback, expiring exceptions, hashed evidence, and machine-readable CI results.
+
+```bash
+npx mobile-ai-agents harness policy init --profile enterprise
+npx mobile-ai-agents harness policy validate
+```
+
 ---
 
 ## Mental Model
@@ -101,7 +108,9 @@ Mobile Harness verifies against docs, not memory:
 | `TASKS.md` | Required before implementation | Task scope and acceptance criteria |
 | `DEPENDENCIES.md` | Required before implementation | Libraries, APIs, env vars |
 | `ROADMAP.md` | Required for idea-to-app work | Milestones, sequence, deferred scope, release checkpoints |
+| `HARNESS_POLICY.json` | Required for enterprise/regulated runs | Risk rules, gates, owners, commands, protected paths, evidence, exceptions |
 | `MOBILE_HARNESS_REPORT.md` | Required after each cycle | Evidence and pass/fail state |
+| `.mobile-ai-agents/harness/runs/<runId>/result.json` | Required for governed runs | CI and audit result |
 
 If these docs are missing, Mobile Harness routes to APPFORGE first.
 
@@ -155,9 +164,16 @@ Task:
 Status: PASS | FAIL | BLOCKED
 Mode:
 Current Loop Stage:
+Run ID:
+Policy:
+Risk:
+Repository State:
+Scope:
 Beginner Checkpoint:
 Artifacts Read:
 Orchestration State:
+Gate Decisions:
+Exceptions:
 Implementation Summary:
 Code Review:
 Tests:
@@ -166,6 +182,8 @@ UI Match:
 Mobile MCP QA:
 Acceptance Criteria:
 Memory Update:
+Evidence Manifest:
+Rollback:
 Remaining Issues:
 NEXT ACTION:
 ```

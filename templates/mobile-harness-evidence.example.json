@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-10-05T08-30-00Z-a1b2c3d-task-4-invoice-form",
+  "generatedAt": "2026-10-05T09:10:00Z",
+  "artifacts": [
+    {
+      "id": "diff-001",
+      "type": "diff",
+      "path": "evidence/changed-files.patch",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "createdAt": "2026-10-05T08:50:00Z",
+      "producer": "mobile-harness",
+      "command": "git diff -- app/invoice test/invoice",
+      "redacted": false
+    },
+    {
+      "id": "test-001",
+      "type": "test",
+      "path": "evidence/unit-tests.txt",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "createdAt": "2026-10-05T08:55:00Z",
+      "producer": "gradle",
+      "command": "./gradlew testDebugUnitTest",
+      "redacted": false
+    },
+    {
+      "id": "prd-001",
+      "type": "report",
+      "path": "evidence/prd-verification.md",
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "createdAt": "2026-10-05T09:05:00Z",
+      "producer": "prd-verification",
+      "redacted": false
+    }
+  ]
+}

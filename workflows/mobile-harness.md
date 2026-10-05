@@ -154,9 +154,31 @@ If the user does not choose, infer the best direction from the app category and 
 | `TASKS.md` | Required before implementation | APPFORGE | Task scope and acceptance criteria |
 | `DEPENDENCIES.md` | Required before implementation | APPFORGE / PIPELINE | Libraries, APIs, env vars, build constraints |
 | `ROADMAP.md` | Recommended | APPFORGE | Milestones and sequencing |
+| `HARNESS_POLICY.json` | Required for enterprise/regulated use | Engineering / security / release owners | Risk, gates, ownership, commands, evidence, exceptions |
 | `MOBILE_HARNESS_REPORT.md` | Required after each cycle | MOBILE-HARNESS | Evidence and pass/fail state |
+| `.mobile-ai-agents/harness/runs/<runId>/result.json` | Required per governed run | MOBILE-HARNESS | Machine-readable result for CI and audit systems |
 
 If any required artifact is missing, MOBILE-HARNESS creates or updates it through APPFORGE before coding.
+
+---
+
+## Stage 0 — Enterprise Preflight
+
+Run this stage before Stage 1 whenever `HARNESS_POLICY.json` exists or the delivery context is enterprise or regulated.
+
+1. Create `runId` from UTC time, short baseline commit, and task slug.
+2. Create `.mobile-ai-agents/harness/runs/<runId>/` without overwriting a prior run.
+3. Record branch, baseline commit, starting dirty state, tool/model, approved task source, allowed paths, protected paths, and expected file count.
+4. Apply the highest matching risk classification: `low`, `medium`, `high`, or `regulated`.
+5. Load required gates and configured commands from `HARNESS_POLICY.json`.
+6. For high or regulated work, define rollback trigger, owner, exact recovery action, validation command, and maximum recovery time before editing.
+7. Stop if ownership is required but missing, a protected path is unapproved, or unrelated local changes overlap the task.
+
+Required gates cannot silently become `SKIPPED`. Use `WAIVED` only when policy permits an exception with ID, owner, reason, ticket, creation time, and expiry. Every exception expires; an expired exception fails. Forbidden gates cannot be waived.
+
+Write proof to append-only `evidence.json`. Every artifact entry has a relative path, producer, UTC timestamp, SHA-256, and command/source. Redact secrets and personal data before storage. Every PASS claim must cite one or more evidence IDs.
+
+Complete the run with both `MOBILE_HARNESS_REPORT.md` and `result.json`. The JSON contracts are versioned in `templates/mobile-harness-policy.schema.json`, `templates/mobile-harness-result.schema.json`, and `templates/mobile-harness-evidence.schema.json`.
 
 ---
 
@@ -216,17 +238,19 @@ For each task:
 4. Read `TASKS.md`.
 5. Read `DEPENDENCIES.md`.
 6. Select exactly one task.
-7. Select the narrowest specialist agent or skill and record why it fits the task.
-8. Use `/mobile-app-design` first when the task creates or changes screens, navigation, visual identity, or a reskin; then implement only that task.
-9. Run platform reviewer.
-10. Run the configured build, lint/static-analysis, and test commands. Discover safe platform defaults when commands are missing and record any unavailable check.
-11. Verify behavior against `PRD.md`.
-12. Verify UI against design.
-13. Run `/mobile-mcp-qa` if device automation is available.
-14. Produce `DEVICE_QA_REPORT.md` with the `device-proof-report` workflow when screenshots or device proof are required.
-15. Write `MOBILE_HARNESS_REPORT.md`.
-16. Update `MOBILE_MEMORY.md`.
-17. At session end, run `mobile-flight-recorder` to preserve changed files, commands, evidence, blockers, and the next action.
+7. Confirm risk, required gates, allowed paths, protected paths, and change budget before editing.
+8. Select the narrowest specialist agent or skill and record why it fits the task.
+9. Use `/mobile-app-design` first when the task creates or changes screens, navigation, visual identity, or a reskin; then implement only that task.
+10. Run platform reviewer.
+11. Run policy commands for build, lint/static analysis, unit tests, and integration tests. Discover safe defaults only when policy does not define them.
+12. Verify behavior against `PRD.md`.
+13. Verify UI against design.
+14. Run `/mobile-mcp-qa` if device automation is available or policy requires it.
+15. Produce `DEVICE_QA_REPORT.md` with the `device-proof-report` workflow when screenshots or device proof are required.
+16. Compare actual changed files with the approved scope and fail on unexplained changes.
+17. Hash and append evidence, then write `MOBILE_HARNESS_REPORT.md` and `result.json`.
+18. Update `MOBILE_MEMORY.md`.
+19. At session end, run `mobile-flight-recorder` to preserve changed files, commands, evidence, blockers, and the next action.
 
 After a task passes, continue to the next safe task automatically when the user has approved autonomous execution for the project. Stop only at human gates defined in the Autonomy Contract.
 
@@ -309,6 +333,10 @@ A task can be marked done only when:
 - UI match is at or above threshold
 - Mobile MCP QA passes or accepted skip is documented
 - No CRITICAL platform-review findings remain
+- Required policy gates pass or have valid, unexpired, permitted exceptions
+- Changed files remain inside the approved scope and change budget
+- High/regulated work has a verified rollback procedure
+- `result.json` and `evidence.json` conform to schema and contain no secrets or personal data
 - `MOBILE_MEMORY.md` is updated
 - NEXT ACTION is either the next task or a concrete fix
 

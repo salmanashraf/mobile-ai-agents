@@ -1385,6 +1385,7 @@ function cmdList() {
   console.log(dim('    npx mobile-ai-agents memory init                     # local Mobile Memory'));
   console.log(dim('    npx mobile-ai-agents doctor --platform android       # check Android setup'));
   console.log(dim('    npx mobile-ai-agents mcp setup --client claude       # configure Mobile MCP'));
+  console.log(dim('    npx mobile-ai-agents harness policy init             # enterprise harness policy'));
   console.log('');
 }
 
@@ -1398,6 +1399,7 @@ function cmdHelp() {
   console.log(`    ${bold('add')} agent|skill|workflow <name>  Install a single item`);
   console.log(`    ${bold('memory')} init|capture|search|...    Local Mobile Memory store`);
   console.log(`    ${bold('doctor')} --platform android          Check SDK, adb, emulator, MCP, and project config`);
+  console.log(`    ${bold('harness')} policy init|validate       Configure governed Mobile Harness runs`);
   console.log(`    ${bold('mcp')} setup|config                  Configure Mobile MCP and Android device QA`);
   console.log(`    ${bold('list')}                            List all available agents, skills, and workflows`);
   console.log(`    ${bold('help')}                            Show this help`);
@@ -1438,6 +1440,8 @@ function cmdHelp() {
   console.log(dim('    npx mobile-ai-agents mcp setup --client codex'));
   console.log(dim('    npx mobile-ai-agents mcp config init --app-id com.example.app'));
   console.log(dim('    npx mobile-ai-agents mcp config validate'));
+  console.log(dim('    npx mobile-ai-agents harness policy init --profile enterprise'));
+  console.log(dim('    npx mobile-ai-agents harness policy validate'));
   console.log('');
   console.log(dim(`  github.com/${REPO}`));
   console.log('');

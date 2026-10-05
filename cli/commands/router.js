@@ -1,6 +1,7 @@
 'use strict';
 
 const { cmdDoctor } = require('./doctor');
+const { cmdHarness } = require('./harness');
 const { cmdMcp } = require('./mcp');
 
 function createCommandRouter(legacyHandlers) {
@@ -11,6 +12,7 @@ function createCommandRouter(legacyHandlers) {
     ['memory', legacyHandlers.memory],
     ['list', legacyHandlers.list],
     ['doctor', cmdDoctor],
+    ['harness', cmdHarness],
     ['mcp', cmdMcp],
     ['help', legacyHandlers.help],
     ['--help', legacyHandlers.help],

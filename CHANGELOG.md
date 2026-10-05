@@ -19,6 +19,16 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 - Prerelease package versions now publish to the npm `prerelease` dist-tag instead of `latest`.
 
+## [1.0.37] — 2026-10-05
+
+### Added
+
+- Mobile Harness enterprise execution contract with policy initialization/validation commands, risk-based gates, run identity, scoped change budgets, ownership, rollback requirements, expiring exceptions, SHA-256 evidence manifests, machine-readable result schemas, CI guidance, and regression tests.
+
+### Changed
+
+- Mobile Harness now produces evidence-linked human and machine-readable results and includes a complete rough-idea-to-device-verified example.
+
 ## [1.0.36] — 2026-10-01
 
 ### Added

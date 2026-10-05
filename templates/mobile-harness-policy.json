@@ -1,0 +1,60 @@
+{
+  "$schema": "./mobile-harness-policy.schema.json",
+  "version": 1,
+  "profile": "enterprise",
+  "defaultRisk": "medium",
+  "riskRules": [
+    {
+      "name": "identity-payments-and-sensitive-data",
+      "paths": [
+        "**/auth/**",
+        "**/payment/**",
+        "**/billing/**",
+        "**/security/**",
+        "**/privacy/**",
+        "**/*Migration*"
+      ],
+      "risk": "high"
+    }
+  ],
+  "gates": {
+    "low": ["scope", "tests"],
+    "medium": ["scope", "platform_review", "static_analysis", "tests", "prd_verification"],
+    "high": ["scope", "owner_approval", "platform_review", "static_analysis", "tests", "integration_tests", "prd_verification", "ui_verification", "device_qa", "accessibility", "security", "supply_chain", "rollback"],
+    "regulated": ["scope", "owner_approval", "platform_review", "static_analysis", "tests", "integration_tests", "prd_verification", "ui_verification", "device_qa", "accessibility", "performance", "security", "privacy", "supply_chain", "rollback", "release_approval"]
+  },
+  "exceptions": {
+    "allowed": true,
+    "requireOwner": true,
+    "requireReason": true,
+    "requireTicket": true,
+    "maxAgeDays": 14,
+    "forbiddenGates": ["scope", "security", "privacy", "rollback", "release_approval"]
+  },
+  "evidence": {
+    "root": ".mobile-ai-agents/harness/runs",
+    "hashAlgorithm": "sha256",
+    "retentionDays": 90,
+    "redactPatterns": ["token", "secret", "password", "authorization", "cookie"]
+  },
+  "ownership": {
+    "product": [],
+    "engineering": [],
+    "security": [],
+    "release": []
+  },
+  "commands": {
+    "build": [],
+    "staticAnalysis": [],
+    "unitTests": [],
+    "integrationTests": []
+  },
+  "protectedPaths": [
+    ".github/workflows/**",
+    "**/gradle/libs.versions.toml",
+    "**/Podfile.lock",
+    "**/Package.resolved",
+    "**/pubspec.lock",
+    "**/package-lock.json"
+  ]
+}

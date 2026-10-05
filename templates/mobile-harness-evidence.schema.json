@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/salmanashraf/mobile-ai-agents/schemas/mobile-harness-evidence-v1.json",
+  "title": "Mobile Harness Evidence Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "generatedAt", "artifacts"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "path", "sha256", "createdAt", "producer"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": { "enum": ["command", "test", "review", "screenshot", "device", "report", "diff", "approval", "exception", "rollback"] },
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "producer": { "type": "string", "minLength": 1 },
+          "command": { "type": "string" },
+          "redacted": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

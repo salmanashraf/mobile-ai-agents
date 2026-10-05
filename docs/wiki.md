@@ -470,6 +470,7 @@ Device Proof Reports turn Mobile MCP QA evidence into a durable `DEVICE_QA_REPOR
 - Release gates: teams can verify launch, core flows, restart, rotation, and edge cases before store submission.
 - Bug fixes: every PASS or FAIL references evidence instead of relying on memory.
 - Mobile Harness: `DEVICE_QA_REPORT.md` can be attached to `MOBILE_HARNESS_REPORT.md`.
+- Enterprise Mobile Harness: add `HARNESS_POLICY.json` to enforce run identity, risk classification, scoped changes, protected paths, required gates, rollback, expiring exceptions, and SHA-256 evidence. Each governed run produces human-readable `MOBILE_HARNESS_REPORT.md` plus machine-readable `result.json` and `evidence.json`; see [Mobile Harness Enterprise Contract](mobile-harness-enterprise.md).
 - Future AI sessions: Mobile Memory can preserve device, build, screenshots, result, and next action.
 
 ### When to run it

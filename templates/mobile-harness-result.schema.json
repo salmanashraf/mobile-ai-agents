@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/salmanashraf/mobile-ai-agents/schemas/mobile-harness-result-v1.json",
+  "title": "Mobile Harness Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runId",
+    "status",
+    "risk",
+    "task",
+    "startedAt",
+    "completedAt",
+    "repository",
+    "scope",
+    "gates",
+    "exceptions",
+    "evidenceManifest",
+    "nextAction"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+    "risk": { "enum": ["low", "medium", "high", "regulated"] },
+    "task": { "type": "string", "minLength": 1 },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "completedAt": { "type": "string", "format": "date-time" },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch", "baselineCommit", "headCommit", "dirtyAtStart"],
+      "properties": {
+        "branch": { "type": "string" },
+        "baselineCommit": { "type": "string", "minLength": 7 },
+        "headCommit": { "type": "string", "minLength": 7 },
+        "dirtyAtStart": { "type": "boolean" }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowedPaths", "changedFiles", "outOfScopeFiles"],
+      "properties": {
+        "allowedPaths": { "type": "array", "items": { "type": "string" } },
+        "changedFiles": { "type": "array", "items": { "type": "string" } },
+        "outOfScopeFiles": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status", "evidence"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["PASS", "FAIL", "BLOCKED", "SKIPPED", "WAIVED"] },
+          "evidence": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "exceptionId": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "gate", "owner", "reason", "ticket", "expiresAt"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "gate": { "type": "string", "minLength": 1 },
+          "owner": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 },
+          "ticket": { "type": "string", "minLength": 1 },
+          "expiresAt": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "evidenceManifest": { "type": "string", "minLength": 1 },
+    "nextAction": { "type": "string", "minLength": 1 }
+  }
+}

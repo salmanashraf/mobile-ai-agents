@@ -101,13 +101,17 @@ Use the agent at agents/android/code-reviewer/agent.md to review this file:
 | Release Notes Generator | `agents/cross-platform/release-notes-generator/` | All | Git commits → user-facing release notes |
 | CI/CD Pipeline Generator | `agents/cross-platform/ci-cd-generator/` | All | Generates GitHub Actions / Bitrise / Fastlane configs |
 | Store Listing Writer | `agents/cross-platform/store-listing-writer/` | All | Play Store / App Store descriptions optimised for ASO |
-| Mobile Harness | `agents/cross-platform/mobile-harness/` | All | Guide beginners from idea and stack choice through one-task implementation, verification, device proof, and memory |
+| Mobile Harness | `agents/cross-platform/mobile-harness/` | All | Guide projects from idea through verified delivery; enterprise mode adds policy, risk gates, scoped changes, rollback, and auditable evidence |
 
 ---
 
 ## Mobile MCP QA
 
 Use `skills/cross-platform/mobile-mcp-qa.md` and `workflows/mobile-mcp-qa.md` when a user wants device, emulator, or simulator QA through Mobile MCP. This belongs after implementation, during APPFORGE UI match review, full QA, launch readiness, or screenshot validation.
+
+## Enterprise Mobile Harness
+
+Use `HARNESS_POLICY.json` when a team needs governed Mobile Harness runs. Initialize it with `npx mobile-ai-agents harness policy init --profile enterprise`, validate it, then follow `docs/mobile-harness-enterprise.md`. Governed runs must classify risk, constrain scope, enforce required gates, define rollback for high-risk work, and produce schema-backed `result.json` plus SHA-256 `evidence.json`.
 
 ## Android ANR Investigation
 

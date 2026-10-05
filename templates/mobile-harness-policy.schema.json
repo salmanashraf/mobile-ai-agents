@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/salmanashraf/mobile-ai-agents/schemas/mobile-harness-policy-v1.json",
+  "title": "Mobile Harness Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "profile",
+    "defaultRisk",
+    "riskRules",
+    "gates",
+    "exceptions",
+    "evidence",
+    "ownership",
+    "commands",
+    "protectedPaths"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1 },
+    "profile": { "enum": ["startup", "team", "enterprise", "regulated"] },
+    "defaultRisk": { "$ref": "#/$defs/risk" },
+    "riskRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "paths", "risk"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "paths": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "risk": { "$ref": "#/$defs/risk" }
+        }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["low", "medium", "high", "regulated"],
+      "properties": {
+        "low": { "$ref": "#/$defs/gateList" },
+        "medium": { "$ref": "#/$defs/gateList" },
+        "high": { "$ref": "#/$defs/gateList" },
+        "regulated": { "$ref": "#/$defs/gateList" }
+      }
+    },
+    "exceptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed", "requireOwner", "requireReason", "requireTicket", "maxAgeDays", "forbiddenGates"],
+      "properties": {
+        "allowed": { "type": "boolean" },
+        "requireOwner": { "type": "boolean" },
+        "requireReason": { "type": "boolean" },
+        "requireTicket": { "type": "boolean" },
+        "maxAgeDays": { "type": "integer", "minimum": 1 },
+        "forbiddenGates": { "$ref": "#/$defs/gateList" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root", "hashAlgorithm", "retentionDays", "redactPatterns"],
+      "properties": {
+        "root": { "type": "string", "minLength": 1 },
+        "hashAlgorithm": { "const": "sha256" },
+        "retentionDays": { "type": "integer", "minimum": 1 },
+        "redactPatterns": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["product", "engineering", "security", "release"],
+      "properties": {
+        "product": { "$ref": "#/$defs/owners" },
+        "engineering": { "$ref": "#/$defs/owners" },
+        "security": { "$ref": "#/$defs/owners" },
+        "release": { "$ref": "#/$defs/owners" }
+      }
+    },
+    "commands": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["build", "staticAnalysis", "unitTests", "integrationTests"],
+      "properties": {
+        "build": { "$ref": "#/$defs/commands" },
+        "staticAnalysis": { "$ref": "#/$defs/commands" },
+        "unitTests": { "$ref": "#/$defs/commands" },
+        "integrationTests": { "$ref": "#/$defs/commands" }
+      }
+    },
+    "protectedPaths": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "risk": { "enum": ["low", "medium", "high", "regulated"] },
+    "gate": {
+      "enum": [
+        "scope",
+        "owner_approval",
+        "platform_review",
+        "static_analysis",
+        "tests",
+        "integration_tests",
+        "prd_verification",
+        "ui_verification",
+        "device_qa",
+        "accessibility",
+        "performance",
+        "security",
+        "privacy",
+        "supply_chain",
+        "rollback",
+        "release_approval"
+      ]
+    },
+    "gateList": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/gate" } },
+    "owners": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "commands": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+  }
+}

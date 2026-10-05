@@ -86,7 +86,7 @@ mobile-ai-agents/
 | **FORGE** | `agents/gaming/forge/` | Unity | C# performance + frame budget + architecture |
 | **UNREAL** | `agents/gaming/unreal/` | Unreal | Blueprint → C++ + performance + GC safety |
 | **APPFORGE** | `agents/cross-platform/appforge/` | All | Rough app idea → PRD → tasks → QA → Play Store |
-| **MOBILE-HARNESS** | `agents/cross-platform/mobile-harness/` | All | Build, test, verify UI, and run Mobile MCP QA |
+| **MOBILE-HARNESS** | `agents/cross-platform/mobile-harness/` | All | Build and verify mobile work; enterprise mode adds policy gates, risk, rollback, and auditable evidence |
 | **CRASHER** | `agents/cross-platform/crasher/` | All | Crash log → root cause → fix |
 | **SENTINEL** | `agents/cross-platform/sentinel/` | All | OWASP Mobile Top 10 security audit |
 | **Mobile Memory** | `agents/cross-platform/mobile-memory/` | All | Mobile knowledge graph + context preservation |
