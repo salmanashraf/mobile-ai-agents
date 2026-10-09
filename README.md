@@ -2,7 +2,7 @@
 
 **The complete AI dev team for mobile engineers.**
 
-19 personality-driven agents · 53 composable skills · 16 end-to-end workflows
+19 personality-driven agents · 56 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
 
 [![npm](https://img.shields.io/npm/v/mobile-ai-agents?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
@@ -217,11 +217,11 @@ Not sure where to begin? Pick your situation:
 |---|---|---|
 | Platform knowledge | Generic | Android · iOS · Flutter · React Native · Unity · Unreal |
 | Agent personalities | None | 19 named specialists with opinions |
-| Real workflows | No | 16 end-to-end processes |
+| Real workflows | No | 17 end-to-end processes |
 | Real examples | Toy pseudocode | Production code input/output pairs |
 | Installable | Copy-paste | `npx mobile-ai-agents install` |
 | Severity levels | None | CRITICAL · WARNING · INFO |
-| Slash commands | No | 53 composable skills |
+| Slash commands | No | 56 composable skills |
 
 ---
 
@@ -308,6 +308,9 @@ Not sure where to begin? Pick your situation:
 ### Cross-Platform
 | Skill | What It Does |
 |---|---|
+| `/figma-mcp-setup` | Connect official Figma MCP and verify frame access |
+| `/figma-spec-harvest` | Figma → traceable requirements, tokens, component specs and references |
+| `/figma-to-implementation` | Design contract → integrated UI in your existing platform |
 | `/grill-mobile` | 20 questions before any mobile code is written |
 | `/mobile-app-design` | Lovable/Stitch-style mobile UI generation, redesigns, and full app reskins |
 | `/crash-triage` | Paste stacktrace → root cause → fix |
@@ -330,13 +333,14 @@ Not sure where to begin? Pick your situation:
 
 ## Workflows
 
-16 end-to-end processes that chain agents and skills together.
+17 end-to-end processes that chain agents and skills together.
 
 | Workflow | What It Covers |
 |---|---|
 | `feature-ship` | Ticket → /grill-mobile → /feature-slice → implement → review → test → PR |
 | `crash-to-fix` | Crash alert → CRASHER → fix → regression test → deploy |
 | `app-launch` | Release build → SENTINEL → PERF → LAUNCHPAD → SCRIBE → /release-prep → store |
+| `figma-to-code` | Figma MCP setup → spec harvest → native implementation → visual and behavior verification |
 | `new-screen` | Figma spec → FIGMA → implement → review → performance check |
 | `ci-setup` | PIPELINE → generate config → secrets → test → document |
 | `release-cycle` | Feature freeze → CRASHER → SENTINEL → SCRIBE → /release-prep → staged rollout |
@@ -703,3 +707,7 @@ If Mobile AI Agents saved you time, a star helps others find it.
 ---
 
 *Built for mobile engineers who ship real apps.*
+
+## Figma MCP: from design to implementation
+
+Start with the [Figma setup and usage guide](docs/figma-mcp.md). Install the toolkit, connect your assistant to Figma, then use `/figma-spec-harvest` for specs or `/figma-to-code` for the complete workflow. Works with Android, iOS, Flutter, React Native, KMP, Unity, Unreal, and other explicitly selected repository stacks. Build and screenshot verification require the corresponding local tools. Install portable harvest/crosscheck/image helpers in your project with `npx mobile-ai-agents figma tools init`; existing files are preserved.

@@ -90,6 +90,8 @@ Create `PRD.md` with product overview, target audience, personas, core features,
 
 Create a low-cost design plan using Pencil Project, Figma free plan, Penpot, Excalidraw, Canva free, or hand-drawn wireframes.
 
+When Figma is supplied, use `/figma-spec-harvest` before design planning. Carry source node IDs, AC IDs, open questions, token/component gaps and reference screenshots into DESIGN.md. Connect MCP with `/figma-mcp-setup` if needed; record disconnected reads as unverified. Preserve existing stage approval rules.
+
 Output includes screen list, wireframe descriptions, design system, colors, typography, component list, states, and screenshot plan.
 
 Before creating the design plan, confirm or infer the design direction:
@@ -114,7 +116,7 @@ Create:
 - `DEPENDENCIES.md`
 - `ROADMAP.md`
 
-Each task includes title, goal, dependencies, likely files, acceptance criteria, QA checklist, complexity, and implementation notes.
+Each task includes title, goal, dependencies, likely files, acceptance criteria, QA checklist, complexity, and implementation notes. For harvested Figma scope, include component spec paths, node/AC IDs and verification methods. Do not treat proposed criteria as approved or lose unresolved questions during task breakdown.
 
 ### Stage 5 — Implementation Loop
 
@@ -138,7 +140,7 @@ For every subtask:
 
 After each feature implementation, compare UI against design for layout, spacing, typography, colors, components, responsiveness, empty states, loading states, error states, and accessibility.
 
-Output match percentage, differences, fixes, and priority list.
+Output differences, fixes, priority and captured evidence. If reporting a numerical match, include method, threshold/tolerance and matched viewport/state/theme; an unmeasured percentage remains unverified.
 
 ### Stage 7 — Full QA
 

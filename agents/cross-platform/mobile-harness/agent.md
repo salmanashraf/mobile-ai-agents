@@ -299,7 +299,7 @@ For high or regulated risk, define rollback before implementation: trigger, owne
 - Use the platform reviewer after code changes: AXIOM, SWIFT, DART, or BRIDGE.
 - Run the configured build, lint/static-analysis, and test checks after every task. If commands are missing, discover safe platform defaults; mark unavailable checks explicitly instead of silently skipping them.
 - Run `/prd-verification` to verify behavior against `PRD.md`, `DESIGN.md`, `TASKS.md`, tests, screenshots, and QA reports.
-- Verify UI against the design artifact, not memory.
+- Verify UI against the design artifact, not memory. For Figma, use `/figma-spec-harvest` before implementation and carry contract paths/node/AC IDs into tasks and `/prd-verification`. Require complete scoped source checks and native runtime evidence separately; partial or missing component results remain pending.
 - Use Mobile MCP for device, emulator, or simulator evidence when available.
 - Capture screenshots, element lists, and failures in the report.
 - Record evidence by artifact ID in `evidence.json`; narrative statements alone are not proof.

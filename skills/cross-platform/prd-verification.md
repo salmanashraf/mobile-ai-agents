@@ -27,6 +27,8 @@ IMPLEMENTATION:
 <changed files, relevant source code, repo tree, or diff>
 EVIDENCE:
 <test output, build output, screenshots, Mobile MCP QA report, logs, accessibility report, security report>
+FIGMA_CONTRACT:
+<optional docs/design-spec/<feature> with source criteria, questions, component specs and verification>
 RESKIN_PLAN:
 <optional /mobile-app-design plan with REDESIGN, RESTYLE, and LEAVE screen inventory rows>
 RESKIN_QA:
@@ -60,6 +62,9 @@ Read these inputs in order:
 Verification rules:
 
 - Verify against written artifacts, not memory.
+- When FIGMA_CONTRACT is supplied, read its criteria, questions, component references, scope and verification. Run the installed Figma strict validator when available; otherwise report that check unverified. Trace each in-scope AC ID and source node to native implementation, behavior check and applicable screenshot evidence.
+- A harvested source contract is not runtime proof. Pending/missing component results, blocked questions, partial scope or missing visual comparisons cannot pass the complete feature. Keep source verification separate from implementation verification.
+- Record matched logical viewport, content/state, theme, fonts and any crop/resampling in Figma comparisons. Do not use an unexplained match percentage as proof.
 - Every PASS or FAIL must cite a source and evidence.
 - If a requirement exists in the PRD but no implementation evidence is provided, mark it UNKNOWN, not PASS.
 - If implementation contradicts the PRD, mark FAIL.
@@ -329,6 +334,8 @@ Next Action:
 Use this guidance when `/mobile-app-design` produced a reskin plan and `/mobile-mcp-qa` produced device evidence.
 
 ```text
+FIGMA_CONTRACT:
+<optional docs/design-spec/<feature> with source criteria, questions, component specs and verification>
 RESKIN_PLAN:
 - Home: REDESIGN. Replace feed cards with grouped Today, Progress, and Next Action sections.
 - Profile: RESTYLE. Keep structure, update typography and spacing only.

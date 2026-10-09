@@ -8,7 +8,7 @@
 
 ## When to Use
 
-Implementing a new screen from a Figma or design spec.
+Implementing a new screen from a Figma or design spec. For a live Figma link, start with [Figma to code](figma-to-code.md): connect MCP, harvest source-traced criteria and references, then implement in the existing stack.
 
 ---
 
@@ -63,6 +63,6 @@ Implementing a new screen from a Figma or design spec.
 
 ## Outputs
 
-- Pixel-perfect, accessible, 60fps screen implementation
+- Integrated screen with recorded visual, accessibility and performance evidence; unrun checks remain unverified
 - Unit test for ViewModel
 - UI test for happy path

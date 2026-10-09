@@ -768,3 +768,7 @@ A: Yes. The repo is MIT licensed — free to use, modify, and incorporate into c
 ---
 
 *Last updated: v1.0.25 — August 2026*
+
+## Figma MCP and Design Handoff
+
+Connect your coding assistant using the [Figma MCP guide](figma-mcp.md). Use `/figma-spec-harvest` for source-traced specs and `/figma-to-implementation` to build in the existing platform. `/figma-to-code` chains setup, harvest, implementation and evidence checks. Install portable helpers with `npx mobile-ai-agents figma tools init`; this preserves existing files and does not authenticate Figma. APPFORGE, Mobile Harness and `/prd-verification` carry node/AC traceability into planning and verification.

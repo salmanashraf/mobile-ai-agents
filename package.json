@@ -1,6 +1,6 @@
 {
   "name": "mobile-ai-agents",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "AI agents, skills, and Loop Engineering workflows for building, testing, auditing, and releasing mobile apps.",
   "bin": {
     "mobile-ai-agents": "cli/index.js",
@@ -19,7 +19,8 @@
     "mobile-karpathy.md",
     "skills/",
     "templates/",
-    "workflows/"
+    "workflows/",
+    "tools/figma-spec/"
   ],
   "keywords": [
     "mobile",

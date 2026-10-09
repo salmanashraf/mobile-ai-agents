@@ -234,3 +234,7 @@ See `CONTRIBUTING.md` for the full guide.
 ## Release Process
 
 For npm releases, follow `docs/release-process.md`. Do not run `npm publish` manually. Update `package.json`, commit, create a local `vX.Y.Z` tag, push `main`, then push the tag so GitHub Actions publishes npm.
+
+## Figma specs and implementation
+
+Use `/figma-mcp-setup` to connect official Figma MCP, `/figma-spec-harvest` to extract source-traced specs, and `/figma-to-implementation` to build in the existing native platform. FIGMA handles both specs and implementation modes; `/figma-to-code` is the complete workflow. Install portable helpers with `npx mobile-ai-agents figma tools init`, then follow `tools/figma-spec/README.md`. Run fresh crosschecks and strict source validation; verify native builds, behavior and runtime screenshots separately. See `docs/figma-mcp.md`.

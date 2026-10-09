@@ -3,6 +3,7 @@
 const { cmdDoctor } = require('./doctor');
 const { cmdHarness } = require('./harness');
 const { cmdMcp } = require('./mcp');
+const { cmdFigma } = require('./figma');
 
 function createCommandRouter(legacyHandlers) {
   const routes = new Map([
@@ -14,6 +15,7 @@ function createCommandRouter(legacyHandlers) {
     ['doctor', cmdDoctor],
     ['harness', cmdHarness],
     ['mcp', cmdMcp],
+    ['figma', cmdFigma],
     ['help', legacyHandlers.help],
     ['--help', legacyHandlers.help],
     ['-h', legacyHandlers.help],

@@ -65,6 +65,9 @@ const AGENTS = {
 };
 
 const SKILLS = {
+  'figma-mcp-setup': { file: 'skills/cross-platform/figma-mcp-setup.md', platform: 'cross' },
+  'figma-spec-harvest': { file: 'skills/cross-platform/figma-spec-harvest.md', platform: 'cross' },
+  'figma-to-implementation': { file: 'skills/cross-platform/figma-to-implementation.md', platform: 'cross' },
   // Android
   'anr-investigation':  { file: 'skills/android/anr-investigation.md',         platform: 'android' },
   'android-tdd':        { file: 'skills/android/android-tdd.md',               platform: 'android' },
@@ -128,6 +131,7 @@ const SKILLS = {
 };
 
 const WORKFLOWS = {
+  'figma-to-code': { file: 'workflows/figma-to-code.md' },
   'feature-ship':      { file: 'workflows/feature-ship.md'      },
   'release-cycle':     { file: 'workflows/release-cycle.md'     },
   'game-level':        { file: 'workflows/game-level.md'        },
@@ -194,8 +198,11 @@ const PLATFORM_AGENTS = {
   ],
 };
 
+const FIGMA_SKILLS = ['figma-mcp-setup', 'figma-spec-harvest', 'figma-to-implementation'];
+
 const PLATFORM_SKILLS = {
   android: [
+    ...FIGMA_SKILLS,
     'anr-investigation', 'android-tdd', 'code-review', 'compose-migration', 'compose-review',
     'kotlin-modernize', 'memory-leak-investigation', 'proguard-rules',
     // cross-platform bundled for android
@@ -205,6 +212,7 @@ const PLATFORM_SKILLS = {
     'release-prep', 'security-audit', 'security-scan', 'store-listing',
   ],
   ios: [
+    ...FIGMA_SKILLS,
     'data-persistence', 'ios-tdd', 'networking', 'ios-performance',
     'swift-concurrency', 'swift-review', 'swiftui-review', 'swiftui-state',
     'unit-testing', 'xcode-warnings',
@@ -215,6 +223,7 @@ const PLATFORM_SKILLS = {
     'release-prep', 'security-audit', 'security-scan', 'store-listing',
   ],
   flutter: [
+    ...FIGMA_SKILLS,
     'dart-modernize', 'flutter-review', 'flutter-tdd', 'widget-extract', 'widget-gen',
     // cross-platform bundled for flutter
     'accessibility-audit', 'api-versioning', 'clean-code-audit', 'crash-analysis', 'crash-triage',
@@ -223,6 +232,7 @@ const PLATFORM_SKILLS = {
     'release-prep', 'security-audit', 'security-scan', 'store-listing',
   ],
   rn: [
+    ...FIGMA_SKILLS,
     'bridge-audit', 'expo-optimize', 'new-arch-migrate', 'rn-performance',
     'rn-review', 'rn-tdd',
     // cross-platform bundled for rn
@@ -232,11 +242,13 @@ const PLATFORM_SKILLS = {
     'release-prep', 'security-audit', 'security-scan', 'store-listing',
   ],
   gaming: [
+    ...FIGMA_SKILLS,
     'blueprint-to-cpp', 'clean-code-audit', 'game-perf', 'mobile-app-design', 'mobile-mcp-qa',
     'mobile-memory-graph', 'mobile-memory-search', 'mobile-memory-save', 'prd-verification', 'security-audit', 'shader-gen',
     'unity-tdd', 'shader-review',
   ],
   cross: [
+    ...FIGMA_SKILLS,
     'accessibility-audit', 'api-versioning', 'clean-code-audit', 'crash-analysis', 'crash-triage',
     'deeplink-debug', 'feature-slice', 'grill-mobile', 'mobile-app-design', 'mobile-mcp-qa',
     'mobile-memory-graph', 'mobile-memory-search', 'mobile-memory-save', 'perf-audit', 'prd-verification',
@@ -1208,6 +1220,7 @@ function cmdMemory(args) {
     console.log('    --files   Comma-separated related files');
     console.log('');
     console.log('  Examples:');
+  console.log(dim('    npx mobile-ai-agents figma tools init'));
     console.log(dim('    npx mobile-ai-agents memory init'));
     console.log(dim('    npx mobile-ai-agents memory capture --type decision --title "Use Room" --text "Persist habits locally with Room."'));
     console.log(dim('    git diff | npx mobile-ai-agents memory capture --type code-state --title "Current diff"'));
@@ -1424,6 +1437,7 @@ function cmdHelp() {
   console.log('    codex     All agents/skills/workflows → AGENTS.md');
   console.log('');
   console.log('  Examples:');
+  console.log(dim('    npx mobile-ai-agents figma tools init'));
   console.log(dim('    npx mobile-ai-agents start'));
   console.log(dim('    npx mobile-ai-agents start --platform flutter --idea "Habit tracker"'));
   console.log(dim('    npx mobile-ai-agents install'));

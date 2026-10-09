@@ -230,3 +230,9 @@ Short version:
 ## Questions / Discussion
 
 Open a GitHub Discussion or Issue. PRs are always welcome.
+
+## Figma Design Handoff
+
+Use `skills/cross-platform/figma-mcp-setup.md` for connection setup, `skills/cross-platform/figma-spec-harvest.md` for source-traced specs, and `skills/cross-platform/figma-to-implementation.md` for native integration. Follow `workflows/figma-to-code.md` for the full pipeline. Setup examples are in `docs/figma-mcp.md`. Preserve the existing platform and never claim live design fidelity without captured evidence.
+
+Portable Figma helpers: `npx mobile-ai-agents figma tools init`. Read `tools/figma-spec/README.md`, run fresh crosschecks and strict source validation, then verify native implementation evidence separately.
