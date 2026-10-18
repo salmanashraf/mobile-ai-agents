@@ -24,6 +24,7 @@ if '--probe' in sys.argv:
  print(json.dumps({'status':'ready','sdkVersion':'4.0.0'})); sys.exit(0)
 task=json.load(sys.stdin)
 assert os.getenv('MOBILE_USE_TELEMETRY_ENABLED') == 'false'
+assert os.getenv('PYTHON_DOTENV_DISABLED') == '1'
 assert os.getenv('EVENTS_OUTPUT_PATH') is None
 mode=os.getenv('STUB_MODE','ok')
 if mode == 'sleep': time.sleep(30)

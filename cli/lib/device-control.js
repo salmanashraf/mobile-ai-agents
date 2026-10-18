@@ -62,7 +62,7 @@ async function runTask(task, { python = 'python3', output, execute = false, mode
   if (probe.status !== 'ready') { report.status = 'blocked'; report.reason = probe.reason; save(); return report; }
   if (signal?.aborted) { report.status = 'cancelled'; save(); return report; }
   // Do not inherit upstream output hooks or opt-in telemetry. Credentials remain in the process environment.
-  const childEnv = { ...env, MOBILE_USE_TELEMETRY_ENABLED: 'false', DOTENV_DISABLED: '1', PYTHONUNBUFFERED: '1' };
+  const childEnv = { ...env, MOBILE_USE_TELEMETRY_ENABLED: 'false', PYTHON_DOTENV_DISABLED: '1', PYTHONUNBUFFERED: '1' };
   delete childEnv.EVENTS_OUTPUT_PATH;
   delete childEnv.RESULTS_OUTPUT_PATH;
   report.status = 'running'; save();

@@ -9,6 +9,14 @@ import sys
 SDK_VERSION = "4.0.0"
 
 
+def disable_dotenv(module):
+    # Upstream pins python-dotenv 1.1.1, which predates the environment opt-out.
+    # This changes only the isolated adapter process, not the installed package.
+    module.load_dotenv = lambda *args, **kwargs: False
+    if hasattr(module, "main"):
+        module.main.load_dotenv = module.load_dotenv
+
+
 def probe():
     if sys.version_info < (3, 12):
         return {"status": "blocked", "reason": "python-3.12-required"}
@@ -24,6 +32,8 @@ def probe():
 async def automate(payload, sdk=None):
     # SDK injection is used only by offline contract tests, never by the CLI.
     if sdk is None:
+        import dotenv
+        disable_dotenv(dotenv)
         from minitap.mobile_use.config import LLMConfig
         from minitap.mobile_use.context import DevicePlatform
         from minitap.mobile_use.sdk import Agent
@@ -64,7 +74,7 @@ async def automate(payload, sdk=None):
 
 def main():
     os.environ["MOBILE_USE_TELEMETRY_ENABLED"] = "false"
-    os.environ["DOTENV_DISABLED"] = "1"
+    os.environ["PYTHON_DOTENV_DISABLED"] = "1"
     os.environ.pop("EVENTS_OUTPUT_PATH", None)
     os.environ.pop("RESULTS_OUTPUT_PATH", None)
     if len(sys.argv) > 1 and sys.argv[1] == "--probe":

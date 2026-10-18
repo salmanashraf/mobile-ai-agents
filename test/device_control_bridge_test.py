@@ -3,6 +3,7 @@ import asyncio
 import importlib.util
 from pathlib import Path
 import unittest
+from types import SimpleNamespace
 
 spec = importlib.util.spec_from_file_location("bridge", Path(__file__).parents[1] / "cli/bridges/mobile_use.py")
 bridge = importlib.util.module_from_spec(spec)
@@ -10,6 +11,12 @@ spec.loader.exec_module(bridge)
 
 
 class BridgeContract(unittest.TestCase):
+    def test_dotenv_loading_disabled_for_legacy_dependency(self):
+        module = SimpleNamespace(load_dotenv=lambda: True, main=SimpleNamespace(load_dotenv=lambda: True))
+        bridge.disable_dotenv(module)
+        self.assertFalse(module.load_dotenv())
+        self.assertFalse(module.main.load_dotenv())
+
     def exercise(self, outcome="result", platform="android"):
         calls = {}
 
