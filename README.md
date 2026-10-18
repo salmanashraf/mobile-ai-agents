@@ -100,6 +100,26 @@ For focused work, use a specialist directly:
 
 ---
 
+## Natural-Language Mobile Device Control
+
+Plan an AI task for an owned Android test app or iOS simulator, then optionally execute it through [Minitap mobile-use](https://github.com/minitap-ai/mobile-use). The integration adds explicit device/app selection, step and time limits, cancellation, and a local execution report.
+
+Try the offline planner from this checkout—no model, Python SDK or device needed:
+
+```bash
+printf '%s\n' 'Inspect the test app home screen without changing data.' > /tmp/mobile-use-goal.txt
+node cli/index.js device-control plan \
+  --platform android --device emulator-5554 --app-id com.example.demo \
+  --goal-file /tmp/mobile-use-goal.txt --max-steps 5 --timeout 30 \
+  --out /tmp/mobile-use-plan-1
+```
+
+Execution is opt-in with a separately installed SDK, model configuration and test device. The adapter's offline contracts are tested; live device/model execution remains unverified. A returned model result is **executed-unverified**, and Mobile MCP/device proof provides independent outcome checks. App focus is not a security sandbox.
+
+Device-control runtime by **Minitap, Inc.**; no upstream code or benchmark claims are bundled. [Setup, execution, platform limits and attribution](docs/mobile-use.md) · [Skill](skills/cross-platform/mobile-use-control.md) · [Issue #81](https://github.com/salmanashraf/mobile-ai-agents/issues/81). New CLI commands require this checkout until released to npm.
+
+---
+
 ## Who It Helps
 
 | Role | How Mobile AI Agents Helps |

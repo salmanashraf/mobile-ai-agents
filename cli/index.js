@@ -65,6 +65,7 @@ const AGENTS = {
 };
 
 const SKILLS = {
+  'mobile-use-control': { file: 'skills/cross-platform/mobile-use-control.md', platform: 'cross' },
   'figma-mcp-setup': { file: 'skills/cross-platform/figma-mcp-setup.md', platform: 'cross' },
   'figma-spec-harvest': { file: 'skills/cross-platform/figma-spec-harvest.md', platform: 'cross' },
   'figma-to-implementation': { file: 'skills/cross-platform/figma-to-implementation.md', platform: 'cross' },
@@ -1410,6 +1411,7 @@ function cmdHelp() {
   console.log(`    ${bold('start')}                           Guided setup that creates PRD/design/tasks/roadmap`);
   console.log(`    ${bold('install')}                         Install agents, skills, and workflows`);
   console.log(`    ${bold('add')} agent|skill|workflow <name>  Install a single item`);
+  console.log(`    ${bold('device-control')} doctor|plan|run  Optional Minitap mobile-use runtime`);
   console.log(`    ${bold('memory')} init|capture|search|...    Local Mobile Memory store`);
   console.log(`    ${bold('doctor')} --platform android          Check SDK, adb, emulator, MCP, and project config`);
   console.log(`    ${bold('harness')} policy init|validate       Configure governed Mobile Harness runs`);

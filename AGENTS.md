@@ -105,6 +105,10 @@ Use the agent at agents/android/code-reviewer/agent.md to review this file:
 
 ---
 
+## Natural-Language Device Control
+
+Use `skills/cross-platform/mobile-use-control.md` for explicit requests to operate an owned test app through the optional Minitap mobile-use runtime. Follow `docs/mobile-use.md` for the offline plan, SDK prerequisites, bounded opt-in execution and independent device verification. Do not treat execution or stub tests as verified app behavior. Keep this distinct from developer QA via Mobile MCP and from embedding AI models inside an app.
+
 ## Mobile MCP QA
 
 Use `skills/cross-platform/mobile-mcp-qa.md` and `workflows/mobile-mcp-qa.md` when a user wants device, emulator, or simulator QA through Mobile MCP. This belongs after implementation, during APPFORGE UI match review, full QA, launch readiness, or screenshot validation.
