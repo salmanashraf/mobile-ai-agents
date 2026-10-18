@@ -100,6 +100,43 @@ For focused work, use a specialist directly:
 
 ---
 
+## Website API Discovery → Mobile Integration
+
+**The website works. Which API calls does your mobile app need?**
+
+Capture HTTP requests and response shapes for each website interaction: load a list, open a detail, validate a form, submit test data. Get a touchpoint report for your Android, iOS, Flutter, React Native or Kotlin Multiplatform coding agent.
+
+```text
+Website flow → browser network capture → observed API shapes → mobile integration handoff
+```
+
+Try the runnable demo from a checkout with optional Playwright browser tooling:
+
+```bash
+# Install browser tooling in your project first; see the guide below.
+node cli/fixtures/network-demo.js /tmp/mobile-api-flow.json
+
+# In another terminal: this writes only to the owned local test server.
+node cli/index.js network capture \
+  --url http://127.0.0.1:4173 \
+  --flow /tmp/mobile-api-flow.json \
+  --out /tmp/mobile-api-demo \
+  --allow-writes
+```
+
+- Correlates zero, one or multiple requests with each interaction window.
+- Records request/response schemas, status codes, failures and redirect links.
+- Omits body values and redacts query/header values in exported JSON and Markdown.
+- Blocks unlisted origins and write methods by default; keeps partial evidence when checks fail.
+
+This delivers browser API evidence. Mobile code generation and verified app/API parity require the [web-network-to-mobile skill](skills/cross-platform/web-network-to-mobile.md), your target app and device/network tooling. It does not prove a native app works from a website capture alone.
+
+[Website API discovery guide: setup, demo, privacy and mobile handoff](docs/website-api-discovery.md) · [Implementation issue #69](https://github.com/salmanashraf/mobile-ai-agents/issues/69)
+
+The new command is available in this checkout; npm availability follows release. Use a new output directory for every run.
+
+---
+
 ## Who It Helps
 
 | Role | How Mobile AI Agents Helps |

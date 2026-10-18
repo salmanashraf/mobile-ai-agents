@@ -105,6 +105,10 @@ Use the agent at agents/android/code-reviewer/agent.md to review this file:
 
 ---
 
+## Website API to Mobile Parity
+
+Use `skills/cross-platform/web-network-to-mobile.md` when a deployed website is the reference for mobile API integration. Trace requests and responses per interaction, implement using the existing mobile stack (including Android, iOS, Flutter, React Native, and KMP), and verify actual mobile network and UI behavior. Browser observations alone do not prove mobile parity. This requires suitable browser capture and mobile verification tools; the skill does not bundle them.
+
 ## Mobile MCP QA
 
 Use `skills/cross-platform/mobile-mcp-qa.md` and `workflows/mobile-mcp-qa.md` when a user wants device, emulator, or simulator QA through Mobile MCP. This belongs after implementation, during APPFORGE UI match review, full QA, launch readiness, or screenshot validation.
