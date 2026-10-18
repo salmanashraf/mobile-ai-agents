@@ -19,6 +19,17 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 - Prerelease package versions now publish to the npm `prerelease` dist-tag instead of `latest`.
 
+## [1.0.39] — 2026-10-18
+
+### Added
+
+- Optional Playwright-backed `network capture` command for website API discovery, with request/response shapes grouped by interaction, sanitized JSON/Markdown reports, bounded flows, origin/method restrictions, an owned demo, and real-browser regression coverage (#80).
+- Cross-platform `web-network-to-mobile` skill for browser API evidence, mobile implementation handoff, and separate network/UI parity verification.
+
+### Fixed
+
+- Include `web-network-to-mobile` in every relevant CLI platform bundle and the shell installer, with isolated install checks.
+
 ## [1.0.37] — 2026-10-05
 
 ### Added

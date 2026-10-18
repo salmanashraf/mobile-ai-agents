@@ -23,7 +23,7 @@ Trace an authorized deployed website's network behavior at each user interaction
 
 ## Optional Capture Adapter
 
-This repository includes `node cli/index.js network capture --url URL --out NEW_DIRECTORY --flow flow.json`. Read [the capture guide](../../docs/website-api-discovery.md) for optional Playwright setup, allowed origins and controlled write actions. It produces sanitized request/response shapes and temporal touchpoint evidence; it does not export full payload values, perform mobile implementation or verify mobile traffic. Use it when that evidence is sufficient, and preserve its capture limitations in the handoff. Do not assume a published npm version already contains the command.
+This repository includes `node cli/index.js network capture --url URL --out NEW_DIRECTORY --flow flow.json`. Read [the capture guide](../../docs/website-api-discovery.md) for optional Playwright setup, allowed origins and controlled write actions. It produces sanitized request/response shapes and temporal touchpoint evidence; it does not export full payload values, perform mobile implementation or verify mobile traffic. Use it when that evidence is sufficient, and preserve its capture limitations in the handoff. The command requires mobile-ai-agents 1.0.39 or newer.
 
 ## Skill Prompt
 

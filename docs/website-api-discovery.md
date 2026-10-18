@@ -31,7 +31,7 @@ node cli/index.js network capture \
 
 Use a new flow-file path and output directory on subsequent runs; existing outputs are never overwritten. Stop the demo with Ctrl+C. If using installed Google Chrome rather than Playwright Chromium, add `--channel chrome`. `--headed` shows the isolated browser. The module never connects to your personal browser profile.
 
-After this change is released, the equivalent installed command will be `npx mobile-ai-agents network capture ...`. Until then use the checkout command above; the currently published npm package may not include it.
+Available starting in `mobile-ai-agents@1.0.39`. For your own authorized site, use `npx mobile-ai-agents@latest network capture --url URL --out NEW_DIRECTORY`. The owned fixture above runs from a checkout. Playwright must be installed in your project; the optional loader resolves it from the current working directory.
 
 ## Expected demo evidence
 

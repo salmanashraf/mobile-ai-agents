@@ -772,3 +772,8 @@ A: Yes. The repo is MIT licensed — free to use, modify, and incorporate into c
 ## Figma MCP and Design Handoff
 
 Connect your coding assistant using the [Figma MCP guide](figma-mcp.md). Use `/figma-spec-harvest` for source-traced specs and `/figma-to-implementation` to build in the existing platform. `/figma-to-code` chains setup, harvest, implementation and evidence checks. Install portable helpers with `npx mobile-ai-agents figma tools init`; this preserves existing files and does not authenticate Figma. APPFORGE, Mobile Harness and `/prd-verification` carry node/AC traceability into planning and verification.
+
+
+## Website API discovery and mobile handoff
+
+Starting in v1.0.39, `npx mobile-ai-agents@latest network capture --url URL --out NEW_DIRECTORY` records bounded website flows with optional Playwright. The `/web-network-to-mobile` skill is installed across platform bundles and maps browser request/response evidence to the existing mobile stack. See [the setup and owned demo](website-api-discovery.md). Captures are observed shapes with temporal attribution; mobile implementation and actual network/UI verification remain separate.

@@ -204,6 +204,7 @@ const FIGMA_SKILLS = ['figma-mcp-setup', 'figma-spec-harvest', 'figma-to-impleme
 const PLATFORM_SKILLS = {
   android: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile',
     'anr-investigation', 'android-tdd', 'code-review', 'compose-migration', 'compose-review',
     'kotlin-modernize', 'memory-leak-investigation', 'proguard-rules',
     // cross-platform bundled for android
@@ -214,6 +215,7 @@ const PLATFORM_SKILLS = {
   ],
   ios: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile',
     'data-persistence', 'ios-tdd', 'networking', 'ios-performance',
     'swift-concurrency', 'swift-review', 'swiftui-review', 'swiftui-state',
     'unit-testing', 'xcode-warnings',
@@ -225,6 +227,7 @@ const PLATFORM_SKILLS = {
   ],
   flutter: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile',
     'dart-modernize', 'flutter-review', 'flutter-tdd', 'widget-extract', 'widget-gen',
     // cross-platform bundled for flutter
     'accessibility-audit', 'api-versioning', 'clean-code-audit', 'crash-analysis', 'crash-triage',
@@ -234,6 +237,7 @@ const PLATFORM_SKILLS = {
   ],
   rn: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile',
     'bridge-audit', 'expo-optimize', 'new-arch-migrate', 'rn-performance',
     'rn-review', 'rn-tdd',
     // cross-platform bundled for rn
@@ -244,12 +248,14 @@ const PLATFORM_SKILLS = {
   ],
   gaming: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile',
     'blueprint-to-cpp', 'clean-code-audit', 'game-perf', 'mobile-app-design', 'mobile-mcp-qa',
     'mobile-memory-graph', 'mobile-memory-search', 'mobile-memory-save', 'prd-verification', 'security-audit', 'shader-gen',
     'unity-tdd', 'shader-review',
   ],
   cross: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile',
     'accessibility-audit', 'api-versioning', 'clean-code-audit', 'crash-analysis', 'crash-triage',
     'deeplink-debug', 'feature-slice', 'grill-mobile', 'mobile-app-design', 'mobile-mcp-qa',
     'mobile-memory-graph', 'mobile-memory-search', 'mobile-memory-save', 'perf-audit', 'prd-verification',

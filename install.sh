@@ -93,6 +93,7 @@ _agent_lines() {
 # Outputs: "<slug> <src_path>" lines
 _skill_lines() {
     # Cross-platform skills (always)
+    echo "web-network-to-mobile skills/cross-platform/web-network-to-mobile.md"
     echo "grill-mobile        skills/cross-platform/grill-mobile.md"
     echo "crash-triage        skills/cross-platform/crash-triage.md"
     echo "perf-audit          skills/cross-platform/perf-audit.md"
@@ -215,6 +216,7 @@ install_claude() {
     echo "   /security-scanner  /store-listing-writer"
     echo ""
     echo "   Cross-platform skills:"
+    echo "   /web-network-to-mobile"
     echo "   /grill-mobile  /clean-code-audit  /security-audit  /crash-triage"
     echo "   /perf-audit  /store-listing  /release-prep"
     echo "   /feature-slice  /mobile-mcp-qa  /mobile-memory-save  /mobile-memory-graph"
