@@ -133,7 +133,7 @@ This delivers browser API evidence. Mobile code generation and verified app/API 
 
 [Website API discovery guide: setup, demo, privacy and mobile handoff](docs/website-api-discovery.md) · [Implementation issue #69](https://github.com/salmanashraf/mobile-ai-agents/issues/69)
 
-**Next: turn browser evidence into a mobile API contract.** In this checkout, run `node cli/index.js network contract --capture /tmp/mobile-api-demo/capture.json --out /tmp/mobile-api-contract-1`. Import HAR with `--har`, or cross-check local OpenAPI JSON with `--openapi`. The output separates observations, documented requirements and unconfirmed inferences; it flags gaps and conflicts while keeping mobile parity unverified. [Contract guide](docs/api-contracts.md). This additional command is not yet released to npm.
+**Next: turn browser evidence into a mobile API contract.** Run `npx mobile-ai-agents@latest network contract --capture /tmp/mobile-api-demo/capture.json --out /tmp/mobile-api-contract-1`. Import HAR with `--har`, or cross-check local OpenAPI JSON with `--openapi`. The output separates observations, documented requirements and unconfirmed inferences; it flags gaps and conflicts while keeping mobile parity unverified. [Contract guide](docs/api-contracts.md). Available starting in `mobile-ai-agents@1.0.40`.
 
 Available in `mobile-ai-agents@1.0.39` and newer. Use `npx mobile-ai-agents@latest network capture --url URL --out NEW_DIRECTORY` for your own authorized site, with optional Playwright installed. Use a new output directory for every run.
 

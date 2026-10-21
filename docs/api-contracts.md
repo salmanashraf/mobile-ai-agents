@@ -2,14 +2,14 @@
 
 The `network contract` command converts captured website traffic into a versioned, traceable mobile handoff. It runs locally without Playwright, a device or a model provider. It never sends requests to the captured site, replays API calls, or generates mobile clients.
 
-**Availability:** New in this checkout; not yet released to npm. This follows the [v1.0.39 capture feature](website-api-discovery.md). Implementation is tracked in [#70](https://github.com/salmanashraf/mobile-ai-agents/issues/70).
+**Availability:** Included in `mobile-ai-agents@1.0.40` and newer. This follows the [v1.0.39 capture feature](website-api-discovery.md). Implementation is tracked in [#70](https://github.com/salmanashraf/mobile-ai-agents/issues/70).
 
 ## From the owned demo or an authorized capture
 
 Run the [capture quickstart](website-api-discovery.md) to obtain `capture.json`, then:
 
 ```bash
-node cli/index.js network contract \
+npx mobile-ai-agents@latest network contract \
   --capture /tmp/mobile-api-demo/capture.json \
   --out /tmp/mobile-api-contract-1
 ```
@@ -17,7 +17,7 @@ node cli/index.js network contract \
 Optionally compare against a local OpenAPI 3.0/3.1 **JSON** document:
 
 ```bash
-node cli/index.js network contract \
+npx mobile-ai-agents@latest network contract \
   --capture /tmp/mobile-api-demo/capture.json \
   --openapi /path/to/openapi.json \
   --out /tmp/mobile-api-contract-2
@@ -28,7 +28,7 @@ The output contains `contract.json` and `contract.md`. Every output directory mu
 ## From a HAR export
 
 ```bash
-node cli/index.js network contract \
+npx mobile-ai-agents@latest network contract \
   --har /path/to/session.har \
   --out /tmp/mobile-api-har-contract-1
 ```

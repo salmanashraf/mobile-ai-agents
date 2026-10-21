@@ -19,6 +19,14 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 - Prerelease package versions now publish to the npm `prerelease` dist-tag instead of `latest`.
 
+## [1.0.40] — 2026-10-21
+
+### Added
+
+- Offline `network contract` export from capture JSON or HAR into versioned JSON/Markdown mobile handoff artifacts, with explicit observed/documented/inferred provenance and coverage gaps (#84).
+- Optional local OpenAPI 3.0/3.1 JSON cross-checks, contract JSON Schema, and request/touchpoint traceability validation.
+- Fixture, CLI, redaction, schema and real-browser capture-to-contract verification; exports never imply mobile implementation or verified app parity.
+
 ## [1.0.39] — 2026-10-18
 
 ### Added

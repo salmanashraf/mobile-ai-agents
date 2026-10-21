@@ -83,7 +83,7 @@ Only GET, HEAD and OPTIONS are allowed by default. `--allow-writes` enables othe
 
 ## Mobile integration handoff
 
-In the latest checkout, convert captures into a versioned handoff using `node cli/index.js network contract --capture /tmp/mobile-api-demo/capture.json --out /tmp/mobile-api-contract-1`. HAR import and optional OpenAPI cross-checking are described in [the contract guide](api-contracts.md). This exporter is not part of the v1.0.39 npm command set.
+Starting in v1.0.40, convert captures into a versioned handoff using `npx mobile-ai-agents@latest network contract --capture /tmp/mobile-api-demo/capture.json --out /tmp/mobile-api-contract-1`. HAR import and optional OpenAPI cross-checking are described in [the contract guide](api-contracts.md). The exporter runs offline without Playwright or device tooling.
 
 Give your coding agent the report, the current app repository, and an explicit target:
 

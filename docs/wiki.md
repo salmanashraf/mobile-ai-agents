@@ -777,3 +777,8 @@ Connect your coding assistant using the [Figma MCP guide](figma-mcp.md). Use `/f
 ## Website API discovery and mobile handoff
 
 Starting in v1.0.39, `npx mobile-ai-agents@latest network capture --url URL --out NEW_DIRECTORY` records bounded website flows with optional Playwright. The `/web-network-to-mobile` skill is installed across platform bundles and maps browser request/response evidence to the existing mobile stack. See [the setup and owned demo](website-api-discovery.md). Captures are observed shapes with temporal attribution; mobile implementation and actual network/UI verification remain separate.
+
+
+### Versioned API handoff contracts
+
+Starting in v1.0.40, `npx mobile-ai-agents@latest network contract --capture capture.json --out NEW_DIRECTORY` exports traceable mobile API contracts. Use `--har` for HAR imports and optional `--openapi` for local OpenAPI JSON cross-checking. Exports separate observed/documented/inferred evidence and stay needs-review with mobile verification unverified. See [API contracts](api-contracts.md).
