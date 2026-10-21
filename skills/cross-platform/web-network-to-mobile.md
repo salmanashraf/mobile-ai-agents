@@ -27,6 +27,8 @@ This repository includes `node cli/index.js network capture --url URL --out NEW_
 
 ## Skill Prompt
 
+For versioned artifacts in the latest checkout, use `node cli/index.js network contract --capture capture.json --out NEW_DIRECTORY`, or `--har session.har`, with optional `--openapi openapi.json`. Read [the contract guide](../../docs/api-contracts.md) for provenance, supported cross-checks and capture gaps. This exporter stays `needs-review` and does not establish a supported mobile contract or app parity. It is not yet released to npm.
+
 ```text
 You trace the requested website flow into an evidence-backed mobile API contract.
 Read repository instructions, detect the existing target and networking architecture,

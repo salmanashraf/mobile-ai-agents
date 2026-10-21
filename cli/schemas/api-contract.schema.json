@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/salmanashraf/mobile-ai-agents/blob/main/cli/schemas/api-contract.schema.json",
+  "title": "Observed mobile API handoff contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contractVersion", "source", "status", "mobileVerification", "touchpoints", "requests", "findings", "limitations"],
+  "properties": {
+    "contractVersion": { "const": "1.0.0" },
+    "source": {
+      "type": "object",
+      "required": ["format", "sha256"],
+      "properties": {
+        "format": { "enum": ["capture", "har"] },
+        "captureStatus": { "enum": ["captured", "partial", "failed", "unknown"] },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "openapiSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "status": { "const": "needs-review" },
+    "mobileVerification": { "const": "unverified" },
+    "touchpoints": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": ["id", "action", "status", "requestIds", "provenance", "outcome"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "action": { "enum": ["navigate", "click", "fill", "unknown"] },
+          "status": { "enum": ["completed", "failed", "running", "unverified"] },
+          "requestIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+          "provenance": { "enum": ["capture-window", "unattributed"] },
+          "outcome": { "enum": ["browser-action-completed-only", "unverified"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "requests": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "required": ["id", "touchpointId", "sequence", "source", "method", "url", "requestHeaders", "responseHeaders", "request", "response", "status", "outcome", "unknowns", "mobileAuth", "paginationCandidates", "transport", "errorEvidence", "dependencies"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "touchpointId": { "$ref": "#/$defs/id" },
+          "sequence": { "type": "integer", "minimum": 1 },
+          "source": { "const": "observed" },
+          "method": { "type": "string", "pattern": "^[A-Z]{1,16}$" },
+          "url": { "type": "string", "pattern": "^https?://" },
+          "requestHeaders": { "type": "object", "additionalProperties": { "type": "string" } },
+          "responseHeaders": { "type": "object", "additionalProperties": { "type": "string" } },
+          "request": { "$ref": "#/$defs/body" },
+          "response": { "$ref": "#/$defs/body" },
+          "status": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+          "outcome": { "enum": ["http-success", "http-error", "http-response", "failed", "pending", "unknown"] },
+          "unknowns": { "type": "array", "items": { "type": "string" } },
+          "mobileAuth": { "type": "object", "required": ["source", "status", "signals"], "properties": { "source": { "const": "inferred" }, "status": { "const": "needs-confirmation" }, "signals": { "type": "array", "items": { "type": "string" } } } },
+          "paginationCandidates": { "type": "object", "required": ["source", "names", "status"], "properties": { "source": { "const": "inferred" }, "names": { "type": "array", "items": { "type": "string" } }, "status": { "const": "unverified" } } },
+          "transport": { "type": "object", "required": ["request", "response"], "additionalProperties": { "type": ["string", "null"] } },
+          "errorEvidence": { "type": "object", "required": ["source", "httpError", "graphqlErrorsField"], "properties": { "source": { "const": "observed" }, "httpError": { "type": "boolean" }, "graphqlErrorsField": { "type": "boolean" } } },
+          "dependencies": { "type": "object", "required": ["source", "redirectedFrom", "causalDependencies", "ordering"], "properties": { "source": { "const": "observed" }, "redirectedFrom": { "type": ["string", "null"] }, "causalDependencies": { "const": "unverified" }, "ordering": { "const": "capture-order-only" } } },
+          "documentation": { "type": "object", "required": ["source", "state"], "properties": { "source": { "const": "documented" }, "state": { "enum": ["operation-matched", "operation-unmatched-or-ambiguous"] }, "path": { "type": "string" }, "request": { "type": "object" }, "response": { "type": "object" } } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "findings": { "type": "array", "items": { "type": "object", "required": ["code", "requestId"], "properties": { "code": { "type": "string" }, "requestId": { "type": ["string", "null"] }, "field": { "type": "string" }, "observedType": { "type": "string" }, "documentedTypes": { "type": "array", "items": { "type": "string" } }, "body": { "enum": ["request", "response"] } }, "additionalProperties": false } },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$" },
+    "body": {
+      "type": "object",
+      "required": ["source", "state"],
+      "properties": { "source": { "const": "observed" }, "state": { "enum": ["observed", "empty", "omitted", "unavailable"] }, "schema": { "$ref": "#/$defs/shape" } },
+      "additionalProperties": false,
+      "if": { "properties": { "state": { "const": "observed" } } },
+      "then": { "required": ["schema"] }
+    },
+    "shape": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "enum": ["object", "array", "string", "number", "boolean", "null", "binary", "unknown"] }, "properties": { "type": "object", "additionalProperties": { "$ref": "#/$defs/shape" } }, "observedItems": { "type": "array", "items": { "$ref": "#/$defs/shape" } }, "sampled": { "type": "boolean" } },
+      "additionalProperties": false
+    }
+  }
+}

@@ -6,6 +6,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { capture, safeUrl, bodyShape, safeHeaders, validateFlow } = require('../cli/lib/network-capture');
 const { createDemo, flow } = require('../cli/fixtures/network-demo');
+const { buildContract } = require('../cli/lib/api-contract');
 
 test('capture artifacts omit body values and URL/header credentials while retaining observed types', () => {
   const body = bodyShape(JSON.stringify({ email: 'private@example.test', password: 'secret', amount: 0, enabled: false, optional: null }), 'application/json');
@@ -57,6 +58,11 @@ test('real browser captures zero/multiple calls, redacts secrets and blocks writ
   assert.equal(save.status, 201);
   assert.equal(save.requestBody.schema.properties.password.type, 'string');
   assert.equal(save.auth, 'authorization-header');
+  const contract = buildContract(report);
+  assert.equal(contract.touchpoints[2].requestIds.length, 2);
+  assert.equal(contract.touchpoints[3].requestIds.length, 0);
+  assert.equal(contract.requests.find(row => row.id === save.id).status, 201);
+  assert.equal(contract.mobileVerification, 'unverified');
   const serialized = fs.readFileSync(path.join(root, 'success/capture.json'), 'utf8');
   for (const secret of ['private@example.test', 'private-password', 'demo-secret', 'Test listing']) assert.equal(serialized.includes(secret), false);
   const blocked = await capture({ url, flow: [{ action: 'click', selector: '#save' }, { action: 'click', selector: '#external' }, { action: 'click', selector: '#error' }, { action: 'click', selector: '#fail' }], output: path.join(root, 'blocked'), playwright, channel });
