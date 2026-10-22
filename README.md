@@ -5,7 +5,7 @@
 19 personality-driven agents · 57 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
 
-[![npm](https://img.shields.io/npm/v/mobile-ai-agents?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
+[![npm](https://img.shields.io/npm/v/mobile-ai-agents.svg?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
 [![npm downloads](https://img.shields.io/npm/dm/mobile-ai-agents?color=CB3837)](https://www.npmjs.com/package/mobile-ai-agents)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-agency?style=social)](https://github.com/salmanashraf/mobile-agency/stargazers)

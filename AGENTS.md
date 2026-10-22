@@ -222,6 +222,14 @@ When Codex is helping with this repo, follow these rules:
 
 ## Contributing
 
+### README Images and Badge Reliability
+
+- Preserve working image and badge URLs during unrelated README edits. Use an explicit `.svg` endpoint for Shields.io badges when supported; the extension alone does not guarantee availability.
+- Before pushing README image/badge changes, follow redirects and verify the final response is HTTP 200, has an `image/*` content type, and contains a valid image rather than an HTML/text error page. Check the GitHub-rendered image proxy after pushing.
+- Check repository-relative image paths, descriptive alt text, and image destination links. Do not treat a valid Markdown link as proof that its image loads.
+- If an external image fails, use a verified working endpoint or an appropriate repository-owned fallback. Do not replace a dynamic version badge with an unmaintained hardcoded version, repeatedly add cache-busting parameters, or claim an upstream outage is fixed by Markdown formatting.
+- Record any external-service failures and the actual verification results. Remote badges can fail after a successful check; prefer repository-owned assets for essential branding and keep useful text/links available when images cannot load.
+
 See `CONTRIBUTING.md` for the full guide.
 
 Short version:
