@@ -6,6 +6,8 @@
 
 ## Table of Contents
 
+- [Mobile Engineering Loop](#mobile-engineering-loop) — detailed workflow, evidence gates and session handoff
+
 1. [What Is This Repo?](#1-what-is-this-repo)
 2. [Installation](#2-installation)
 3. [Three Resource Types](#3-three-resource-types)
@@ -20,6 +22,116 @@
 12. [Output Format Reference](#12-output-format-reference)
 13. [Contributing a New Agent](#13-contributing-a-new-agent)
 14. [FAQ](#14-faq)
+
+---
+
+## Mobile Engineering Loop
+
+The [README overview](../README.md#how-it-works) shows the big picture. This guide explains what happens inside each stage and what evidence is needed to move forward. This is a guided agent workflow, not a claim that one command automatically runs every stage. SDKs, model access, design connections and device tools must be available for the selected checks.
+
+```mermaid
+flowchart TD
+    start(["Start a project or resume a session"])
+
+    subgraph planning["1. Understand and plan"]
+        context["Read repository instructions and saved context"]
+        inventory["Inspect code, architecture and available tools"]
+        reference["Identify requirements, design references and API contracts"]
+        task["Choose a matching issue or define a focused task"]
+        criteria["Record scope, risks and acceptance criteria"]
+        agreed{"Required product decisions resolved?"}
+        clarify["Clarify scope or obtain the missing decision"]
+    end
+
+    subgraph implementation["2. Implement one feature"]
+        branch["Use a focused branch and reuse existing components"]
+        build["Implement UI, state, navigation and API integration"]
+        states["Handle loading, empty, error and relevant offline states"]
+        checks["Run the build and relevant automated tests"]
+    end
+
+    subgraph verification["3. Audit and verify"]
+        audit["Audit architecture, code quality and model separation"]
+        security["Review authentication, secrets, storage and permissions"]
+        ui["Verify design match, layouts and accessibility"]
+        device["Run the user journey on a device or simulator"]
+        integration["When relevant, compare actual mobile API traffic"]
+        performance["Check relevant startup, memory and rendering risks"]
+    end
+
+    subgraph evidence["4. Report and preserve context"]
+        report["Record passed, failed and unverified checks with evidence"]
+        save["Save decisions, changed files, blockers and next action"]
+        outcome{"Required acceptance criteria satisfied?"}
+        repair["Fix confirmed issues and rerun affected checks"]
+        unblock["Resolve missing prerequisites without claiming a pass"]
+    end
+
+    subgraph delivery["5. Review, release and learn"]
+        pr["Prepare a reviewable PR and implementation summary"]
+        prepare["Prepare release notes, rollback and rollout checks"]
+        approved{"Release explicitly approved?"}
+        hold(["Keep work ready and resume when needed"])
+        release["Use the configured release pipeline"]
+        monitor["Review feedback, crashes and performance"]
+        next["Prioritize the next useful improvement"]
+    end
+
+    start --> context --> inventory --> reference --> task --> criteria --> agreed
+    agreed -->|"Not yet"| clarify --> criteria
+    agreed -->|"Yes"| branch --> build --> states --> checks
+    checks --> audit --> security --> ui --> device --> integration --> performance
+    performance --> report --> save --> outcome
+    outcome -->|"Failed checks"| repair --> build
+    outcome -->|"Missing evidence"| unblock --> inventory
+    outcome -->|"Yes"| pr --> prepare --> approved
+    approved -->|"Not yet"| hold
+    approved -->|"Yes"| release --> monitor --> next --> context
+    hold -.->|"Resume later"| context
+
+    classDef plan fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef work fill:#ede9fe,stroke:#7c3aed,color:#2e1065
+    classDef proof fill:#dcfce7,stroke:#15803d,color:#14532d
+    classDef decision fill:#fef3c7,stroke:#b45309,color:#78350f
+    class context,inventory,reference,task,criteria,clarify plan
+    class branch,build,states,repair work
+    class checks,audit,security,ui,device,integration,performance proof
+    class report,save,pr,hold,monitor,next proof
+    class agreed,outcome,unblock,prepare,approved,release decision
+```
+
+### What each stage gives you
+
+| Stage | Useful output | Existing resources |
+|---|---|---|
+| Planning | Scoped requirements, design direction, tasks, risks and acceptance criteria | APPFORGE, Mobile Harness, `/grill-mobile`, `/feature-slice` |
+| Implementation | A focused code change that preserves the app's existing stack | Platform agents and feature workflows |
+| Code audit | Findings tied to files, architecture boundaries and maintainability | Platform reviewers, `/clean-code-audit` |
+| Security review | Findings about auth, secrets, storage, permissions and sensitive data | SENTINEL, `/security-audit` |
+| UI verification | Design/state comparison and accessibility findings | Figma handoff, `/accessibility-audit`, `/prd-verification` |
+| Device QA | Actual journey results, screenshots and reproducible failures | `/mobile-mcp-qa`, Device Proof Reports |
+| API verification | Observed request/response evidence compared with the intended contract | `/web-network-to-mobile`, capture and contract commands |
+| Performance | Relevant startup, memory, rendering or network findings | PERF, `/perf-audit` and platform investigation skills |
+| Reporting | What changed, checks run, evidence, deviations and open gaps | Mobile Harness and PRD verification reports |
+| Context saving | Durable decisions, current task, blockers and next action | Mobile Memory and Mobile Flight Recorder |
+| Release | Reviewable changes, release notes and controlled rollout | `/release-prep`, PIPELINE, SCRIBE |
+| Improvement | Follow-up issues grounded in feedback and operational evidence | Crash, performance and store-listing workflows |
+
+### Evidence and approval gates
+
+- **Passed:** The relevant check ran and its evidence supports the acceptance criterion.
+- **Failed:** A confirmed problem needs correction and an appropriate rerun.
+- **Unverified:** A check did not run or evidence is missing. It cannot count as passed.
+- Model output and generated code alone do not prove that an app works. Screenshots alone do not prove API payload parity.
+- Save context when blocked or stopping mid-stage as well as at normal handoffs; recording a report must not depend on completing the entire loop.
+- Ask for required product decisions, unavailable access and explicit authorization for consequential actions. Existing authorization carries forward; routine work should not cause repeated approval requests.
+- Release is a separate approval gate. Passing checks does not itself authorize publishing, production deployment or store submission.
+
+### What survives the next session
+
+Keep the approved requirements, current task, changed files, executed checks and evidence paths together with unresolved findings and the next concrete action. Preserve repository-specific conventions: beginner starter docs, Mobile Memory and Flight Recorder are complementary resources, not mandatory duplicate copies of the same history.
+
+Start with [Mobile Harness](mobile-harness.md), use the [Core Loops guide](core-loops.md) to choose specialists, and follow [device setup](android-device-setup.md) when runtime proof is needed. If a referenced tool or runtime is unavailable, report the gap and continue independent authorized work.
 
 ---
 
