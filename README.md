@@ -116,7 +116,7 @@ node cli/index.js device-control plan \
 
 Execution is opt-in with a separately installed SDK, model configuration and test device. The adapter's offline contracts are tested; live device/model execution remains unverified. A returned model result is **executed-unverified**, and Mobile MCP/device proof provides independent outcome checks. App focus is not a security sandbox.
 
-Device-control runtime by **Minitap, Inc.**; no upstream code or benchmark claims are bundled. [Setup, execution, platform limits and attribution](docs/mobile-use.md) · [Skill](skills/cross-platform/mobile-use-control.md) · [Issue #81](https://github.com/salmanashraf/mobile-ai-agents/issues/81). New CLI commands require this checkout until released to npm.
+Device-control runtime by **Minitap, Inc.**; no upstream code or benchmark claims are bundled. [Setup, execution, platform limits and attribution](docs/mobile-use.md) · [Skill](skills/cross-platform/mobile-use-control.md) · [Issue #81](https://github.com/salmanashraf/mobile-ai-agents/issues/81). Available starting in `mobile-ai-agents@1.0.41`; use `npx mobile-ai-agents@latest device-control` or this checkout.
 
 ---
 

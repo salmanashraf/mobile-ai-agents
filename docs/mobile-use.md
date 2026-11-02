@@ -2,7 +2,7 @@
 
 Give a bounded task to an AI device agent through an optional external SDK. This repository provides the plan/run bridge, limits and reporting; [Minitap mobile-use](https://github.com/minitap-ai/mobile-use) supplies the device-control runtime.
 
-**Status:** Offline planning, SDK mapping and process lifecycle are tested. Live model/device execution is not verified by this integration's tests. The new command is available from this checkout; npm availability follows release.
+**Status:** Offline planning, SDK mapping and process lifecycle are tested. Live model/device execution is not verified by this integration's tests. Available starting in `mobile-ai-agents@1.0.41`. Use `npx mobile-ai-agents@latest device-control` in place of `node cli/index.js device-control` in the examples below.
 
 ## What is included
 
