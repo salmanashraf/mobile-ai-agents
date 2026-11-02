@@ -25,7 +25,9 @@ async function cmdDeviceControl(args) {
   if (command === 'run') {
     if (!opts['model-config']) throw new Error('--model-config is required for non-interactive execution.');
     if (fs.statSync(opts['model-config']).size > 65536) throw new Error('Model config exceeds 64 KiB.');
-    modelConfig = JSON.parse(fs.readFileSync(opts['model-config'], 'utf8'));
+    const configText = fs.readFileSync(opts['model-config'], 'utf8');
+    try { modelConfig = JSON.parse(configText); }
+    catch { throw new Error('Model config must contain valid JSON; contents suppressed.'); }
   }
   const controller = new AbortController();
   const cancel = () => controller.abort();

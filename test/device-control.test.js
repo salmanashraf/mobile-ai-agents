@@ -101,3 +101,16 @@ test('Python SDK mapping and cleanup contract tests (stub SDK, no live provider/
   const result = spawnSync('python3', [path.resolve(__dirname, 'device_control_bridge_test.py')], { encoding: 'utf8', env: { ...process.env, PYTHONDONTWRITEBYTECODE: '1' } });
   assert.equal(result.status, 0, result.stdout + result.stderr);
 });
+
+// Malformed provider files can contain API keys; parser diagnostics must not echo them.
+test('CLI suppresses malformed model configuration contents', t => {
+  const root = fixture(t);
+  const goal = path.join(root, 'goal.txt'), config = path.join(root, 'model.json');
+  fs.writeFileSync(goal, 'Inspect test app');
+  fs.writeFileSync(config, 'private-provider-secret-invalid-json');
+  const result = spawnSync(process.execPath, [path.resolve(__dirname, '../cli/index.js'), 'device-control', 'run', '--execute', '--platform', 'android', '--device', task.device, '--app-id', task.appId, '--goal-file', goal, '--model-config', config, '--out', path.join(root, 'out')], { encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /valid JSON/);
+  assert.equal((result.stdout + result.stderr).includes('private-provider-secret'), false);
+  assert.equal(fs.existsSync(path.join(root, 'out')), false);
+});

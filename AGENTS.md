@@ -109,6 +109,10 @@ Use the agent at agents/android/code-reviewer/agent.md to review this file:
 
 Use `skills/cross-platform/mobile-use-control.md` for explicit requests to operate an owned test app through the optional Minitap mobile-use runtime. Follow `docs/mobile-use.md` for the offline plan, SDK prerequisites, bounded opt-in execution and independent device verification. Do not treat execution or stub tests as verified app behavior. Keep this distinct from developer QA via Mobile MCP and from embedding AI models inside an app.
 
+## Website API to Mobile Parity
+
+Use `skills/cross-platform/web-network-to-mobile.md` when a deployed website is the reference for mobile API integration. Trace requests and responses per interaction, implement using the existing mobile stack (including Android, iOS, Flutter, React Native, and KMP), and verify actual mobile network and UI behavior. Browser observations alone do not prove mobile parity. This requires suitable browser capture and mobile verification tools; the skill does not bundle them.
+
 ## Mobile MCP QA
 
 Use `skills/cross-platform/mobile-mcp-qa.md` and `workflows/mobile-mcp-qa.md` when a user wants device, emulator, or simulator QA through Mobile MCP. This belongs after implementation, during APPFORGE UI match review, full QA, launch readiness, or screenshot validation.
@@ -221,6 +225,14 @@ When Codex is helping with this repo, follow these rules:
 ---
 
 ## Contributing
+
+### README Images and Badge Reliability
+
+- Preserve working image and badge URLs during unrelated README edits. Use an explicit `.svg` endpoint for Shields.io badges when supported; the extension alone does not guarantee availability.
+- Before pushing README image/badge changes, follow redirects and verify the final response is HTTP 200, has an `image/*` content type, and contains a valid image rather than an HTML/text error page. Check the GitHub-rendered image proxy after pushing.
+- Check repository-relative image paths, descriptive alt text, and image destination links. Do not treat a valid Markdown link as proof that its image loads.
+- If an external image fails, use a verified working endpoint or an appropriate repository-owned fallback. Do not replace a dynamic version badge with an unmaintained hardcoded version, repeatedly add cache-busting parameters, or claim an upstream outage is fixed by Markdown formatting.
+- Record any external-service failures and the actual verification results. Remote badges can fail after a successful check; prefer repository-owned assets for essential branding and keep useful text/links available when images cannot load.
 
 See `CONTRIBUTING.md` for the full guide.
 

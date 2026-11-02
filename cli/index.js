@@ -66,6 +66,7 @@ const AGENTS = {
 
 const SKILLS = {
   'mobile-use-control': { file: 'skills/cross-platform/mobile-use-control.md', platform: 'cross' },
+  'web-network-to-mobile': { file: 'skills/cross-platform/web-network-to-mobile.md', platform: 'cross' },
   'figma-mcp-setup': { file: 'skills/cross-platform/figma-mcp-setup.md', platform: 'cross' },
   'figma-spec-harvest': { file: 'skills/cross-platform/figma-spec-harvest.md', platform: 'cross' },
   'figma-to-implementation': { file: 'skills/cross-platform/figma-to-implementation.md', platform: 'cross' },
@@ -204,6 +205,7 @@ const FIGMA_SKILLS = ['figma-mcp-setup', 'figma-spec-harvest', 'figma-to-impleme
 const PLATFORM_SKILLS = {
   android: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile', 'mobile-use-control',
     'anr-investigation', 'android-tdd', 'code-review', 'compose-migration', 'compose-review',
     'kotlin-modernize', 'memory-leak-investigation', 'proguard-rules',
     // cross-platform bundled for android
@@ -214,6 +216,7 @@ const PLATFORM_SKILLS = {
   ],
   ios: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile', 'mobile-use-control',
     'data-persistence', 'ios-tdd', 'networking', 'ios-performance',
     'swift-concurrency', 'swift-review', 'swiftui-review', 'swiftui-state',
     'unit-testing', 'xcode-warnings',
@@ -225,6 +228,7 @@ const PLATFORM_SKILLS = {
   ],
   flutter: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile', 'mobile-use-control',
     'dart-modernize', 'flutter-review', 'flutter-tdd', 'widget-extract', 'widget-gen',
     // cross-platform bundled for flutter
     'accessibility-audit', 'api-versioning', 'clean-code-audit', 'crash-analysis', 'crash-triage',
@@ -234,6 +238,7 @@ const PLATFORM_SKILLS = {
   ],
   rn: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile', 'mobile-use-control',
     'bridge-audit', 'expo-optimize', 'new-arch-migrate', 'rn-performance',
     'rn-review', 'rn-tdd',
     // cross-platform bundled for rn
@@ -244,12 +249,14 @@ const PLATFORM_SKILLS = {
   ],
   gaming: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile', 'mobile-use-control',
     'blueprint-to-cpp', 'clean-code-audit', 'game-perf', 'mobile-app-design', 'mobile-mcp-qa',
     'mobile-memory-graph', 'mobile-memory-search', 'mobile-memory-save', 'prd-verification', 'security-audit', 'shader-gen',
     'unity-tdd', 'shader-review',
   ],
   cross: [
     ...FIGMA_SKILLS,
+    'web-network-to-mobile', 'mobile-use-control',
     'accessibility-audit', 'api-versioning', 'clean-code-audit', 'crash-analysis', 'crash-triage',
     'deeplink-debug', 'feature-slice', 'grill-mobile', 'mobile-app-design', 'mobile-mcp-qa',
     'mobile-memory-graph', 'mobile-memory-search', 'mobile-memory-save', 'perf-audit', 'prd-verification',
@@ -1412,6 +1419,8 @@ function cmdHelp() {
   console.log(`    ${bold('install')}                         Install agents, skills, and workflows`);
   console.log(`    ${bold('add')} agent|skill|workflow <name>  Install a single item`);
   console.log(`    ${bold('device-control')} doctor|plan|run  Optional Minitap mobile-use runtime`);
+  console.log(`    ${bold('network capture')} --url URL --out DIR  Capture website API touchpoints (optional Playwright)`);
+  console.log(`    ${bold('network contract')} --capture JSON|--har HAR --out DIR [--openapi JSON]  Export mobile API handoff`);
   console.log(`    ${bold('memory')} init|capture|search|...    Local Mobile Memory store`);
   console.log(`    ${bold('doctor')} --platform android          Check SDK, adb, emulator, MCP, and project config`);
   console.log(`    ${bold('harness')} policy init|validate       Configure governed Mobile Harness runs`);

@@ -2,10 +2,10 @@
 
 **The complete AI dev team for mobile engineers.**
 
-19 personality-driven agents · 56 composable skills · 17 end-to-end workflows
+19 personality-driven agents · 58 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
 
-[![npm](https://img.shields.io/npm/v/mobile-ai-agents?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
+[![npm](https://img.shields.io/npm/v/mobile-ai-agents.svg?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
 [![npm downloads](https://img.shields.io/npm/dm/mobile-ai-agents?color=CB3837)](https://www.npmjs.com/package/mobile-ai-agents)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-agency?style=social)](https://github.com/salmanashraf/mobile-agency/stargazers)
@@ -117,6 +117,45 @@ node cli/index.js device-control plan \
 Execution is opt-in with a separately installed SDK, model configuration and test device. The adapter's offline contracts are tested; live device/model execution remains unverified. A returned model result is **executed-unverified**, and Mobile MCP/device proof provides independent outcome checks. App focus is not a security sandbox.
 
 Device-control runtime by **Minitap, Inc.**; no upstream code or benchmark claims are bundled. [Setup, execution, platform limits and attribution](docs/mobile-use.md) · [Skill](skills/cross-platform/mobile-use-control.md) · [Issue #81](https://github.com/salmanashraf/mobile-ai-agents/issues/81). New CLI commands require this checkout until released to npm.
+
+---
+
+## Website API Discovery → Mobile Integration
+
+**The website works. Which API calls does your mobile app need?**
+
+Capture HTTP requests and response shapes for each website interaction: load a list, open a detail, validate a form, submit test data. Get a touchpoint report for your Android, iOS, Flutter, React Native or Kotlin Multiplatform coding agent.
+
+```text
+Website flow → browser network capture → observed API shapes → mobile integration handoff
+```
+
+Try the runnable demo from a checkout with optional Playwright browser tooling:
+
+```bash
+# Install browser tooling in your project first; see the guide below.
+node cli/fixtures/network-demo.js /tmp/mobile-api-flow.json
+
+# In another terminal: this writes only to the owned local test server.
+node cli/index.js network capture \
+  --url http://127.0.0.1:4173 \
+  --flow /tmp/mobile-api-flow.json \
+  --out /tmp/mobile-api-demo \
+  --allow-writes
+```
+
+- Correlates zero, one or multiple requests with each interaction window.
+- Records request/response schemas, status codes, failures and redirect links.
+- Omits body values and redacts query/header values in exported JSON and Markdown.
+- Blocks unlisted origins and write methods by default; keeps partial evidence when checks fail.
+
+This delivers browser API evidence. Mobile code generation and verified app/API parity require the [web-network-to-mobile skill](skills/cross-platform/web-network-to-mobile.md), your target app and device/network tooling. It does not prove a native app works from a website capture alone.
+
+[Website API discovery guide: setup, demo, privacy and mobile handoff](docs/website-api-discovery.md) · [Implementation issue #69](https://github.com/salmanashraf/mobile-ai-agents/issues/69)
+
+**Next: turn browser evidence into a mobile API contract.** Run `npx mobile-ai-agents@latest network contract --capture /tmp/mobile-api-demo/capture.json --out /tmp/mobile-api-contract-1`. Import HAR with `--har`, or cross-check local OpenAPI JSON with `--openapi`. The output separates observations, documented requirements and unconfirmed inferences; it flags gaps and conflicts while keeping mobile parity unverified. [Contract guide](docs/api-contracts.md). Available starting in `mobile-ai-agents@1.0.40`.
+
+Available in `mobile-ai-agents@1.0.39` and newer. Use `npx mobile-ai-agents@latest network capture --url URL --out NEW_DIRECTORY` for your own authorized site, with optional Playwright installed. Use a new output directory for every run.
 
 ---
 
@@ -241,7 +280,7 @@ Not sure where to begin? Pick your situation:
 | Real examples | Toy pseudocode | Production code input/output pairs |
 | Installable | Copy-paste | `npx mobile-ai-agents install` |
 | Severity levels | None | CRITICAL · WARNING · INFO |
-| Slash commands | No | 56 composable skills |
+| Slash commands | No | 58 composable skills |
 
 ---
 
@@ -280,7 +319,7 @@ Not sure where to begin? Pick your situation:
 
 ## Skills Library
 
-36 focused prompt modules — use inline or compose with agents.
+58 focused prompt modules — use inline or compose with agents.
 
 ### Android
 | Skill | What It Does |
@@ -328,6 +367,8 @@ Not sure where to begin? Pick your situation:
 ### Cross-Platform
 | Skill | What It Does |
 |---|---|
+| `/mobile-use-control` | Plan optional natural-language device control with bounded execution and independent verification |
+| `/web-network-to-mobile` | Website API touchpoints → observed contracts, mobile integration handoff and parity checks |
 | `/figma-mcp-setup` | Connect official Figma MCP and verify frame access |
 | `/figma-spec-harvest` | Figma → traceable requirements, tokens, component specs and references |
 | `/figma-to-implementation` | Design contract → integrated UI in your existing platform |
