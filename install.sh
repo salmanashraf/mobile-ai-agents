@@ -94,6 +94,7 @@ _agent_lines() {
 _skill_lines() {
     # Cross-platform skills (always)
     echo "web-network-to-mobile skills/cross-platform/web-network-to-mobile.md"
+    echo "mobile-use-control skills/cross-platform/mobile-use-control.md"
     echo "grill-mobile        skills/cross-platform/grill-mobile.md"
     echo "crash-triage        skills/cross-platform/crash-triage.md"
     echo "perf-audit          skills/cross-platform/perf-audit.md"

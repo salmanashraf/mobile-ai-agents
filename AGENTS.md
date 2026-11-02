@@ -105,6 +105,10 @@ Use the agent at agents/android/code-reviewer/agent.md to review this file:
 
 ---
 
+## Natural-Language Device Control
+
+Use `skills/cross-platform/mobile-use-control.md` for explicit requests to operate an owned test app through the optional Minitap mobile-use runtime. Follow `docs/mobile-use.md` for the offline plan, SDK prerequisites, bounded opt-in execution and independent device verification. Do not treat execution or stub tests as verified app behavior. Keep this distinct from developer QA via Mobile MCP and from embedding AI models inside an app.
+
 ## Website API to Mobile Parity
 
 Use `skills/cross-platform/web-network-to-mobile.md` when a deployed website is the reference for mobile API integration. Trace requests and responses per interaction, implement using the existing mobile stack (including Android, iOS, Flutter, React Native, and KMP), and verify actual mobile network and UI behavior. Browser observations alone do not prove mobile parity. This requires suitable browser capture and mobile verification tools; the skill does not bundle them.

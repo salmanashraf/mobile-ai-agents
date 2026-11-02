@@ -2,7 +2,7 @@
 
 **The complete AI dev team for mobile engineers.**
 
-19 personality-driven agents · 57 composable skills · 17 end-to-end workflows
+19 personality-driven agents · 58 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
 
 [![npm](https://img.shields.io/npm/v/mobile-ai-agents.svg?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
@@ -97,6 +97,26 @@ For focused work, use a specialist directly:
 /perf-audit startup
 /security-audit release
 ```
+
+---
+
+## Natural-Language Mobile Device Control
+
+Plan an AI task for an owned Android test app or iOS simulator, then optionally execute it through [Minitap mobile-use](https://github.com/minitap-ai/mobile-use). The integration adds explicit device/app selection, step and time limits, cancellation, and a local execution report.
+
+Try the offline planner from this checkout—no model, Python SDK or device needed:
+
+```bash
+printf '%s\n' 'Inspect the test app home screen without changing data.' > /tmp/mobile-use-goal.txt
+node cli/index.js device-control plan \
+  --platform android --device emulator-5554 --app-id com.example.demo \
+  --goal-file /tmp/mobile-use-goal.txt --max-steps 5 --timeout 30 \
+  --out /tmp/mobile-use-plan-1
+```
+
+Execution is opt-in with a separately installed SDK, model configuration and test device. The adapter's offline contracts are tested; live device/model execution remains unverified. A returned model result is **executed-unverified**, and Mobile MCP/device proof provides independent outcome checks. App focus is not a security sandbox.
+
+Device-control runtime by **Minitap, Inc.**; no upstream code or benchmark claims are bundled. [Setup, execution, platform limits and attribution](docs/mobile-use.md) · [Skill](skills/cross-platform/mobile-use-control.md) · [Issue #81](https://github.com/salmanashraf/mobile-ai-agents/issues/81). New CLI commands require this checkout until released to npm.
 
 ---
 
@@ -260,7 +280,7 @@ Not sure where to begin? Pick your situation:
 | Real examples | Toy pseudocode | Production code input/output pairs |
 | Installable | Copy-paste | `npx mobile-ai-agents install` |
 | Severity levels | None | CRITICAL · WARNING · INFO |
-| Slash commands | No | 57 composable skills |
+| Slash commands | No | 58 composable skills |
 
 ---
 
@@ -299,7 +319,7 @@ Not sure where to begin? Pick your situation:
 
 ## Skills Library
 
-57 focused prompt modules — use inline or compose with agents.
+58 focused prompt modules — use inline or compose with agents.
 
 ### Android
 | Skill | What It Does |
@@ -347,6 +367,7 @@ Not sure where to begin? Pick your situation:
 ### Cross-Platform
 | Skill | What It Does |
 |---|---|
+| `/mobile-use-control` | Plan optional natural-language device control with bounded execution and independent verification |
 | `/web-network-to-mobile` | Website API touchpoints → observed contracts, mobile integration handoff and parity checks |
 | `/figma-mcp-setup` | Connect official Figma MCP and verify frame access |
 | `/figma-spec-harvest` | Figma → traceable requirements, tokens, component specs and references |
