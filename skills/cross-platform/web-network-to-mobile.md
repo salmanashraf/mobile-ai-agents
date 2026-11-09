@@ -25,6 +25,10 @@ Trace an authorized deployed website's network behavior at each user interaction
 
 This repository includes `node cli/index.js network capture --url URL --out NEW_DIRECTORY --flow flow.json`. Read [the capture guide](../../docs/website-api-discovery.md) for optional Playwright setup, allowed origins and controlled write actions. It produces sanitized request/response shapes and temporal touchpoint evidence; it does not export full payload values, perform mobile implementation or verify mobile traffic. Use it when that evidence is sufficient, and preserve its capture limitations in the handoff. The command requires mobile-ai-agents 1.0.39 or newer.
 
+## Existing-App Handoff Adapter
+
+After exporting `contract.json`, use `network handoff --contract contract.json --mapping mapping.json --repo APP_ROOT --out NEW_DIRECTORY`. Read [the handoff guide](../../docs/mobile-integration-handoff.md). Supply reviewed existing-file ownership and native auth/endpoint evidence; detection markers alone do not establish architecture. Missing mappings block dependent tasks. Use KMP `shared` versus `native` ownership explicitly. Requires mobile-ai-agents 1.0.42 or newer. The command writes a scoped plan and never edits the target app or claims mobile parity. Review all remaining contract findings before implementing.
+
 ## Skill Prompt
 
 For versioned artifacts, use `npx mobile-ai-agents@latest network contract --capture capture.json --out NEW_DIRECTORY`, or `--har session.har`, with optional `--openapi openapi.json`. Read [the contract guide](../../docs/api-contracts.md) for provenance, supported cross-checks and capture gaps. This exporter stays `needs-review` and does not establish a supported mobile contract or app parity. It requires mobile-ai-agents 1.0.40 or newer.
