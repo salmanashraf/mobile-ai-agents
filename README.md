@@ -159,6 +159,20 @@ Available in `mobile-ai-agents@1.0.39` and newer. Use `npx mobile-ai-agents@late
 
 ---
 
+## Keep your mobile app’s architecture
+
+Turn browser API contracts into scoped tasks mapped to your existing app files:
+
+```bash
+npx mobile-ai-agents@latest network handoff \
+  --contract /tmp/mobile-api-contract-1/contract.json \
+  --mapping mapping.json --repo /path/to/mobile-app --out /tmp/mobile-handoff-1
+```
+
+Review networking, auth, domain, state and navigation ownership across Android, iOS, Flutter, React Native and KMP. Native auth or endpoint gaps block dependent tasks; generated plans never claim device verification. Includes a React Native reference flow with HTTP contract tests. Available starting in `1.0.42`. [Mapping format, reference flow and verification limits](docs/mobile-integration-handoff.md).
+
+---
+
 ## Who It Helps
 
 | Role | How Mobile AI Agents Helps |

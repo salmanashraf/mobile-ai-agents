@@ -1420,6 +1420,7 @@ function cmdHelp() {
   console.log(`    ${bold('add')} agent|skill|workflow <name>  Install a single item`);
   console.log(`    ${bold('device-control')} doctor|plan|run  Optional Minitap mobile-use runtime`);
   console.log(`    ${bold('network capture')} --url URL --out DIR  Capture website API touchpoints (optional Playwright)`);
+  console.log(`    ${bold('network handoff')} --contract JSON --mapping JSON --repo APP --out DIR  Plan existing-stack integration`);
   console.log(`    ${bold('network contract')} --capture JSON|--har HAR --out DIR [--openapi JSON]  Export mobile API handoff`);
   console.log(`    ${bold('memory')} init|capture|search|...    Local Mobile Memory store`);
   console.log(`    ${bold('doctor')} --platform android          Check SDK, adb, emulator, MCP, and project config`);

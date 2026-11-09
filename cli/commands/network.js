@@ -2,11 +2,20 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { parseOptions } = require('../lib/options');
+const { buildHandoff, writeHandoff } = require('../lib/mobile-handoff');
 const { capture } = require('../lib/network-capture');
 const { readJson, buildContract, writeContract } = require('../lib/api-contract');
 
 async function cmdNetwork(args) {
   const opts = parseOptions(args);
+  if (opts._.join(' ') === 'handoff') {
+    if (!opts.contract || !opts.mapping || !opts.repo || !opts.out || Object.keys(opts).some(k => !['_', 'contract', 'mapping', 'repo', 'out'].includes(k))) throw new Error('Usage: network handoff --contract contract.json --mapping mapping.json --repo APP_ROOT --out NEW_DIRECTORY');
+    for (const key of Object.keys(opts)) if (key !== '_' && typeof opts[key] !== 'string') throw new Error(`--${key} needs a value.`);
+    const report = buildHandoff(readJson(opts.contract), readJson(opts.mapping), opts.repo);
+    writeHandoff(report, path.resolve(opts.out));
+    console.log(`${report.status}: ${report.tasks.length} scoped tasks. Mobile verification: unverified. ${path.resolve(opts.out)}`);
+    return;
+  }
   if (opts._.join(' ') === 'contract') {
     if ((!opts.capture && !opts.har) || (opts.capture && opts.har) || !opts.out || Object.keys(opts).some(key => !['_', 'capture', 'har', 'openapi', 'out'].includes(key))) throw new Error('Usage: network contract --capture capture.json | --har session.har --out NEW_DIRECTORY [--openapi openapi.json]');
     for (const key of Object.keys(opts)) if (key !== '_' && typeof opts[key] !== 'string') throw new Error(`--${key} needs a value.`);
