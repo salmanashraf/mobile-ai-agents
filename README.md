@@ -78,6 +78,39 @@ npx mobile-agency install
 
 Mobile AI Agents turns AI coding from one-off prompts into a repeatable mobile engineering loop.
 
+**Build the feature. Prove it works. Pick up where you left off.**
+
+```mermaid
+flowchart TD
+    goal(["Bring an idea, existing app or design"])
+    plan["Plan a useful feature and define success"]
+    build["Implement in your existing stack"]
+    audit["Audit code and review security"]
+    verify["Run tests, verify UI and check the app on a device"]
+    remember["Report evidence and save project context"]
+    ready{"Required checks passed?"}
+    review(["Ready for your review and release approval"])
+    unblock["Resolve missing tools, access or evidence"]
+
+    goal --> plan --> build --> audit --> verify --> remember --> ready
+    ready -->|"Yes"| review
+    ready -->|"Fix needed"| build
+    ready -->|"Evidence missing"| unblock --> audit
+
+    classDef planning fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef work fill:#ede9fe,stroke:#7c3aed,color:#2e1065
+    classDef proof fill:#dcfce7,stroke:#15803d,color:#14532d
+    classDef gate fill:#fef3c7,stroke:#b45309,color:#78350f
+    class goal,plan planning
+    class build,audit work
+    class verify,remember,review proof
+    class ready,unblock gate
+```
+
+You provide the goal and approve important decisions. Your coding agent follows the workflow using the available tools; missing checks stay unverified. Context is saved so the next session can continue.
+
+[Explore the detailed workflow, verification gates and saved artifacts in the Wiki →](https://github.com/salmanashraf/mobile-ai-agents/wiki/Mobile-Engineering-Loop)
+
 | Step | What Happens | Command |
 |---|---|---|
 | 1. Start | Turn a raw idea into starter PRD, design, task, roadmap, and memory docs. | `npx mobile-ai-agents start` |
