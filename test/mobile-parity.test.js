@@ -135,4 +135,3 @@ test('an explicit browser HTML document shell can be a justified native differen
   source.requests[0].url = 'https://web.example/api/items';
   assert.equal(verifyParity(buildContract(source), mobile).verdict, 'FAILED');
 });
-
