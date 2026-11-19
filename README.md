@@ -190,6 +190,17 @@ This delivers browser API evidence. Mobile code generation and verified app/API 
 
 Available in `mobile-ai-agents@1.0.39` and newer. Use `npx mobile-ai-agents@latest network capture --url URL --out NEW_DIRECTORY` for your own authorized site, with optional Playwright installed. Use a new output directory for every run.
 
+**Finally: verify the real mobile runtime.** `network verify` compares a browser contract with app-owned mobile network evidence and reports web capture, mobile network and mobile UI separately for every touchpoint. It requires an observed runtime, passing build checks and explicit auth-expiry, invalid-input, offline and duplicate-submission evidence before returning `VERIFIED`.
+
+```bash
+npx mobile-ai-agents@latest network verify \
+  --contract /tmp/mobile-api-contract-1/contract.json \
+  --mobile /tmp/mobile-evidence.json \
+  --out /tmp/mobile-parity-1
+```
+
+The repository includes an owned iOS simulator fixture that performs a real Chrome capture, builds and launches SwiftUI, records app network evidence, saves a screenshot and runs the comparison. Other targets remain unverified until separately exercised. Available starting in `mobile-ai-agents@1.0.43`. [Evidence format, runnable fixture and verification rules](docs/mobile-parity-verification.md).
+
 ---
 
 ## Keep your mobile app’s architecture

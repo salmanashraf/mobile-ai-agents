@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/salmanashraf/mobile-ai-agents/cli/schemas/mobile-evidence.schema.json",
+  "title": "Mobile runtime network and UI evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evidenceVersion", "capturedAt", "environment", "runtimeObserved", "target", "touchpoints", "scenarios", "buildChecks"],
+  "properties": {
+    "evidenceVersion": { "const": "1.0.0" },
+    "capturedAt": { "type": "string", "format": "date-time" },
+    "environment": { "type": "string", "pattern": "^[A-Za-z0-9_.:-]{1,100}$" },
+    "runtimeObserved": { "type": "boolean" },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "runtime", "buildId"],
+      "properties": {
+        "platform": { "enum": ["android", "ios", "flutter", "rn", "kmp", "other"] },
+        "runtime": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "buildId": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    },
+    "touchpoints": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": ["id", "networkVisibility", "ui", "requests"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "networkVisibility": { "enum": ["observed", "missing", "not-applicable"] },
+          "nativeDifference": { "const": "browser-document-shell" },
+          "ui": { "$ref": "#/$defs/status" },
+          "requests": {
+            "type": "array",
+            "maxItems": 500,
+            "items": {
+              "type": "object",
+              "required": ["id", "method", "url", "status"],
+              "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "method": { "type": "string", "pattern": "^[A-Z]{1,16}$" },
+                "url": { "type": "string", "format": "uri" },
+                "status": { "type": "integer", "minimum": 100, "maximum": 599 },
+                "request": { "$ref": "#/$defs/body" },
+                "response": { "$ref": "#/$defs/body" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status", "evidence"],
+        "properties": {
+          "name": { "enum": ["auth-expiry", "invalid-input", "offline-failure", "duplicate-submission"] },
+          "status": { "$ref": "#/$defs/status" },
+          "evidence": { "type": "string", "minLength": 1, "maxLength": 500 }
+        }
+      }
+    },
+    "buildChecks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "status"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "status": { "$ref": "#/$defs/status" }
+        }
+      }
+    },
+    "normalization": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pointer", "reason"],
+        "properties": {
+          "pointer": { "type": "string", "pattern": "^/" },
+          "reason": { "enum": ["server-generated-id", "server-timestamp"] }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$" },
+    "status": { "enum": ["pass", "fail", "unverified"] },
+    "body": {
+      "type": "object",
+      "required": ["state"],
+      "properties": {
+        "state": { "enum": ["observed", "empty", "omitted", "unavailable"] },
+        "schema": { "type": "object" }
+      }
+    }
+  }
+}
