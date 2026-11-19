@@ -3,11 +3,21 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { parseOptions } = require('../lib/options');
 const { buildHandoff, writeHandoff } = require('../lib/mobile-handoff');
+const { readEvidence, verifyParity, writeParity } = require('../lib/mobile-parity');
 const { capture } = require('../lib/network-capture');
 const { readJson, buildContract, writeContract } = require('../lib/api-contract');
 
 async function cmdNetwork(args) {
   const opts = parseOptions(args);
+  if (opts._.join(' ') === 'verify') {
+    if (!opts.contract || !opts.mobile || !opts.out || Object.keys(opts).some(key => !['_', 'contract', 'mobile', 'out'].includes(key))) throw new Error('Usage: network verify --contract contract.json --mobile mobile-evidence.json --out NEW_DIRECTORY');
+    for (const key of Object.keys(opts)) if (key !== '_' && typeof opts[key] !== 'string') throw new Error(`--${key} needs a value.`);
+    const report = verifyParity(readJson(opts.contract), readEvidence(opts.mobile));
+    writeParity(report, path.resolve(opts.out));
+    console.log(`${report.verdict}: ${report.rows.length} touchpoints. ${path.resolve(opts.out)}`);
+    if (report.verdict === 'FAILED') process.exitCode = 1;
+    return;
+  }
   if (opts._.join(' ') === 'handoff') {
     if (!opts.contract || !opts.mapping || !opts.repo || !opts.out || Object.keys(opts).some(k => !['_', 'contract', 'mapping', 'repo', 'out'].includes(k))) throw new Error('Usage: network handoff --contract contract.json --mapping mapping.json --repo APP_ROOT --out NEW_DIRECTORY');
     for (const key of Object.keys(opts)) if (key !== '_' && typeof opts[key] !== 'string') throw new Error(`--${key} needs a value.`);

@@ -29,6 +29,10 @@ This repository includes `node cli/index.js network capture --url URL --out NEW_
 
 After exporting `contract.json`, use `network handoff --contract contract.json --mapping mapping.json --repo APP_ROOT --out NEW_DIRECTORY`. Read [the handoff guide](../../docs/mobile-integration-handoff.md). Supply reviewed existing-file ownership and native auth/endpoint evidence; detection markers alone do not establish architecture. Missing mappings block dependent tasks. Use KMP `shared` versus `native` ownership explicitly. Requires mobile-ai-agents 1.0.42 or newer. The command writes a scoped plan and never edits the target app or claims mobile parity. Review all remaining contract findings before implementing.
 
+## Runtime Parity Adapter
+
+When actual app network and UI evidence exists, run `network verify --contract contract.json --mobile mobile-evidence.json --out NEW_DIRECTORY` and read [the verification guide](../../docs/mobile-parity-verification.md). Use app-owned debug instrumentation, authorized server correlation or supported capture tooling; screenshots and UI automation alone cannot establish network parity. Record absent runtime or missing visibility as unverified. A `VERIFIED` result applies only to the named platform, runtime, build and supplied touchpoints. Never weaken production TLS or certificate pinning to collect evidence. Requires mobile-ai-agents 1.0.43 or newer.
+
 ## Skill Prompt
 
 For versioned artifacts, use `npx mobile-ai-agents@latest network contract --capture capture.json --out NEW_DIRECTORY`, or `--har session.har`, with optional `--openapi openapi.json`. Read [the contract guide](../../docs/api-contracts.md) for provenance, supported cross-checks and capture gaps. This exporter stays `needs-review` and does not establish a supported mobile contract or app parity. It requires mobile-ai-agents 1.0.40 or newer.
