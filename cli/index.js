@@ -116,6 +116,7 @@ const SKILLS = {
   'crash-triage':       { file: 'skills/cross-platform/crash-triage.md',       platform: 'cross'   },
   'deeplink-debug':     { file: 'skills/cross-platform/deeplink-debug.md',     platform: 'cross'   },
   'feature-slice':      { file: 'skills/cross-platform/feature-slice.md',      platform: 'cross'   },
+  'file-output-qa':     { file: 'skills/cross-platform/file-output-qa.md',     platform: 'cross'   },
   'grill-mobile':       { file: 'skills/cross-platform/grill-mobile.md',       platform: 'cross'   },
   'mobile-app-design':  { file: 'skills/cross-platform/mobile-app-design.md',  platform: 'cross'   },
   'mobile-mcp-qa':      { file: 'skills/cross-platform/mobile-mcp-qa.md',      platform: 'cross'   },
@@ -201,10 +202,12 @@ const PLATFORM_AGENTS = {
 };
 
 const FIGMA_SKILLS = ['figma-mcp-setup', 'figma-spec-harvest', 'figma-to-implementation'];
+const UNIVERSAL_QA_SKILLS = ['file-output-qa'];
 
 const PLATFORM_SKILLS = {
   android: [
     ...FIGMA_SKILLS,
+    ...UNIVERSAL_QA_SKILLS,
     'web-network-to-mobile', 'mobile-use-control',
     'anr-investigation', 'android-tdd', 'code-review', 'compose-migration', 'compose-review',
     'kotlin-modernize', 'memory-leak-investigation', 'proguard-rules',
@@ -216,6 +219,7 @@ const PLATFORM_SKILLS = {
   ],
   ios: [
     ...FIGMA_SKILLS,
+    ...UNIVERSAL_QA_SKILLS,
     'web-network-to-mobile', 'mobile-use-control',
     'data-persistence', 'ios-tdd', 'networking', 'ios-performance',
     'swift-concurrency', 'swift-review', 'swiftui-review', 'swiftui-state',
@@ -228,6 +232,7 @@ const PLATFORM_SKILLS = {
   ],
   flutter: [
     ...FIGMA_SKILLS,
+    ...UNIVERSAL_QA_SKILLS,
     'web-network-to-mobile', 'mobile-use-control',
     'dart-modernize', 'flutter-review', 'flutter-tdd', 'widget-extract', 'widget-gen',
     // cross-platform bundled for flutter
@@ -238,6 +243,7 @@ const PLATFORM_SKILLS = {
   ],
   rn: [
     ...FIGMA_SKILLS,
+    ...UNIVERSAL_QA_SKILLS,
     'web-network-to-mobile', 'mobile-use-control',
     'bridge-audit', 'expo-optimize', 'new-arch-migrate', 'rn-performance',
     'rn-review', 'rn-tdd',
@@ -249,6 +255,7 @@ const PLATFORM_SKILLS = {
   ],
   gaming: [
     ...FIGMA_SKILLS,
+    ...UNIVERSAL_QA_SKILLS,
     'web-network-to-mobile', 'mobile-use-control',
     'blueprint-to-cpp', 'clean-code-audit', 'game-perf', 'mobile-app-design', 'mobile-mcp-qa',
     'mobile-memory-graph', 'mobile-memory-search', 'mobile-memory-save', 'prd-verification', 'security-audit', 'shader-gen',
@@ -256,6 +263,7 @@ const PLATFORM_SKILLS = {
   ],
   cross: [
     ...FIGMA_SKILLS,
+    ...UNIVERSAL_QA_SKILLS,
     'web-network-to-mobile', 'mobile-use-control',
     'accessibility-audit', 'api-versioning', 'clean-code-audit', 'crash-analysis', 'crash-triage',
     'deeplink-debug', 'feature-slice', 'grill-mobile', 'mobile-app-design', 'mobile-mcp-qa',

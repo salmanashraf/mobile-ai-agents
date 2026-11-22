@@ -4,7 +4,7 @@
 
 Mobile AI Agents is an open-source **mobile engineering and QA system** for Claude Code, Codex, Cursor, GitHub Copilot, and Windsurf. It gives your coding agent platform-specific skills, specialist reviews, device-testing workflows, and evidence-backed quality gates for real app codebases.
 
-19 personality-driven agents · 58 composable skills · 17 end-to-end workflows
+19 personality-driven agents · 59 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
 
 [![npm](https://img.shields.io/npm/v/mobile-ai-agents.svg?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
@@ -345,7 +345,7 @@ Not sure where to begin? Pick your situation:
 | Real examples | Toy pseudocode | Production code input/output pairs |
 | Installable | Copy-paste | `npx mobile-ai-agents install` |
 | Severity levels | None | CRITICAL · WARNING · INFO |
-| Slash commands | No | 58 composable skills |
+| Slash commands | No | 59 composable skills |
 
 ---
 
@@ -384,7 +384,7 @@ Not sure where to begin? Pick your situation:
 
 ## Skills Library
 
-58 focused prompt modules — use inline or compose with agents.
+59 focused prompt modules — use inline or compose with agents.
 
 ### Android
 | Skill | What It Does |
@@ -432,6 +432,7 @@ Not sure where to begin? Pick your situation:
 ### Cross-Platform
 | Skill | What It Does |
 |---|---|
+| `/file-output-qa` | Validate structure, content, size, quality, metadata, and safety for files produced by mobile apps |
 | `/mobile-use-control` | Plan optional natural-language device control with bounded execution and independent verification |
 | `/web-network-to-mobile` | Website API touchpoints → observed contracts, mobile integration handoff and parity checks |
 | `/figma-mcp-setup` | Connect official Figma MCP and verify frame access |
