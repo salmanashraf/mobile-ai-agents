@@ -1,6 +1,8 @@
 # Mobile AI Agents
 
-**The complete AI dev team for mobile engineers.**
+**Build mobile apps with AI that plans, implements, reviews, tests, and proves its work.**
+
+Mobile AI Agents is an open-source mobile engineering system for **Claude Code, Codex, Cursor, GitHub Copilot, and Windsurf**. It gives your coding agent reusable, mobile-specific instructions for working inside real app codebases—from product planning and architecture to device QA and release readiness.
 
 19 personality-driven agents · 58 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
@@ -8,22 +10,27 @@ Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Un
 [![npm](https://img.shields.io/npm/v/mobile-ai-agents.svg?color=CB3837&label=npm)](https://www.npmjs.com/package/mobile-ai-agents)
 [![npm downloads](https://img.shields.io/npm/dm/mobile-ai-agents?color=CB3837)](https://www.npmjs.com/package/mobile-ai-agents)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-agency?style=social)](https://github.com/salmanashraf/mobile-agency/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-ai-agents?style=social)](https://github.com/salmanashraf/mobile-ai-agents/stargazers)
 [![Platform](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Flutter%20%7C%20RN%20%7C%20KMP%20%7C%20Unity%20%7C%20Unreal-brightgreen)](#core-loops-and-platform-plugins)
 
 [Installation Guide](docs/installation.md) · [Android Device Setup](docs/android-device-setup.md) · [Core Loops](docs/core-loops.md) · [mobile-karpathy](mobile-karpathy.md) · [Wiki](https://github.com/salmanashraf/mobile-ai-agents/wiki) · [Getting Started](docs/getting-started.md) · [Contributing](CONTRIBUTING.md)
 
-> AI agents, skills, and Loop Engineering workflows for building, testing, reviewing, and shipping Android, iOS, Flutter, React Native, Unity, and Unreal apps.
-
-**What Are Mobile AI Agents?**
-
 ![Mobile Harness Loop Engineering preview](https://github.com/user-attachments/assets/3e51426a-d2d9-41d3-b668-48d4c751f20c)
 
-Mobile AI Agents is a ready-to-use AI engineering system for mobile apps, hybrid apps, and games. Instead of learning every platform from scratch or writing the same prompts again and again, you install the agents, skills, and workflows, then use them to plan, build, review, test, and ship real Android, iOS, Flutter, React Native, Kotlin Multiplatform, Unity, and Unreal projects.
+## Why Mobile AI Agents?
 
-Bring the idea. Mobile AI Agents brings the mobile team: product planning, architecture review, feature development, clean-code audits, security checks, performance analysis, UI verification, device QA, release prep, and store growth.
+Generating code is one part of mobile development. Shipping a reliable app also means respecting the existing architecture, handling lifecycle and platform behavior, reviewing security and performance, matching designs, testing on a device, and keeping evidence that the change works.
 
-Mobile AI Agents is built around **Loop Engineering** and a **mobile-karpathy** mindset: define the goal once, then let the system keep moving through planning, implementation, code audit, security review, UI verification, device QA, reporting, and context saving. The aim is to reduce manual work and repeated manual prompting so developers can focus on product decisions, architecture tradeoffs, credentials, and final approval.
+Mobile AI Agents gives your coding agent that missing mobile context:
+
+- **Works with your current stack.** Use it in an existing Android, iOS, Flutter, React Native, KMP, Unity, or Unreal project without replacing the architecture that already works.
+- **Use a specialist or run the full loop.** Call a focused skill for Android ANRs, Swift review, Flutter widgets, React Native performance, Figma handoff, API parity, security, or release prep—or let Mobile Harness coordinate the stages.
+- **Treat verification as part of the work.** Tests, code and security reviews, screenshots, device checks, network evidence, and unresolved gaps stay visible instead of being collapsed into a success claim.
+- **Continue across sessions.** Mobile Memory saves decisions, evidence, completed work, and next actions so another coding session can resume with the right context.
+
+Start with a rough idea, an existing app, a Figma design, a deployed web flow, a crash report, or a GitHub issue. Install the toolkit once, then ask your coding agent for the outcome you need.
+
+The system is built around **Loop Engineering**: plan the change, implement it, audit the code, verify the UI and runtime behavior, report the evidence, and save enough context to continue. You remain responsible for product decisions, credentials, architecture tradeoffs, and release approval.
 
 ---
 ## Install
@@ -60,8 +67,8 @@ Common installs:
 Local clone install:
 
 ```bash
-git clone https://github.com/salmanashraf/mobile-agency
-cd mobile-agency
+git clone https://github.com/salmanashraf/mobile-ai-agents
+cd mobile-ai-agents
 ./install.sh --platform android
 ./install.sh --platform flutter --tool cursor
 ./install.sh --tool all
