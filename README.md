@@ -1,8 +1,8 @@
 # Mobile AI Agents
 
-**Build mobile apps with AI that plans, implements, reviews, tests, and proves its work.**
+**Build, test, and ship mobile apps with AI that proves its work.**
 
-Mobile AI Agents is an open-source mobile engineering system for **Claude Code, Codex, Cursor, GitHub Copilot, and Windsurf**. It gives your coding agent reusable, mobile-specific instructions for working inside real app codebases—from product planning and architecture to device QA and release readiness.
+Mobile AI Agents is an open-source **mobile engineering and QA system** for Claude Code, Codex, Cursor, GitHub Copilot, and Windsurf. It gives your coding agent platform-specific skills, specialist reviews, device-testing workflows, and evidence-backed quality gates for real app codebases.
 
 19 personality-driven agents · 58 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
@@ -25,7 +25,7 @@ Mobile AI Agents gives your coding agent that missing mobile context:
 
 - **Works with your current stack.** Use it in an existing Android, iOS, Flutter, React Native, KMP, Unity, or Unreal project without replacing the architecture that already works.
 - **Use a specialist or run the full loop.** Call a focused skill for Android ANRs, Swift review, Flutter widgets, React Native performance, Figma handoff, API parity, security, or release prep—or let Mobile Harness coordinate the stages.
-- **Treat verification as part of the work.** Tests, code and security reviews, screenshots, device checks, network evidence, and unresolved gaps stay visible instead of being collapsed into a success claim.
+- **Make QA part of the delivery loop.** Build and test results, code/security/performance reviews, UI and API parity, simulator/emulator checks, device evidence, and unresolved gaps stay visible. Missing tooling stays unverified.
 - **Continue across sessions.** Mobile Memory saves decisions, evidence, completed work, and next actions so another coding session can resume with the right context.
 
 Start with a rough idea, an existing app, a Figma design, a deployed web flow, a crash report, or a GitHub issue. Install the toolkit once, then ask your coding agent for the outcome you need.
@@ -279,7 +279,7 @@ https://github.com/user-attachments/assets/427422db-b6b1-4e93-96d0-ad5dd2843f53
 
 https://github.com/user-attachments/assets/ee8bbd61-9c64-47bf-a9b3-7812cc12412c
 
-More context: [AXIOM discussion](https://github.com/salmanashraf/mobile-agency/discussions/5)
+More context: [AXIOM discussion](https://github.com/salmanashraf/mobile-ai-agents/discussions/5)
 
 ---
 
@@ -824,11 +824,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
 
 ## Community
 
-- [GitHub Discussions](https://github.com/salmanashraf/mobile-agency/discussions) — share your output, ask questions, show and tell
-- [Issues](https://github.com/salmanashraf/mobile-agency/issues) — bug reports, new agent requests
+- [GitHub Discussions](https://github.com/salmanashraf/mobile-ai-agents/discussions) — share your output, ask questions, show and tell
+- [Issues](https://github.com/salmanashraf/mobile-ai-agents/issues) — bug reports, new agent requests
 
 If Mobile AI Agents saved you time, a star helps others find it.
-[![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-agency?style=social)](https://github.com/salmanashraf/mobile-agency/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-ai-agents?style=social)](https://github.com/salmanashraf/mobile-ai-agents/stargazers)
 
 ---
 
