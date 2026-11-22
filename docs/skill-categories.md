@@ -63,9 +63,9 @@ Proving the app matches requirements through tests, device QA, accessibility che
 
 **Platforms:** All
 
-**Examples:** PRD verification, Mobile MCP QA, accessibility checks, restart persistence tests
+**Examples:** PRD verification, Mobile MCP QA, transformed-file validation, accessibility checks, restart persistence tests
 
-**Skills:** `/prd-verification`, `/mobile-mcp-qa`, `/accessibility-audit`
+**Skills:** `/prd-verification`, `/mobile-mcp-qa`, `/file-output-qa`, `/accessibility-audit`
 
 ---
 
