@@ -15,6 +15,8 @@ Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Un
 
 [Installation Guide](docs/installation.md) · [Android Device Setup](docs/android-device-setup.md) · [Core Loops](docs/core-loops.md) · [mobile-karpathy](mobile-karpathy.md) · [Wiki](https://github.com/salmanashraf/mobile-ai-agents/wiki) · [Getting Started](docs/getting-started.md) · [Contributing](CONTRIBUTING.md)
 
+**Real proof:** [Watch the Mobile QA demo](docs/case-studies/assets/mobile-ai-agents-mobile-qa-demo.mp4) · [Read the Android PDF Compressor case study](docs/case-studies/pdf-compressor-mobile-qa.md) — exact file measurements, page preservation, rendered output, and explicit gaps.
+
 ![Mobile Harness Loop Engineering preview](https://github.com/user-attachments/assets/3e51426a-d2d9-41d3-b668-48d4c751f20c)
 
 ## Why Mobile AI Agents?
