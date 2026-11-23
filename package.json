@@ -1,7 +1,7 @@
 {
   "name": "mobile-ai-agents",
   "version": "1.0.46",
-  "description": "AI agents, skills, and Loop Engineering workflows for building, testing, auditing, and releasing mobile apps.",
+  "description": "End-to-end AI engineering system for planning, building, reviewing, testing, and releasing mobile products.",
   "bin": {
     "mobile-ai-agents": "cli/index.js",
     "mobile-agency": "cli/index.js",
@@ -29,6 +29,9 @@
     "mobile-ai-agents",
     "mobile-agents",
     "mobile-development",
+    "mobile-engineering",
+    "app-development",
+    "mobile-app-development",
     "android",
     "ios",
     "flutter",

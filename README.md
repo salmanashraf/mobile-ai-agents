@@ -1,8 +1,10 @@
 # Mobile AI Agents
 
-**Build, test, and ship mobile apps with AI that proves its work.**
+**The end-to-end AI engineering system for mobile products.**
 
-Mobile AI Agents is an open-source **mobile engineering and QA system** for Claude Code, Codex, Cursor, GitHub Copilot, and Windsurf. It gives your coding agent platform-specific skills, specialist reviews, device-testing workflows, and evidence-backed quality gates for real app codebases.
+Turn an idea, design, issue, or existing codebase into a planned, implemented, reviewed, device-tested, and release-ready mobile product. Mobile AI Agents equips Claude Code, Codex, Cursor, GitHub Copilot, and Windsurf with a complete mobile engineering harness—not just prompts.
+
+**Idea → Spec → Tasks → Build → Review → Device QA → Release → Learn**
 
 19 personality-driven agents · 59 composable skills · 17 end-to-end workflows
 Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Unreal
@@ -15,24 +17,21 @@ Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Un
 
 [Installation Guide](docs/installation.md) · [Android Device Setup](docs/android-device-setup.md) · [Core Loops](docs/core-loops.md) · [mobile-karpathy](mobile-karpathy.md) · [Wiki](https://github.com/salmanashraf/mobile-ai-agents/wiki) · [Getting Started](docs/getting-started.md) · [Contributing](CONTRIBUTING.md)
 
-**Real proof:** [Watch the Mobile QA demo](docs/case-studies/assets/mobile-ai-agents-mobile-qa-demo.mp4) · [Read the Android PDF Compressor case study](docs/case-studies/pdf-compressor-mobile-qa.md) — exact file measurements, page preservation, rendered output, and explicit gaps.
+**See it work:** [Watch the end-to-end mobile engineering demo](docs/case-studies/assets/mobile-ai-agents-mobile-qa-demo.mp4) · [Read the Android PDF Compressor case study](docs/case-studies/pdf-compressor-mobile-qa.md)
 
-![Mobile Harness Loop Engineering preview](https://github.com/user-attachments/assets/3e51426a-d2d9-41d3-b668-48d4c751f20c)
+## Build the Product, Not Just the Code
 
-## Why Mobile AI Agents?
+Code generation is one step. A real mobile product also needs discovery, specifications, task planning, architecture, UI implementation, API integration, security, performance, device QA, release preparation, and a feedback loop.
 
-Generating code is one part of mobile development. Shipping a reliable app also means respecting the existing architecture, handling lifecycle and platform behavior, reviewing security and performance, matching designs, testing on a device, and keeping evidence that the change works.
+Mobile AI Agents brings those stages into one repeatable system:
 
-Mobile AI Agents gives your coding agent that missing mobile context:
+- **Start anywhere.** Bring a rough idea, Figma design, web flow, GitHub issue, crash report, or existing app.
+- **Build end to end.** Mobile Harness coordinates planning, implementation, review, verification, release, and the next iteration.
+- **Stay native to your stack.** Work inside Android, iOS, Flutter, React Native, or KMP without replacing the architecture that already works.
+- **Prove the result.** Tests, screenshots, network evidence, generated files, simulators, emulators, and devices support every important PASS.
+- **Keep momentum.** Mobile Memory preserves decisions, evidence, progress, and next actions across sessions.
 
-- **Works with your current stack.** Use it in an existing Android, iOS, Flutter, React Native, KMP, Unity, or Unreal project without replacing the architecture that already works.
-- **Use a specialist or run the full loop.** Call a focused skill for Android ANRs, Swift review, Flutter widgets, React Native performance, Figma handoff, API parity, security, or release prep—or let Mobile Harness coordinate the stages.
-- **Make QA part of the delivery loop.** Build and test results, code/security/performance reviews, UI and API parity, simulator/emulator checks, device evidence, and unresolved gaps stay visible. Missing tooling stays unverified.
-- **Continue across sessions.** Mobile Memory saves decisions, evidence, completed work, and next actions so another coding session can resume with the right context.
-
-Start with a rough idea, an existing app, a Figma design, a deployed web flow, a crash report, or a GitHub issue. Install the toolkit once, then ask your coding agent for the outcome you need.
-
-The system is built around **Loop Engineering**: plan the change, implement it, audit the code, verify the UI and runtime behavior, report the evidence, and save enough context to continue. You remain responsible for product decisions, credentials, architecture tradeoffs, and release approval.
+Use the full product loop or call a specialist directly for Figma handoff, API parity, code review, ANRs, memory leaks, security, accessibility, performance, testing, CI/CD, release notes, or store launch work. You remain responsible for product decisions, credentials, architecture tradeoffs, and release approval.
 
 ---
 ## Install

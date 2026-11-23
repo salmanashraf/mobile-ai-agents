@@ -7,12 +7,13 @@
 
 ## What This Repo Is
 
-A curated toolkit of AI agents, skill prompts, and reusable workflows for
-Android, iOS, Flutter, React Native, Unity, and Unreal Engine developers.
+An end-to-end AI engineering system for mobile products. It helps teams move
+from idea, design, or issue through specification, implementation, review,
+device QA, release, and iteration across Android, iOS, Flutter, React Native,
+Kotlin Multiplatform, Unity, and Unreal Engine.
 
-Each agent is self-contained: it has a purpose, an input format, an output
-format, and a real worked example. Drop any agent into Codex as a
-system prompt and it works immediately.
+Mobile Harness coordinates the complete product loop. Self-contained agents,
+skills, and workflows can also be used independently for focused engineering work.
 
 ---
 
