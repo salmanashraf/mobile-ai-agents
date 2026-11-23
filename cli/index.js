@@ -1425,6 +1425,7 @@ function cmdHelp() {
   console.log('  Commands:');
   console.log(`    ${bold('start')}                           Guided setup that creates PRD/design/tasks/roadmap`);
   console.log(`    ${bold('install')}                         Install agents, skills, and workflows`);
+  console.log(`    ${bold('mobile-test')}                     Prepare simple device testing in one command`);
   console.log(`    ${bold('add')} agent|skill|workflow <name>  Install a single item`);
   console.log(`    ${bold('device-control')} doctor|plan|run  Optional Minitap mobile-use runtime`);
   console.log(`    ${bold('network capture')} --url URL --out DIR  Capture website API touchpoints (optional Playwright)`);
@@ -1462,6 +1463,7 @@ function cmdHelp() {
   console.log(dim('    npx mobile-ai-agents start'));
   console.log(dim('    npx mobile-ai-agents start --platform flutter --idea "Habit tracker"'));
   console.log(dim('    npx mobile-ai-agents install'));
+  console.log(dim('    npx mobile-ai-agents mobile-test'));
   console.log(dim('    npx mobile-ai-agents install --platform android'));
   console.log(dim('    npx mobile-ai-agents install --platform ios --tool cursor'));
   console.log(dim('    npx mobile-ai-agents install --tool all'));

@@ -53,6 +53,14 @@ Fast install path:
 npx mobile-ai-agents install
 ```
 
+Then test a mobile app with one beginner-friendly command—no global install required:
+
+```bash
+npx mobile-ai-agents mobile-test
+```
+
+If the toolkit is already installed globally, the shorter `mobile-test` command works too. It detects the project, prepares Mobile MCP for the AI tool it finds, and creates a plain-language test request. If automatic detection is unavailable, use `mobile-test --client codex` (or `claude`, `cursor`, or `windsurf`). The existing `/mobile-mcp-qa` skill remains available for advanced control.
+
 This installs Mobile AI Agents for Claude Code. For Cursor, Windsurf, GitHub Copilot, Codex, platform-only installs, and troubleshooting, see [docs/installation.md](docs/installation.md).
 
 Common installs:
@@ -83,51 +91,19 @@ npx mobile-agency install
 ```
 
 ---
-## How It Works
+## One Simple Mobile Engineering Loop
 
-Mobile AI Agents turns AI coding from one-off prompts into a repeatable mobile engineering loop.
-
-**Build the feature. Prove it works. Pick up where you left off.**
+**Discover → Spec → Tasks → Implement → Review → Verify → PR → Learn**
 
 ```mermaid
-flowchart TD
-    goal(["Bring an idea, existing app or design"])
-    plan["Plan a useful feature and define success"]
-    build["Implement in your existing stack"]
-    audit["Audit code and review security"]
-    verify["Run tests, verify UI and check the app on a device"]
-    remember["Report evidence and save project context"]
-    ready{"Required checks passed?"}
-    review(["Ready for your review and release approval"])
-    unblock["Resolve missing tools, access or evidence"]
-
-    goal --> plan --> build --> audit --> verify --> remember --> ready
-    ready -->|"Yes"| review
-    ready -->|"Fix needed"| build
-    ready -->|"Evidence missing"| unblock --> audit
-
-    classDef planning fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef work fill:#ede9fe,stroke:#7c3aed,color:#2e1065
-    classDef proof fill:#dcfce7,stroke:#15803d,color:#14532d
-    classDef gate fill:#fef3c7,stroke:#b45309,color:#78350f
-    class goal,plan planning
-    class build,audit work
-    class verify,remember,review proof
-    class ready,unblock gate
+flowchart LR
+    discover[Discover] --> spec[Spec] --> tasks[Tasks] --> implement[Implement]
+    implement --> review[Review] --> verify[Verify] --> pr[PR] --> learn[Learn]
 ```
 
-You provide the goal and approve important decisions. Your coding agent follows the workflow using the available tools; missing checks stay unverified. Context is saved so the next session can continue.
+This is the simple Mobile Harness path. `mobile-test` handles Verify. A result only passes when tests, screenshots, files, or device actions provide evidence; Learn saves useful context for the next cycle.
 
 [Explore the detailed workflow, verification gates and saved artifacts in the Wiki →](https://github.com/salmanashraf/mobile-ai-agents/wiki/Mobile-Engineering-Loop)
-
-| Step | What Happens | Command |
-|---|---|---|
-| 1. Start | Turn a raw idea into starter PRD, design, task, roadmap, and memory docs. | `npx mobile-ai-agents start` |
-| 2. Install | Add the agents, skills, and workflows to your AI coding tool. | `npx mobile-ai-agents install` |
-| 3. Open your app | Use it inside an Android, iOS, Flutter, React Native, KMP, Unity, or Unreal project. | Claude Code · Cursor · Windsurf · Copilot · Codex |
-| 4. Run the loop | Tell Mobile Harness to continue from the generated docs. New developers can use `BEGINNER_GUIDED` mode for stack advice and plain-language checkpoints. | `/mobile-harness` |
-| 5. Build with gates | The loop plans, implements, reviews architecture, checks security, audits performance, verifies UI, and runs QA. | `@MOBILE-HARNESS` |
-| 6. Continue later | Project context, decisions, reports, and next tasks are saved so work can continue across sessions. | Mobile Memory |
 
 For focused work, use a specialist directly:
 
