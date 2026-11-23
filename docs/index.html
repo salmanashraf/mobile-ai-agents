@@ -114,6 +114,31 @@
     .hero-sub { font-size: 13px; color: var(--muted); }
     .hero-sub a { color: var(--muted); text-decoration: underline; }
 
+    /* ── Demo ── */
+    .demo-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 64px;
+    }
+    .demo-wrap video {
+      display: block;
+      width: 100%;
+      border-radius: 10px;
+      background: #08111f;
+    }
+    .demo-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 4px 2px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .demo-caption strong { color: var(--text); }
+    @media (max-width: 640px) { .demo-caption { flex-direction: column; gap: 6px; } }
+
     /* ── Stats ── */
     .stats {
       display: flex;
@@ -305,6 +330,7 @@
     <span class="nav-brand">mobile-ai-agents</span>
     <div class="nav-links">
       <a href="#loops">Loops</a>
+      <a href="#demo">Demo</a>
       <a href="#agents">Agents</a>
       <a href="#skills">Skills</a>
       <a href="#workflows">Workflows</a>
@@ -330,6 +356,20 @@
       or <a href="https://github.com/salmanashraf/mobile-ai-agents">clone the repo</a> and run <code>./install.sh</code>
       &nbsp;·&nbsp; <a href="mobile-harness-enterprise.md">Enterprise Harness</a>
     </span>
+  </div>
+</div>
+
+<!-- Idea to product demo -->
+<div class="container" id="demo">
+  <div class="demo-wrap">
+    <video controls preload="metadata" playsinline poster="case-studies/assets/mobile-ai-agents-mobile-qa-proof.png">
+      <source src="case-studies/assets/mobile-ai-agents-mobile-qa-demo.mp4" type="video/mp4" />
+      <a href="case-studies/assets/mobile-ai-agents-mobile-qa-demo.mp4">Watch the idea-to-product demo</a>
+    </video>
+    <div class="demo-caption">
+      <strong>From idea to a verified mobile product.</strong>
+      <span>Plan · Build · Review · Device QA · Evidence · Release</span>
+    </div>
   </div>
 </div>
 
@@ -612,7 +652,7 @@
   <div class="container">
     <div class="section-label">mobile-karpathy.md</div>
     <h2>4 rules that stop AI agents<br>shipping broken mobile apps.</h2>
-    <p class="section-sub">Add to your project's CLAUDE.md. Share independently. <a href="https://github.com/salmanashraf/mobile-agency/blob/main/mobile-karpathy.md">Read the full file →</a></p>
+    <p class="section-sub">Add to your project's CLAUDE.md. Share independently. <a href="https://github.com/salmanashraf/mobile-ai-agents/blob/main/mobile-karpathy.md">Read the full file →</a></p>
 
     <div class="rules-grid">
       <div class="rule-card">
@@ -666,8 +706,8 @@
     </div>
     <div class="code-block" id="tab-bash" style="display:none">
       <span class="comment"># Clone and install</span><br>
-      <span class="cmd2">git clone https://github.com/salmanashraf/mobile-agency</span><br>
-      <span class="cmd2">cd mobile-agency</span><br>
+      <span class="cmd2">git clone https://github.com/salmanashraf/mobile-ai-agents</span><br>
+      <span class="cmd2">cd mobile-ai-agents</span><br>
       <span class="cmd2">./install.sh</span><br><br>
       <span class="comment"># Platform-specific</span><br>
       <span class="cmd2">./install.sh</span> <span class="flag">--platform</span> <span class="val">android</span><br>
@@ -681,10 +721,8 @@
       <span class="cmd2">npx mobile-ai-agents add agent axiom</span><br>
       <span class="cmd2">npx mobile-ai-agents add agent anr-investigation</span><br>
       <span class="cmd2">npx mobile-ai-agents add agent memory-leak-analyzer</span><br><br>
-      <span class="comment"># Prepare Android device QA with Mobile MCP</span><br>
-      <span class="cmd2">npx mobile-ai-agents doctor</span> <span class="flag">--platform</span> <span class="val">android</span><br>
-      <span class="cmd2">npx mobile-ai-agents mcp setup</span> <span class="flag">--client</span> <span class="val">claude</span><br>
-      <span class="cmd2">npx mobile-ai-agents mcp config init</span> <span class="flag">--app-id</span> <span class="val">com.example.app</span><br><br>
+      <span class="comment"># Prepare device QA in one command</span><br>
+      <span class="cmd2">npx mobile-ai-agents mobile-test</span><br><br>
       <a href="android-device-setup.md">Read the Android Device QA Setup guide →</a>
     </div>
     <div class="code-block" id="tab-cursor" style="display:none">
@@ -702,7 +740,7 @@
 <footer>
   <div class="container">
     <p>
-      <a href="https://github.com/salmanashraf/mobile-agency">github.com/salmanashraf/mobile-agency</a>
+      <a href="https://github.com/salmanashraf/mobile-ai-agents">github.com/salmanashraf/mobile-ai-agents</a>
       &nbsp;·&nbsp; MIT License
       &nbsp;·&nbsp; Built for mobile engineers who ship.
     </p>
