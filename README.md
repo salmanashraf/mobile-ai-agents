@@ -15,9 +15,13 @@ Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Un
 [![GitHub Stars](https://img.shields.io/github/stars/salmanashraf/mobile-ai-agents?style=social)](https://github.com/salmanashraf/mobile-ai-agents/stargazers)
 [![Platform](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Flutter%20%7C%20RN%20%7C%20KMP%20%7C%20Unity%20%7C%20Unreal-brightgreen)](#core-loops-and-platform-plugins)
 
-[Installation Guide](docs/installation.md) · [Android Device Setup](docs/android-device-setup.md) · [Core Loops](docs/core-loops.md) · [mobile-karpathy](mobile-karpathy.md) · [Wiki](https://github.com/salmanashraf/mobile-ai-agents/wiki) · [Getting Started](docs/getting-started.md) · [Contributing](CONTRIBUTING.md)
+[Website](https://salmanashraf.github.io/mobile-ai-agents/) · [Installation Guide](docs/installation.md) · [Getting Started](docs/getting-started.md) · [Core Loops](docs/core-loops.md) · [Wiki](https://github.com/salmanashraf/mobile-ai-agents/wiki) · [Contributing](CONTRIBUTING.md)
 
-**See it work:** [Watch the end-to-end mobile engineering demo](docs/case-studies/assets/mobile-ai-agents-mobile-qa-demo.mp4) · [Read the Android PDF Compressor case study](docs/case-studies/pdf-compressor-mobile-qa.md)
+### See the Full Product Loop
+
+[**Watch the idea-to-product demo →**](docs/case-studies/assets/mobile-ai-agents-mobile-qa-demo.mp4)
+
+See how one mobile engineering harness moves through planning, implementation, review, device QA, evidence, and release. Then read the [Android PDF Compressor case study](docs/case-studies/pdf-compressor-mobile-qa.md) for the measured proof behind the demo.
 
 ## Build the Product, Not Just the Code
 
