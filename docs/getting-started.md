@@ -1,12 +1,12 @@
 # Getting Started
 
-This guide walks you through using Mobile AI Agents for the first time.
+This guide takes you from a mobile product idea or existing app to an implemented, reviewed, device-tested, and release-ready result.
 
 ---
 
 ## Choose a Loop First
 
-Mobile AI Agents works best when you choose the engineering loop before choosing an agent.
+Start with the product outcome. Mobile Harness coordinates the engineering loop and selects focused specialists when they are needed.
 
 If you are starting from a raw app idea, run this inside your project folder first:
 
