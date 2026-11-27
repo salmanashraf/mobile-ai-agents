@@ -17,7 +17,7 @@ Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Un
 
 [Website](https://salmanashraf.github.io/mobile-ai-agents/) · [Installation Guide](docs/installation.md) · [Getting Started](docs/getting-started.md) · [Core Loops](docs/core-loops.md) · [Wiki](https://github.com/salmanashraf/mobile-ai-agents/wiki) · [Contributing](CONTRIBUTING.md)
 
-### See the Full Product Loop
+### VaultSheet — App-Building Promo
 
 Watch Mobile Harness take VaultSheet from a project brief through the app engineering workflow:
 
@@ -278,7 +278,7 @@ Performance guide: [docs/performance-loop.md](docs/performance-loop.md)
 
 ## See It In Action
 
-`/mobile-harness` running Loop Engineering — one flow for planning, building, testing, UI verification, and release checks:
+**Mobile Harness — real CLI walkthrough.** `/mobile-harness` running Loop Engineering: planning, building, testing, UI verification, and release checks:
 
 https://github.com/user-attachments/assets/c98d4468-d56d-41ce-b545-7d9fdc43e9d2
 
