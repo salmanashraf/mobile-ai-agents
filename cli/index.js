@@ -1423,6 +1423,7 @@ function cmdHelp() {
   console.log(bold('  npx mobile-ai-agents <command> [options]'));
   console.log('');
   console.log('  Commands:');
+  console.log('    build "App idea" --client claude|codex  Launch the complete Mobile Harness conversation');
   console.log(`    ${bold('start')}                           Guided setup that creates PRD/design/tasks/roadmap`);
   console.log(`    ${bold('install')}                         Install agents, skills, and workflows`);
   console.log(`    ${bold('mobile-test')}                     Prepare simple device testing in one command`);

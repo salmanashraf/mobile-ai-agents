@@ -6,11 +6,13 @@ const { cmdMcp } = require('./mcp');
 const { cmdFigma } = require('./figma');
 const { cmdDeviceControl } = require('./device-control');
 const { cmdNetwork } = require('./network');
+const { cmdBuild } = require('./build');
 const { cmdMobileTest } = require('./mobile-test');
 
 function createCommandRouter(legacyHandlers) {
   const routes = new Map([
     ['start', legacyHandlers.start],
+    ['build', cmdBuild],
     ['install', legacyHandlers.install],
     ['add', legacyHandlers.add],
     ['memory', legacyHandlers.memory],

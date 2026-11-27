@@ -40,6 +40,22 @@ Use the full product loop or call a specialist directly for Figma handoff, API p
 ---
 ## Install
 
+### Build your app with Mobile Harness
+
+With Claude Code or Codex installed and signed in, run this from your app folder:
+
+```bash
+npx mobile-ai-agents build "Build a habit tracker" --client claude
+```
+
+Already have a project brief and Figma design?
+
+```bash
+npx mobile-ai-agents build --brief PROJECT.md --figma "YOUR_FIGMA_URL" --client codex
+```
+
+Mobile Harness starts inside your AI CLI, clarifies requirements, prepares the plan for your approval, and guides implementation, review, testing, and device verification. Your brief is sent through the selected AI client's configured service. Add `--preview` to inspect the handoff offline. Building and device testing require the relevant platform tools; results are reported only when verified.
+
 New to AI coding tools? Start with the step-by-step [Installation Guide](docs/installation.md).
 
 Starting from a fresh app idea? Generate the starter docs first:
