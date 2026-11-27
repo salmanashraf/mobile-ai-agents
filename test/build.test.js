@@ -24,6 +24,17 @@ test('invalid requests fail before starting an AI client', () => {
   assert.throws(() => buildPrompt({_: ['App'], figma: 'https://example.com/design'}), /Figma HTTPS/);
   assert.throws(() => cmdBuild(['App', '--client', 'unknown']), /claude or.*codex/);
 });
+test('invalid options fail before launch or configuration changes', () => {
+  const deps = {spawnSync: () => { throw new Error('Unexpected launch'); }, setupMcpClient: () => { throw new Error('Unexpected configuration'); }};
+  assert.throws(() => cmdBuild(['App', '--clinet', 'codex'], deps), /Unknown build option/);
+  assert.throws(() => cmdBuild(['App', '--figma'], deps), /needs a value/);
+  assert.throws(() => cmdBuild(['App', '--mobile-mcp', 'false'], deps), /does not take a value/);
+  assert.throws(() => cmdBuild(['--brief', 'missing-project-file.md'], deps), /Project brief was not found/);
+  assert.throws(() => cmdBuild(['--brief', '.'], deps), /not a directory/);
+});
+test('handoff locates the bundled specialist resources', () => {
+  assert.match(buildPrompt({_: ['App']}), /Bundled toolkit resources are located at/);
+});
 test('preview does not start a client', () => {
   const result = cmdBuild(['App', '--preview'], {spawnSync: () => { throw new Error('Must not launch'); }});
   assert.equal(result.preview, true);
