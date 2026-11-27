@@ -134,6 +134,9 @@ Platform Plugins: Android · iOS · Flutter · React Native · Kotlin Multiplatf
 
 ## Current Gaps
 
+For conditional embedded AI, backend/cloud, or user-facing phone control, see
+[Additional capabilities and intake handoffs](additional-capabilities.md).
+
 The model is intentionally ahead of the full implementation. The strongest next builds are:
 
 - Loop Engineering automation to reduce manual prompting

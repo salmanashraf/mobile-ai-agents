@@ -141,6 +141,12 @@ If `BEGINNER_GUIDED` applies, ask the four beginner questions above and infer th
 
 ## Delivery Profiles
 
+At intake, use [Additional capabilities](../../../docs/additional-capabilities.md)
+to route embedded AI, backend/cloud, and product phone-control requirements.
+Reuse existing services, record owners and contracts in DEPENDENCIES.md, and
+continue independent tasks while a track is blocked. Mobile MCP QA remains
+developer verification; it does not establish production phone-control support.
+
 MOBILE-HARNESS must choose or ask for a delivery profile before creating PRD, design, and tasks. If the user says the goal is a demo, launch video, investor demo, social post, or "viral" output, default to **Demo-grade MVP**.
 
 | Profile | Use When | Minimum Bar |
