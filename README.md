@@ -19,9 +19,13 @@ Android · iOS · Flutter · React Native · Kotlin Multiplatform · Unity · Un
 
 ### See the Full Product Loop
 
-[**Watch the idea-to-product demo →**](https://github.com/salmanashraf/mobile-ai-agents/releases/download/v1.0.48/mobile-ai-agents-mobile-qa-demo.mp4)
+Watch Mobile Harness take VaultSheet from a project brief through the app engineering workflow:
 
-See how one mobile engineering harness moves through planning, implementation, review, device QA, evidence, and release. Then read the [Android PDF Compressor case study](docs/case-studies/pdf-compressor-mobile-qa.md) for the measured proof behind the demo.
+https://github.com/user-attachments/assets/52df46f1-0099-475a-acce-787e1d2d1568
+
+Plan → Design → Implement → Review → Verify → Device Proof → Save Context.
+
+For a separate example of measured device and file-output verification, read the [Android PDF Compressor case study](docs/case-studies/pdf-compressor-mobile-qa.md).
 
 ## Build the Product, Not Just the Code
 
