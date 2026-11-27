@@ -56,6 +56,16 @@ npx mobile-ai-agents build --brief PROJECT.md --figma "YOUR_FIGMA_URL" --client 
 
 Mobile Harness starts inside your AI CLI, clarifies requirements, prepares the plan for your approval, and guides implementation, review, testing, and device verification. Your brief is sent through the selected AI client's configured service. Add `--preview` to inspect the handoff offline. Building and device testing require the relevant platform tools; results are reported only when verified.
 
+At startup it asks whether you want to connect **GitHub, Jira, Figma, Mobile MCP, or another MCP tool**. Existing connections are reused; missing connections are set up with your agreement and verified before use. You can skip integrations and continue local work.
+
+To configure Mobile MCP before the AI session launches:
+
+```bash
+npx mobile-ai-agents build "Build my app" --client codex --mobile-mcp
+```
+
+This adds the Mobile MCP server to the selected client's configuration while preserving unrelated settings. The session checks device availability separately. Other services use their provider's supported authentication flow; never paste tokens into your project brief.
+
 New to AI coding tools? Start with the step-by-step [Installation Guide](docs/installation.md).
 
 Starting from a fresh app idea? Generate the starter docs first:

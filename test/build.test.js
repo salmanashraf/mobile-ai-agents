@@ -28,3 +28,17 @@ test('preview does not start a client', () => {
   const result = cmdBuild(['App', '--preview'], {spawnSync: () => { throw new Error('Must not launch'); }});
   assert.equal(result.preview, true);
 });
+test('handoff asks about optional services and requires actual connection evidence', () => {
+  const prompt = buildPrompt({_: ['App']});
+  assert.match(prompt, /GitHub, Jira, Figma, Mobile MCP/);
+  assert.match(prompt, /configured-but-unverified/);
+  assert.match(prompt, /minimal read-only operation/);
+});
+test('explicit Mobile MCP setup runs before the interactive client', () => {
+  const calls = [];
+  cmdBuild(['App', '--mobile-mcp'], {
+    setupMcpClient: client => { calls.push(`setup:${client}`); return {changed: true}; },
+    spawnSync: () => { calls.push('launch'); return {status: 0}; },
+  });
+  assert.deepEqual(calls, ['setup:claude', 'launch']);
+});
