@@ -1113,6 +1113,8 @@ async function cmdStart(args) {
   console.log('  1. Review PRD.md and answer the open questions.');
   console.log('  2. Choose one design direction in DESIGN.md.');
   console.log('  3. Run /mobile-harness and ask it to continue from TASKS.md.');
+  console.log('     First ask whether to connect GitHub, Jira, Figma, Mobile MCP, or another MCP tool.');
+  console.log('     Or run: npx mobile-ai-agents build --brief PRD.md --client claude --mobile-mcp');
   console.log('  4. Save important decisions with npx mobile-ai-agents memory capture.');
   console.log('');
 }
@@ -1423,6 +1425,7 @@ function cmdHelp() {
   console.log(bold('  npx mobile-ai-agents <command> [options]'));
   console.log('');
   console.log('  Commands:');
+  console.log('    build "App idea" --client claude|codex  Launch the complete Mobile Harness conversation');
   console.log(`    ${bold('start')}                           Guided setup that creates PRD/design/tasks/roadmap`);
   console.log(`    ${bold('install')}                         Install agents, skills, and workflows`);
   console.log(`    ${bold('mobile-test')}                     Prepare simple device testing in one command`);
