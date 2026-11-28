@@ -48,6 +48,16 @@ Use the full product loop or call a specialist directly for Figma handoff, API p
 
 With Claude Code or Codex installed and signed in, run this from your app folder:
 
+Check the selected AI client and Mobile MCP configuration first (optional):
+
+```bash
+npx mobile-ai-agents build --check --client codex
+```
+
+This read-only check does not start a build or send your brief. It does not verify authentication, model access, platform SDKs, or a running device. Use `--json` for structured output.
+
+Then start the app-building conversation:
+
 ```bash
 npx mobile-ai-agents build "Build a habit tracker" --client claude
 ```

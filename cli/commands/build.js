@@ -5,9 +5,10 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { parseOptions } = require('../lib/options');
 const { setupMcpClient } = require('./mcp');
+const { checkBuildReadiness } = require('./build-readiness');
 const ROOT = path.resolve(__dirname, '../..');
 const CLIENTS = new Set(['claude', 'codex']);
-const OPTIONS = new Set(['_', 'client', 'brief', 'figma', 'preview', 'mobile-mcp', 'help', 'h']);
+const OPTIONS = new Set(['_', 'client', 'brief', 'figma', 'preview', 'mobile-mcp', 'help', 'h', 'check', 'json']);
 
 function validateOptions(opts) {
   for (const key of Object.keys(opts)) {
@@ -18,7 +19,7 @@ function validateOptions(opts) {
       throw new Error(`--${key} needs a value. Run build --help.`);
     }
   }
-  for (const key of ['preview', 'mobile-mcp', 'help', 'h']) {
+  for (const key of ['preview', 'mobile-mcp', 'help', 'h', 'check', 'json']) {
     if (opts[key] !== undefined && opts[key] !== true) throw new Error(`--${key} is a flag and does not take a value.`);
   }
 }
@@ -50,12 +51,22 @@ function cmdBuild(args, dependencies = {}) {
   const opts = parseOptions(args);
   validateOptions(opts);
   if (opts.help || opts.h) {
+    console.log('  --check [--json]  Check client and Mobile MCP configuration without starting a build.');
     console.log('  --mobile-mcp  Configure Mobile MCP before launching; device access is checked in the session.');
     console.log('Build an app with Mobile Harness\n\n  npx mobile-ai-agents build "My app idea" --client claude\n  npx mobile-ai-agents build --brief PROJECT.md --figma URL --client codex\n\n  --preview  Print the handoff without launching or changing files.\n\nRequires an installed, authenticated Claude Code or Codex CLI.');
     return;
   }
   const client = opts.client || 'claude';
   if (!CLIENTS.has(client)) throw new Error('Use --client claude or --client codex.');
+  if (opts.check) {
+    if (opts['mobile-mcp'] || opts.preview || opts.brief || opts.figma || opts._.length) throw new Error('Use --check with only --client and optionally --json; no build input or setup is needed.');
+    const report = checkBuildReadiness(client, dependencies);
+    if (opts.json) console.log(JSON.stringify(report, null, 2));
+    else console.log(`Client: ${client} — ${report.cli.status}\n${report.cli.action}\nMobile MCP: ${report.mobileMcp.status}\n${report.mobileMcp.action}\n${report.note}`);
+    if (report.cli.status === 'unavailable') process.exitCode = 1;
+    return report;
+  }
+  if (opts.json) throw new Error('--json is supported only with --check.');
   const prompt = buildPrompt(opts, dependencies.cwd || process.cwd());
   if (opts.preview) { console.log(prompt); return { client, preview: true }; }
   if (opts['mobile-mcp']) {
