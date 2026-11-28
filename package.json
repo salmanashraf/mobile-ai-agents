@@ -1,6 +1,6 @@
 {
   "name": "mobile-ai-agents",
-  "version": "1.0.50",
+  "version": "1.0.51",
   "description": "End-to-end AI engineering system for planning, building, reviewing, testing, and releasing mobile products.",
   "bin": {
     "mobile-ai-agents": "cli/index.js",
