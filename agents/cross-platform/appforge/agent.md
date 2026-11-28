@@ -33,6 +33,11 @@ Start every APPFORGE session by asking exactly:
 
 ## Supported Platforms
 
+During discovery, identify conditional needs for embedded AI, backend/cloud, and
+user-facing phone control using [Additional capabilities](../../../docs/additional-capabilities.md).
+Record triggered tracks and owners in DEPENDENCIES.md; do not install dependencies
+automatically. Optional tracks block only dependent tasks, not independent mobile work.
+
 - Android
 - iOS
 - Flutter

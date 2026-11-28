@@ -9,7 +9,7 @@ const readline = require('readline');
 const { createCommandRouter } = require('./commands/router');
 const { parseOptions } = require('./lib/options');
 
-const REPO = 'salmanashraf/mobile-agency';
+const REPO = 'salmanashraf/mobile-ai-agents';
 const BRANCH = 'main';
 const RAW = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`;
 const PACKAGE_ROOT = path.resolve(__dirname, '..');
